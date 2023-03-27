@@ -26,3 +26,4 @@ Route::post('admin/users/login/store', [LoginController::class, 'store']);
 // Bảo vệ khi chưa đăng nhập
 Route::middleware(['auth'])->group(function(){
     Route::get('admin/main', [MainController::class, 'index'])->name('admin');
+});
