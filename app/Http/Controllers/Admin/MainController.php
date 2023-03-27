@@ -8,6 +8,6 @@ class MainController extends Controller
 {
     public function index()
     {
-        echo 'Tesst admin';
+        return view('admin.home', ['title' => 'Trang quản trị']);
     }
 }
