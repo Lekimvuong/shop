@@ -8,6 +8,6 @@ class MainController extends Controller
 {
     public function index()
     {
-        echo 'đm tk oc lon';
+        echo 'Tesst admin';
     }
 }
