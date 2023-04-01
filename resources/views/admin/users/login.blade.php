@@ -16,6 +16,7 @@
                 <form action="{{ asset('admin/users/login/store') }}" method="post">
                     <div class="input-group mb-3">
                         <input type="email" name="email" class="form-control" placeholder="Email">
+                        
                         <div class="input-group-append">
                             <div class="input-group-text">
                                 <span class="fas fa-envelope"></span>
@@ -24,6 +25,7 @@
                     </div>
                     <div class="input-group mb-3">
                         <input type="password" name="password" class="form-control" placeholder="Password">
+                        
                         <div class="input-group-append">
                             <div class="input-group-text">
                                 <span class="fas fa-lock"></span>
@@ -52,6 +54,11 @@
     </div>
 <!-- /.login-box -->
 
-    @include('admin.footer')
+   <!-- jQuery -->
+<script src="{{asset('template/admin/plugins/jquery/jquery.min.js')}}"></script>
+<!-- Bootstrap 4 -->
+<script src="{{asset('template/admin/plugins/bootstrap/js/bootstrap.bundle.min.js')}}"></script>
+<!-- AdminLTE App -->
+<script src="{{asset('template/admin/dist/js/adminlte.min.js')}}"></script>
 </body>
 </html>
