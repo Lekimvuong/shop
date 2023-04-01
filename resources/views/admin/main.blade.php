@@ -11,7 +11,7 @@
         <div id="container">
             <div id="header-wp">
                 <div class="wp-inner clearfix">
-                    <a href="?page=list_post" title="" id="logo" class="fl-left">ADMIN</a>
+                    <a href="?page=list_post" title="" id="logo" class="fl-left">Admin</a>
                     <ul id="main-menu" class="fl-left">
                         <li>
                             <a href="?page=list_post" title="">Trang</a>
@@ -73,11 +73,11 @@
                             <div id="thumb-circle" class="fl-left">
                                 <img src="template/admin/publics/images/admin.JPG">
                             </div>
-                            <h3 id="account" class="fl-right">Admin</h3>
+                            <h3 id="account" class="fl-right">{{Auth::User()->name}}</h3>
                         </button>
                         <ul class="dropdown-menu">
                             <li><a href="?page=info_account" title="Thông tin cá nhân">Thông tin tài khoản</a></li>
-                            <li><a href="#" title="Thoát">Thoát</a></li>
+                            <li><a href="{{asset('admin/users/logout')}}" title="Thoát">Thoát</a></li>
                         </ul>
                     </div>
                 </div>
