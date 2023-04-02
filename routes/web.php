@@ -11,7 +11,6 @@ Route::post('admin/users/login/store', [LoginController::class, 'store']);
 // Bảo vệ khi chưa đăng nhập
 
 Route::middleware(['auth'])->group(function () {
-    Route::get('admin/main', [MainController::class, 'index']);
     Route::get('admin', [MainController::class, 'index'])->name('admin');
 });
 
@@ -21,8 +20,6 @@ Route::middleware(['auth'])->group(function () {
         Route::get('main', [MainController::class, 'index']);
         Route::get('/', [MainController::class, 'index'])->name('admin');
         Route::prefix('menus')->group(function () {
-
-            //điều hướng
             Route::get('add', [MenuController::class, 'create']);
         });
     });
