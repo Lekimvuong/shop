@@ -80,7 +80,7 @@
                         <div id="dropdown-user" class="dropdown dropdown-extended fl-right">
                             <button class="dropdown-toggle clearfix" type="button"  data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
                                 <div id="thumb-circle" class="fl-left">
-                                    <img src="template/admin/publics/images/admin.JPG">
+                                    <img src="{{asset('template/admin/publics/images/admin.jpg')}}">
                                 </div>
                                 <h3 id="account" class="fl-right">{{Auth::User()->name}}</h3>
                             </button>

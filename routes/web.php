@@ -1,7 +1,7 @@
 <?php
 
 use App\Http\Controllers\Admin\MainController;
-use App\Http\Controllers\Admin\MenuController;
+use App\Http\Controllers\Admin\PostController;
 use Illuminate\Support\Facades\Route;
 use \App\Http\Controllers\Admin\Users\Logincontroller;
 
@@ -9,19 +9,18 @@ Route::get('admin/users/login', [LoginController::class, 'index'])->name('login'
 Route::post('admin/users/login/store', [LoginController::class, 'store']);
 
 // Bảo vệ khi chưa đăng nhập
-
-Route::middleware(['auth'])->group(function () {
-    Route::get('admin', [MainController::class, 'index'])->name('admin');
-});
-
 Route::middleware(['auth'])->group(function () {
     Route::get('admin/users/logout', [LoginController::class, 'logout'])->name('logout');
     Route::prefix('admin')->group(function () {
         Route::get('main', [MainController::class, 'index']);
         Route::get('/', [MainController::class, 'index'])->name('admin');
-        Route::prefix('menus')->group(function () {
-            Route::get('add', [MenuController::class, 'create']);
+        Route::prefix('posts')->group(function () {
+            Route::get('add', [PostController::class, 'create'])->name('posts.add');
+            Route::post('add', [PostController::class, 'store'])->name('posts.store');
         });
     });
 
 });
+
+// t chưa sưa
+// T ví dụ nha,. Kiểu kiểu rứa. Nhớ config lại thanh menu nhé

@@ -10,18 +10,21 @@
             </div>
             <div class="section" id="detail-page">
                 <div class="section-detail">
+                    @include('admin.alert')
                     <form method="POST">
                         <label for="title">Tiêu đề</label>
-                        <input type="text" name="title" id="title">
-                        <label for="title">Slug ( Friendly_url )</label>
-                        <input type="text" name="slug" id="slug">
-                        <label for="desc">Mô tả</label>
-                        <textarea name="desc" id="desc" class="ckeditor"></textarea>
-                        <label>Hình ảnh</label>
-                        <div id="uploadFile">
-                            <input type="file" name="file" id="upload-thumb">
-                            <input type="submit" name="btn-upload-thumb" value="Upload" id="btn-upload-thumb">
-                            <img src="public/images/img-thumb.png">
+                        <input type="text" name="title" id="title" placeholder="Nhập tiêu đề">
+                        <label for="title">Mô tả ngắn</label>
+                        <textarea name="short-desc" id="short-desc"></textarea>
+                        {{-- <input type="text" name="slug" id="slug"> --}}
+                        <label for="content">Nội dung</label>
+                        <textarea name="content" id="content" class="ckeditor"></textarea>
+                        <label for="title">Kích hoạt</label>
+                        <div class="radio-check">
+                            <input type="radio" id="active" class="mr-4" name="active" value="1">Có
+                        </div>
+                        <div class="radio-check">
+                            <input type="radio" id="no_active" class="mr-4" value="0" name="active">Không
                         </div>
                         <label>Danh mục cha</label>
                         <select name="parent-Cat">
@@ -31,6 +34,7 @@
                             <option value="3">Tài chính</option>
                         </select>
                         <button type="submit" name="btn-submit" id="btn-submit">Thêm mới</button>
+                        @csrf
                     </form>
                 </div>
             </div>
