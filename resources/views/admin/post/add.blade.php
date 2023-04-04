@@ -12,10 +12,10 @@
                 <div class="section-detail">
                     @include('admin.alert')
                     <form method="POST">
-                        <label for="title">Tiêu đề</label>
-                        <input type="text" name="title" id="title" placeholder="Nhập tiêu đề">
-                        <label for="title">Mô tả ngắn</label>
-                        <textarea name="short-desc" id="short-desc"></textarea>
+                        <label for="name">Tiêu đề</label>
+                        <input type="text" name="name" id="name" placeholder="Nhập tiêu đề">
+                        <label for="description">Mô tả ngắn</label>
+                        <textarea name="description" id="description"></textarea>
                         {{-- <input type="text" name="slug" id="slug"> --}}
                         <label for="content">Nội dung</label>
                         <textarea name="content" id="content" class="ckeditor"></textarea>
@@ -27,11 +27,12 @@
                             <input type="radio" id="no_active" class="mr-4" value="0" name="active">Không
                         </div>
                         <label>Danh mục cha</label>
-                        <select name="parent-Cat">
+                        <select name="parent_id">
                             <option value="">-- Chọn danh mục --</option>
-                            <option value="1">Thể thao</option>
-                            <option value="2">Xã hội</option>
-                            <option value="3">Tài chính</option>
+                            @foreach ($posts as $post)
+                                <option value="{{ $post->id }}">{{ $post->name }}</option>
+                            @endforeach
+
                         </select>
                         <button type="submit" name="btn-submit" id="btn-submit">Thêm mới</button>
                         @csrf

@@ -5,7 +5,18 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
+/**
+ * Summary of Post
+ */
 class Post extends Model
 {
     use HasFactory;
+   
+    protected $fillable = [
+        'name',
+        'parent_id',
+        'description',
+        'content',
+        'active'
+    ];
 }
