@@ -21,14 +21,14 @@
                         <textarea name="content" id="content" class="ckeditor"></textarea>
                         <label for="title">Kích hoạt</label>
                         <div class="radio-check">
-                            <input type="radio" id="active" class="mr-4" name="active" value="1">Có
+                            <input type="radio" id="active" class="mr-4" name="active" value="1">  Có
                         </div>
                         <div class="radio-check">
-                            <input type="radio" id="no_active" class="mr-4" value="0" name="active">Không
+                            <input type="radio" id="no_active" class="mr-4" value="0" name="active">  Không
                         </div>
                         <label>Danh mục cha</label>
                         <select name="parent_id">
-                            <option value="">-- Chọn danh mục --</option>
+                            <option value="0">-- Chọn danh mục --</option>
                             @foreach ($posts as $post)
                                 <option value="{{ $post->id }}">{{ $post->name }}</option>
                             @endforeach

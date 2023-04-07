@@ -24,7 +24,7 @@
                     <a href="{{route('posts.add')}}" title="" class="nav-link">Thêm mới</a>
                 </li>
                 <li class="nav-item">
-                    <a href="?page=list_post" title="" class="nav-link">Danh sách bài viết</a>
+                    <a href="{{route('posts.list-posts')}}" title="" class="nav-link">Danh sách bài viết</a>
                 </li>
                 <li class="nav-item">
                     <a href="" title="" class="nav-link">Danh mục bài viết</a>

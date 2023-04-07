@@ -16,7 +16,8 @@ Route::middleware(['auth'])->group(function () {
         Route::get('/', [MainController::class, 'index'])->name('admin');
         Route::prefix('posts')->group(function () {
             Route::get('add', [PostController::class, 'create'])->name('posts.add');
-            Route::post('add', [PostController::class, 'store'])->name('posts.store');
+            Route::post('add', [PostController::class, 'store']);
+            Route::get('list-posts', [PostController::class, 'index'])->name('posts.list-posts');
         });
     });
 

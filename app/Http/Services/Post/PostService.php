@@ -11,7 +11,11 @@ class PostService
 {
     public function getParent()
     {
-return Post::where('parent_id',0)->get();
+        return Post::where('parent_id', 0)->get();
+    }
+    public function getAll()
+    {
+        return Post::orderbyDesc('id')->paginate(20);
     }
     public function create($request)
     {
