@@ -20,7 +20,7 @@
                             <li class="trash"><a href="">Thùng rác <span class="count">(0)</span></a></li>
                         </ul>
                         <form method="GET" class="form-s fl-right">
-                            <input type="text" name="s" id="s">
+                            <input type="text" name="s" id="search">
                             <input type="submit" name="sm_s" value="Tìm kiếm">
                         </form>
                     </div>
@@ -60,7 +60,6 @@
 </div>
 @endsection
 @section('script')
-    <script type="text/javascript" src="https://cdn.datatables.net/1.13.4/js/jquery.dataTables.js"></script>
     <script type="text/javascript" src="{{asset('template/admin/publics/js/posts/posts.js')}}"></script>
     <script type="text/javascript">
         $(document).ready(function() {

@@ -17,6 +17,9 @@
 <script src="{{ asset('template/admin/publics/js/bootstrap/bootstrap.min.js') }}" type="text/javascript"></script>
 <script src="{{ asset('template/admin/publics/js/plugins/ckeditor/ckeditor.js') }}" type="text/javascript"></script>
 <script src="{{ asset('template/admin/publics/js/main.js') }}" type="text/javascript"></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script type="text/javascript" src="https://cdn.datatables.net/1.13.4/js/jquery.dataTables.js"></script>
+<script src="{{ asset('template/admin/publics/js/base.app.js') }}" type="text/javascript"></script>
     </head>
     <body>
         <div id="site">

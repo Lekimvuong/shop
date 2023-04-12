@@ -8,4 +8,11 @@
     </div>
     </div>
     </body>
+    <script>
+        // var DateTime = luxon.DateTime;
+          $.app.init({
+              url: '{{url('')}}',
+              token: '{!! csrf_token() !!}',
+          });
+    </script>
     </html>

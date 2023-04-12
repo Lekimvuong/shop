@@ -12,6 +12,7 @@ var PostClass = function() {
     this.init = function() {
         ele.row = $('.remove-row');
         ele.postTable = $('#posts-table');
+        ele.search = $('#search');
     }
 
     this.bindEvents = function() {
@@ -23,32 +24,39 @@ var PostClass = function() {
         ele.row.on('click', function() {
             var $id = $(this).data('id');
             var $url = $(this).attr('url-delete');
-            console.log($id, window.location.origin + 'admin/posts/destroy');
-            if (confirm('Bạn có muốn xóa không ?')) {
-                $.ajax({
-                    type: 'DELETE',
-                    datatype: 'JSON',
-                    data: { 'id': $id },
-                    url: $url,
-                    success: function(result) {
-                        if (result.error == false) {
-                            alert(result.message);
-                            location.reload();
-                        } else {
-                            alert('Lỗi! Vui lòng thử lại');
+            $.app.pushConfirmNoti({
+                title: 'Bạn có muốn xóa không ?',
+                callback: function() {
+                    $.ajax({
+                        type: 'DELETE',
+                        datatype: 'JSON',
+                        data: { 'id': $id },
+                        url: $url,
+                        success: function(result) {
+                            if (result.error == false) {
+                                $.app.pushNoty('success');
+                                location.reload();
+                            } else {
+                                $.app.pushNoty('error', 'Lỗi! Vui lòng thử lại');
+                            }
                         }
-                    }
-                });
-            }
+                    });
+                }
+            });
         })
     }
 
     var drawPostData = function() {
-        ele.postTable.DataTable({
-            searching: false,
+        var postTable = ele.postTable.DataTable({
+            searching: true,
             pagination: true,
             lengthMenu: 20,
             lengthChange: false,
+            info: false,
+            dom: "lrtip",
+        });
+        ele.search.on('keyup', function(e) {
+            postTable.column(2).search(e.target.value).draw();
         })
     }
 }
