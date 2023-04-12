@@ -1,6 +1,5 @@
 <?php
 namespace App\http\Services\Post;
-
 use App\Models\Post;
 use Illuminate\Support\Facades\Session;
 
@@ -15,7 +14,8 @@ class PostService
     }
     public function getAll()
     {
-        return Post::orderbyDesc('id')->paginate(20);
+        $posts = Post::where('active', 1)->get();
+        return $posts;
     }
     public function create($request)
     {
@@ -33,4 +33,15 @@ class PostService
             return false;
         }
         return true;
-    }}
+    }
+
+    public function destroy($request)
+    {
+        $id = (int) $request->input('id');
+        $post = Post::where('id', $id)->first();
+        if ($post) {
+            return Post::where('id', $id)->orWhere('parent_id', $id)->delete();
+        } 
+        return false;
+    }
+}

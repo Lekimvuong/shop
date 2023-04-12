@@ -1,4 +1,5 @@
-@include('admin.header')
+@extends('admin.master')
+@section('content')
 <div id="main-content-wp" class="list-post-page">
     <div class="wrap clearfix">
         @include('admin.sidebar')
@@ -34,7 +35,7 @@
                         </form>
                     </div>
                     <div class="table-responsive">
-                        <table class="table list-table-wp">
+                        <table id="posts-table" class="table cell-border list-table-wp">
                             <thead>
                                 <tr>
                                     <td><input type="checkbox" name="checkAll" id="checkAll"></td>
@@ -54,29 +55,17 @@
 
                 </div>
             </div>
-            <div class="section" id="paging-wp">
-                <div class="section-detail clearfix">
-                    <ul id="list-paging" class="fl-right">
-                        <li>
-                            <a href="" title="">
-                                << /a>
-                        </li>
-                        <li>
-                            <a href="" title="">1</a>
-                        </li>
-                        <li>
-                            <a href="" title="">2</a>
-                        </li>
-                        <li>
-                            <a href="" title="">3</a>
-                        </li>
-                        <li>
-                            <a href="" title="">></a>
-                        </li>
-                    </ul>
-                </div>
-            </div>
         </div>
     </div>
 </div>
-@include('admin.footer')
+@endsection
+@section('script')
+    <script type="text/javascript" src="https://cdn.datatables.net/1.13.4/js/jquery.dataTables.js"></script>
+    <script type="text/javascript" src="{{asset('template/admin/publics/js/posts/posts.js')}}"></script>
+    <script type="text/javascript">
+        $(document).ready(function() {
+            var instance = new PostClass();
+            instance.run();
+        }); 
+    </script>
+@endsection

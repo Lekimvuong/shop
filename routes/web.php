@@ -14,10 +14,12 @@ Route::middleware(['auth'])->group(function () {
     Route::prefix('admin')->group(function () {
         Route::get('main', [MainController::class, 'index']);
         Route::get('/', [MainController::class, 'index'])->name('admin');
+
         Route::prefix('posts')->group(function () {
             Route::get('add', [PostController::class, 'create'])->name('posts.add');
             Route::post('add', [PostController::class, 'store']);
             Route::get('list-posts', [PostController::class, 'index'])->name('posts.list-posts');
+            Route::delete('destroy', [PostController::class, 'destroy'])->name('posts.delete');
         });
     });
 

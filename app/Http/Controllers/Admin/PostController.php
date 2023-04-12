@@ -5,7 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Post\CreateFormRequest;
 use App\http\Services\Post\PostService;
-use App\Models\Post;
+use Illuminate\Http\Request;
 
 class PostController extends Controller
 {
@@ -17,7 +17,7 @@ class PostController extends Controller
     public function create()
     {
         return view('admin.post.add', ['title' => 'Thêm mới danh mục',
-            'posts' => $this->postService->getParent()
+            'posts' => $this->postService->getParent(),
         ]);
 
     }
@@ -29,9 +29,25 @@ class PostController extends Controller
     }
     public function index()
     {
-      
+        $posts = $this->postService->getAll();
         return view('admin.post.list-posts', ['title' => 'Danh sách bài viết',
-            'posts' => $this->postService->getAll()
+            'posts' => $posts,
         ]);
 
-    }}
+    }
+
+    public function destroy(Request $request)
+    {
+        $result = $this->postService->destroy($request);
+        if ($result) {
+            return response()->json([
+                'error' => false,
+                'message' => 'Xóa thành công danh mục',
+            ]);
+        }
+        return response()->json([
+            'error' => true,
+        ]);
+
+    }
+}
