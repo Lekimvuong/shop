@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Post\CreateFormRequest;
 use App\http\Services\Post\PostService;
 use Illuminate\Http\Request;
+use App\Models\Post;
 
 class PostController extends Controller
 {
@@ -16,7 +17,7 @@ class PostController extends Controller
     }
     public function create()
     {
-        return view('admin.post.add', ['title' => 'Thêm mới danh mục',
+        return view('admin.post.add', ['title' => 'Thêm mới bài viết',
             'posts' => $this->postService->getParent(),
         ]);
 
@@ -31,10 +32,21 @@ class PostController extends Controller
     {
         $posts = $this->postService->getAll();
         return view('admin.post.list-posts', ['title' => 'Danh sách bài viết',
-            'posts' => $posts,
+            'posts' => $posts
         ]);
 
     }
+    public function show(Post $post)
+    {
+        
+        return view('admin.post.edit', 
+        ['title' =>'Chỉnh sửa bài viết' .$post->name, //$post này chính là bản ghi cần lấy để edit
+        'post'=> $post,
+        'posts' => $this->postService->getParent()
+    ]);
+
+    }
+
 
     public function destroy(Request $request)
     {

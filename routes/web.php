@@ -19,6 +19,7 @@ Route::middleware(['auth'])->group(function () {
             Route::get('add', [PostController::class, 'create'])->name('posts.add');
             Route::post('add', [PostController::class, 'store']);
             Route::get('list-posts', [PostController::class, 'index'])->name('posts.list-posts');
+            Route::get('edit/{post}', [PostController::class, 'show'])->name('posts.edit');
             Route::delete('destroy', [PostController::class, 'destroy'])->name('posts.delete');
         });
     });

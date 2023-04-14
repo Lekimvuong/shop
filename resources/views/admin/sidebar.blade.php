@@ -26,9 +26,6 @@
                 <li class="nav-item">
                     <a href="{{route('posts.list-posts')}}" title="" class="nav-link">Danh sách bài viết</a>
                 </li>
-                <li class="nav-item">
-                    <a href="" title="" class="nav-link">Danh mục bài viết</a>
-                </li>
             </ul>
         </li>
         <li class="nav-item">

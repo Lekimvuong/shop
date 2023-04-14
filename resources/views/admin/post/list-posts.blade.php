@@ -25,14 +25,14 @@
                         </form>
                     </div>
                     <div class="actions">
-                        <form method="GET" action="" class="form-actions">
+                        {{-- <form method="GET" action="" class="form-actions">
                             <select name="actions">
                                 <option value="0">Tác vụ</option>
                                 <option value="1">Chỉnh sửa</option>
                                 <option value="2">Bỏ vào thủng rác</option>
                             </select>
                             <input type="submit" name="sm_action" value="Áp dụng">
-                        </form>
+                        </form> --}}
                     </div>
                     <div class="table-responsive">
                         <table id="posts-table" class="table cell-border list-table-wp">

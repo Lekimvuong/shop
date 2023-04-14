@@ -14,24 +14,26 @@
                     @include('admin.alert')
                     <form method="POST">
                         <label for="name">Tiêu đề</label>
-                        <input type="text" name="name" id="name" placeholder="Nhập tiêu đề">
+                        <input type="text" name="name" id="name" value = "{{$post->name}}" placeholder="Nhập tiêu đề">
                         <label for="description">Mô tả ngắn</label>
-                        <textarea name="description" id="description"></textarea>
+                        <textarea name="description" id="description">{{$post->description}}</textarea>
                         {{-- <input type="text" name="slug" id="slug"> --}}
                         <label for="content">Nội dung</label>
-                        <textarea name="content" id="content" class="ckeditor"></textarea>
+                        <textarea name="content" id="content" class="ckeditor">{{$post->content}}</textarea>
                         <label for="title">Kích hoạt</label>
                         <div class="radio-check">
-                            <input type="radio" id="active" class="mr-4" name="active" value="1">  Có
+                            <input type="radio" id="active" class="mr-4" name="active" {{$post->active == 1 ? 'checked =""':''}}value="1">  Có
                         </div>
                         <div class="radio-check">
-                            <input type="radio" id="no_active" class="mr-4" value="0" name="active">  Không
+                            <input type="radio" id="no_active" class="mr-4"  name="active"{{$post->active == 0 ? 'checked =""':''}}value="0">  Không
                         </div>
                         <label>Danh mục cha</label>
                         <select name="parent_id">
-                            <option value="0">-- Chọn danh mục --</option>
-                            @foreach ($posts as $post)
-                                <option value="{{ $post->id }}">{{ $post->name }}</option>
+                            <option value="0" {{ $post->parent_id ==0 ? 'selected':'' }}>-- Chọn danh mục --</option>
+                            @foreach ($posts as $postParent)
+                                <option value="{{ $postParent ->id }}" {{ $post->parent_id ==$postParent->id ? 'selected':'' }}>
+                                {{$postParent->name}}
+                                </option>
                             @endforeach
 
                         </select>
@@ -43,4 +45,5 @@
         </div>
     </div>
 </div>
+
 @endsection

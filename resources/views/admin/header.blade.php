@@ -46,10 +46,7 @@
                                         <a href="{{route('posts.add')}}" title="">Thêm mới</a> 
                                     </li>
                                     <li>
-                                        <a href="{{route('posts.list-posts')}}" title="">Danh sách bài viết</a> 
-                                    </li>
-                                    <li>
-                                        <a href="?page=list_cat" title="">Danh mục bài viết</a> 
+                                        <a href="{{route('posts.list-posts')}}" title="">Danh mục bài viết</a> 
                                     </li>
                                 </ul>
                             </li>

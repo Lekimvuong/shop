@@ -14,7 +14,7 @@ class PostService
     }
     public function getAll()
     {
-        $posts = Post::where('active', 1)->get();
+        $posts = Post::get();
         return $posts;
     }
     public function create($request)

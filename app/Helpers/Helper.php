@@ -10,7 +10,6 @@ class Helper
         global $count;
         $html = '';
         foreach ($posts as $key => $post) {
-
             if ($post->parent_id == $parent_id) {
                 $count++;
                 $html .= '<tr>
@@ -21,7 +20,7 @@ class Helper
                 <a href="" title="">' . $char . $post->name . '</a>
             </div>
             <ul class="list-operation fl-right">
-                <li><a href="" title="Sửa" class="edit"><i class="fa fa-pencil"
+                <li><a href="'.route('posts.edit', ['post' => $post->id]).'" title="Sửa" data-id="'. $post->id .'class="edit"><i class="fa fa-pencil"
                             aria-hidden="true"></i></a></li>
                 <li><a url-delete="'.route('posts.delete').'" title="Xóa" data-id="'. $post->id .'" class="delete remove-row"><i class="fa fa-trash"
                             aria-hidden="true"></i></a></li>
