@@ -1,7 +1,7 @@
 <?php
 
 use App\Http\Controllers\Admin\MainController;
-use App\Http\Controllers\Admin\PostController;
+use App\Http\Controllers\Admin\PostCatController;
 use Illuminate\Support\Facades\Route;
 use \App\Http\Controllers\Admin\Users\Logincontroller;
 
@@ -15,16 +15,13 @@ Route::middleware(['auth'])->group(function () {
         Route::get('main', [MainController::class, 'index']);
         Route::get('/', [MainController::class, 'index'])->name('admin');
 
-        Route::prefix('posts')->group(function () {
-            Route::get('add', [PostController::class, 'create'])->name('posts.add');
-            Route::post('add', [PostController::class, 'store']);
-            Route::get('list-posts', [PostController::class, 'index'])->name('posts.list-posts');
-            Route::get('edit/{post}', [PostController::class, 'show'])->name('posts.edit');
-            Route::delete('destroy', [PostController::class, 'destroy'])->name('posts.delete');
+        Route::prefix('postCats')->group(function () {
+            Route::get('add', [PostCatController::class, 'create'])->name('postCats.add');
+            Route::post('add', [PostCatController::class, 'store']);
+            Route::get('list-posts', [PostCatController::class, 'index'])->name('postCats.list-posts');
+            Route::get('edit/{postCat}', [PostCatController::class, 'show'])->name('postCats.edit');
+            Route::post('edit/{postCat}', [PostCatController::class, 'update'])->name('postCats.update');
+            Route::delete('destroy', [PostCatController::class, 'destroy'])->name('postCats.delete');
         });
     });
-
 });
-
-// t chưa sưa
-// T ví dụ nha,. Kiểu kiểu rứa. Nhớ config lại thanh menu nhé

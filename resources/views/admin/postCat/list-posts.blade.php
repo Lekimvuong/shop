@@ -7,7 +7,7 @@
             <div class="section" id="title-page">
                 <div class="clearfix">
                     <h3 id="index" class="fl-left">{{ $title }}</h3>
-                    <a href="{{ route('posts.add') }}" title="" id="add-new" class="fl-left">Thêm mới</a>
+                    <a href="{{ route('postCats.add') }}" title="" id="add-new" class="fl-left">Thêm mới</a>
                 </div>
             </div>
             <div class="section" id="detail-page">
@@ -25,14 +25,6 @@
                         </form>
                     </div>
                     <div class="actions">
-                        {{-- <form method="GET" action="" class="form-actions">
-                            <select name="actions">
-                                <option value="0">Tác vụ</option>
-                                <option value="1">Chỉnh sửa</option>
-                                <option value="2">Bỏ vào thủng rác</option>
-                            </select>
-                            <input type="submit" name="sm_action" value="Áp dụng">
-                        </form> --}}
                     </div>
                     <div class="table-responsive">
                         <table id="posts-table" class="table cell-border list-table-wp">
@@ -48,7 +40,7 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                {!! \App\Helpers\Helper::post($posts) !!}
+                                {!! \App\Helpers\Helper::postCat($postCats) !!}
                             </tbody>
                         </table>
                     </div>

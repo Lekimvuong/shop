@@ -43,10 +43,10 @@
                                 <a href="?page=list_post" title="">Bài viết</a>
                                 <ul class="sub-menu">
                                     <li>
-                                        <a href="{{route('posts.add')}}" title="">Thêm mới</a> 
+                                        <a href="{{route('postCats.add')}}" title="">Thêm mới</a> 
                                     </li>
                                     <li>
-                                        <a href="{{route('posts.list-posts')}}" title="">Danh mục bài viết</a> 
+                                        <a href="{{route('postCats.list-posts')}}" title="">Danh mục bài viết</a> 
                                     </li>
                                 </ul>
                             </li>

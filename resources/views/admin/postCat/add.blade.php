@@ -30,8 +30,8 @@
                         <label>Danh mục cha</label>
                         <select name="parent_id">
                             <option value="0">-- Chọn danh mục --</option>
-                            @foreach ($posts as $post)
-                                <option value="{{ $post->id }}">{{ $post->name }}</option>
+                            @foreach ($postCats as $postCat)
+                                <option value="{{ $postCat->id }}">{{ $postCat->name }}</option>
                             @endforeach
 
                         </select>

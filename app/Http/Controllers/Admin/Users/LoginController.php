@@ -15,12 +15,11 @@ class Logincontroller extends Controller
     }
     public function store(Request $request)
     {
-        
         $this->validate($request, [
             'email' => 'required|email:filter',
             'password' => 'required'
         ]);
-
+  // Kiểm tra thông tin đăng nhập của người dùng
         if (Auth::attempt([
                 'email' => $request->input('email'),
                 'password' => $request->input('password')
@@ -28,8 +27,9 @@ class Logincontroller extends Controller
 
             return redirect()->route('admin');
         }
-
+//lưu thông tin lỗi vào session
         Session::flash('error', 'Email hoặc Password không đúng');
+        // Lỗi thì lùi về trang login
         return redirect()->back();
     }
     public function logout()

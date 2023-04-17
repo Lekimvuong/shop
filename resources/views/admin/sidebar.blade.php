@@ -21,10 +21,10 @@
             </a>
             <ul class="sub-menu">
                 <li class="nav-item">
-                    <a href="{{route('posts.add')}}" title="" class="nav-link">Thêm mới</a>
+                    <a href="{{route('postCats.add')}}" title="" class="nav-link">Thêm mới</a>
                 </li>
                 <li class="nav-item">
-                    <a href="{{route('posts.list-posts')}}" title="" class="nav-link">Danh sách bài viết</a>
+                    <a href="{{route('postCats.list-posts')}}" title="" class="nav-link">Danh sách bài viết</a>
                 </li>
             </ul>
         </li>
