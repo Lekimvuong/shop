@@ -1,6 +1,6 @@
 <div id="sidebar" class="fl-left">
     <ul id="sidebar-menu">
-        <li class="nav-item">
+        {{-- <li class="nav-item">
             <a href="" title="" class="nav-link nav-toggle">
                 <span class="fa fa-map icon"></span>
                 <span class="title">Trang</span>
@@ -13,7 +13,7 @@
                     <a href="?page=list_page" title="" class="nav-link">Danh sách các trang</a>
                 </li>
             </ul>
-        </li>
+        </li> --}}
         <li class="nav-item">
             <a href="" title="" class="nav-link nav-toggle">
                 <span class="fa fa-pencil-square-o icon"></span>
@@ -21,10 +21,10 @@
             </a>
             <ul class="sub-menu">
                 <li class="nav-item">
-                    <a href="{{route('postCats.add')}}" title="" class="nav-link">Thêm mới</a>
+                    <a href="{{route('postCats.add')}}" title="" class="nav-link">Thêm mới danh mục</a>
                 </li>
                 <li class="nav-item">
-                    <a href="{{route('postCats.list-posts')}}" title="" class="nav-link">Danh sách bài viết</a>
+                    <a href="{{route('postCats.list-posts')}}" title="" class="nav-link">Danh Mục bài viết</a>
                 </li>
             </ul>
         </li>
@@ -35,7 +35,7 @@
             </a>
             <ul class="sub-menu">
                 <li class="nav-item">
-                    <a href="?page=add_product" title="" class="nav-link">Thêm mới</a>
+                    <a href="{{route('products.add')}}" title="" class="nav-link">Thêm mới</a>
                 </li>
                 <li class="nav-item">
                     <a href="?page=list_product" title="" class="nav-link">Danh sách sản phẩm</a>

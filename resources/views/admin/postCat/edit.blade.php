@@ -20,13 +20,6 @@
                         {{-- <input type="text" name="slug" id="slug"> --}}
                         <label for="content">Nội dung</label>
                         <textarea name="content" id="content" class="ckeditor">{{$postCat->content}}</textarea>
-                        <label for="title">Kích hoạt</label>
-                        <div class="radio-check">
-                            <input type="radio" id="active" class="mr-4" name="active" {{$postCat->active == 1 ? 'checked =""':''}}value="1">  Có
-                        </div>
-                        <div class="radio-check">
-                            <input type="radio" id="no_active" class="mr-4"  name="active"{{$postCat->active == 0 ? 'checked =""':''}}value="0">  Không
-                        </div>
                         <label>Danh mục cha</label>
                         <select name="parent_id">
                             <option value="0" {{ $postCat->parent_id ==0 ? 'selected':'' }}>-- Chọn danh mục --</option>
@@ -35,8 +28,14 @@
                                 {{$postCatParent->name}}
                                 </option>
                             @endforeach
-
                         </select>
+                        <label for="title">Kích hoạt</label>
+                        <div class="radio-check">
+                            <input type="radio" id="active" class="mr-4" name="active" {{$postCat->active == 1 ? 'checked =""':''}}value="1">  Có
+                        </div>
+                        <div class="radio-check">
+                            <input type="radio" id="no_active" class="mr-4"  name="active"{{$postCat->active == 0 ? 'checked =""':''}}value="0">  Không
+                        </div>
                         <button type="submit" name="btn-submit" id="btn-submit">Cập nhật</button>
                         @csrf
                     </form>

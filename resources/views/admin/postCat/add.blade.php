@@ -20,21 +20,20 @@
                         {{-- <input type="text" name="slug" id="slug"> --}}
                         <label for="content">Nội dung</label>
                         <textarea name="content" id="content" class="ckeditor"></textarea>
-                        <label for="title">Kích hoạt</label>
-                        <div class="radio-check">
-                            <input type="radio" id="active" class="mr-4" name="active" value="1">  Có
-                        </div>
-                        <div class="radio-check">
-                            <input type="radio" id="no_active" class="mr-4" value="0" name="active">  Không
-                        </div>
                         <label>Danh mục cha</label>
                         <select name="parent_id">
                             <option value="0">-- Chọn danh mục --</option>
                             @foreach ($postCats as $postCat)
                                 <option value="{{ $postCat->id }}">{{ $postCat->name }}</option>
                             @endforeach
-
                         </select>
+                        <label for="title">Kích hoạt</label>
+                        <div class="radio-check">
+                            <input type="radio" id="active" class="radio-check-1" name="active" value="1">  Có
+                        </div>
+                        <div class="radio-check">
+                            <input type="radio" id="no_active" class="radio-check-2" value="0" name="active">  Không
+                        </div>
                         <button type="submit" name="btn-submit" id="btn-submit">Thêm mới</button>
                         @csrf
                     </form>

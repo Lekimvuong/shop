@@ -30,7 +30,7 @@ class PostCatController extends Controller
     public function index()
     {
         $postCats = $this->postCatService->getAll();
-        return view('admin.postCat.list-posts', ['title' => 'Danh sách bài viết',
+        return view('admin.postCat.list-posts', ['title' => 'Danh mục bài viết',
             'postCats' => $postCats
         ]);
     }
@@ -38,7 +38,7 @@ class PostCatController extends Controller
     {
 
         return view('admin.postCat.edit',
-            ['title' => 'Chỉnh sửa bài viết' . $postCat->name, //$post này chính là bản ghi cần lấy để edit
+            ['title' => 'Chỉnh sửa danh mục bài viết' . $postCat->name, //$post này chính là bản ghi cần lấy để edit
                 'postCat' => $postCat,
                 'postCats' => $this->postCatService->getParent(),
             ]);

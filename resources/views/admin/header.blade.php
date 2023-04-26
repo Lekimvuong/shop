@@ -28,7 +28,7 @@
                     <div class="wp-inner clearfix">
                         <a href="?page=list_post" title="" id="logo" class="fl-left">ADMIN</a>
                         <ul id="main-menu" class="fl-left">
-                            <li>
+                            {{-- <li>
                                 <a href="?page=list_post" title="">Trang</a>
                                 <ul class="sub-menu">
                                     <li>
@@ -38,12 +38,12 @@
                                         <a href="?page=list_page" title="">Danh sách trang</a> 
                                     </li>
                                 </ul>
-                            </li>
+                            </li> --}}
                             <li>
                                 <a href="?page=list_post" title="">Bài viết</a>
                                 <ul class="sub-menu">
                                     <li>
-                                        <a href="{{route('postCats.add')}}" title="">Thêm mới</a> 
+                                        <a href="{{route('postCats.add')}}" title="">Thêm mới danh mục</a> 
                                     </li>
                                     <li>
                                         <a href="{{route('postCats.list-posts')}}" title="">Danh mục bài viết</a> 
@@ -54,7 +54,7 @@
                                 <a href="?page=list_product" title="">Sản phẩm</a>
                                 <ul class="sub-menu">
                                     <li>
-                                        <a href="?page=add_product" title="">Thêm mới</a> 
+                                        <a href="{{route('products.add')}}" title="">Thêm mới</a> 
                                     </li>
                                     <li>
                                         <a href="?page=list_product" title="">Danh sách sản phẩm</a> 
