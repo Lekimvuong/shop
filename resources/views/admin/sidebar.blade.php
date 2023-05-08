@@ -24,7 +24,7 @@
                     <a href="{{route('postCats.add')}}" title="" class="nav-link">Thêm mới danh mục</a>
                 </li>
                 <li class="nav-item">
-                    <a href="{{route('postCats.list-posts')}}" title="" class="nav-link">Danh Mục bài viết</a>
+                    <a href="{{route('postCats.list')}}" title="" class="nav-link">Danh Mục bài viết</a>
                 </li>
             </ul>
         </li>
@@ -38,10 +38,10 @@
                     <a href="{{route('products.add')}}" title="" class="nav-link">Thêm mới</a>
                 </li>
                 <li class="nav-item">
-                    <a href="?page=list_product" title="" class="nav-link">Danh sách sản phẩm</a>
+                    <a href="{{route('products.list')}}" title="" class="nav-link">Danh sách sản phẩm</a>
                 </li>
                 <li class="nav-item">
-                    <a href="?page=list_cat" title="" class="nav-link">Danh mục sản phẩm</a>
+                    <a href="{{route('productCat.list')}}" title="" class="nav-link">Danh mục sản phẩm</a>
                 </li>
             </ul>
         </li>

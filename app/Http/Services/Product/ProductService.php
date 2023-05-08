@@ -1,14 +1,14 @@
 <?php
 namespace App\http\Services\Product;
-use App\Models\PostCat;
 use App\Models\Product;
+use App\Models\productCat;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Session;
 
 
 class ProductService{
-    public function getPostCats(){
-        return PostCat::where('active', 1)->get();
+    public function getproductCats(){
+        return productCat::get();
     }
     protected function isValidPrice($request)
     {

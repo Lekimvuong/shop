@@ -46,7 +46,7 @@
                                         <a href="{{route('postCats.add')}}" title="">Thêm mới danh mục</a> 
                                     </li>
                                     <li>
-                                        <a href="{{route('postCats.list-posts')}}" title="">Danh mục bài viết</a> 
+                                        <a href="{{route('postCats.list')}}" title="">Danh mục bài viết</a> 
                                     </li>
                                 </ul>
                             </li>

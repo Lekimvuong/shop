@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Product\ProductRequest;
 use App\http\Services\Product\ProductService;
+use App\Models\Product;
 use Illuminate\Http\Request;
 
 class ProductController extends Controller
@@ -17,7 +18,7 @@ class ProductController extends Controller
     public function index()
     {
         return view('admin.product.list', ['title' => 'Danh sách sản phẩm',
-            'product' => $this->productService->get()]);
+            'products' => $this->productService->get()]);
     }
 
     /**
@@ -26,7 +27,7 @@ class ProductController extends Controller
     public function create()
     {
         return view('admin.product.add', ['title' => 'Thêm mới sản phẩm',
-            'postCats' => $this->productService->getPostCats(),
+            'productCats' => $this->productService->getproductCats(),
         ]);
     }
 
@@ -42,9 +43,13 @@ class ProductController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show(Product $product)
     {
-        //
+        return view('admin.product.edit',
+        ['title' => 'Chỉnh sửa thông tin sản phẩm' ,
+        'product' => $product,
+        'productCats' => $this->productService->getproductCats(),
+        ]);
     }
 
     /**

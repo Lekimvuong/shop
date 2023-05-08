@@ -5,22 +5,14 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Product extends Model
+class productCat extends Model
 {
     use HasFactory;
     protected $fillable = [
         'name',
-        'code',
-        'price',
-        'price_sale',
+        'parent_id',
         'description',
         'content',
-        'cat_id',
-        'active',
-        'thumb'
+        'active'
     ];
-
-    public function product_cat(){
-        return $this->hasOne(productCat::class, 'id', 'cat_id');
-    }
 }

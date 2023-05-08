@@ -30,7 +30,7 @@ class PostCatController extends Controller
     public function index()
     {
         $postCats = $this->postCatService->getAll();
-        return view('admin.postCat.list-posts', ['title' => 'Danh mục bài viết',
+        return view('admin.postCat.list', ['title' => 'Danh mục bài viết',
             'postCats' => $postCats
         ]);
     }
@@ -47,7 +47,7 @@ class PostCatController extends Controller
     {
 
         $this->postCatService->update($request, $postCat);
-        return redirect()->route('postCats.list-posts');
+        return redirect()->route('postCats.list');
     }
 
     public function destroy(Request $request)

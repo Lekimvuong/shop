@@ -111,6 +111,10 @@
     font-weight: normal;
 }
 
+.list-operation {
+    display: flex;
+}
+
 .list-operation li {
     float: left;
 }

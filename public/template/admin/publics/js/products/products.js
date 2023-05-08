@@ -10,11 +10,14 @@ var UpdateClass = function() {
     }
 
     this.init = function() {
-        ele.thumb = $('#upload-thumb');
+        ele.thumb = $('#upload-multiplethumb');
+        ele.postTable = $('#product-table');
+        ele.search = $('#search');
     }
 
     this.bindEvents = function() {
         updateThumb();
+        drawPostData();
     }
     var updateThumb = function() {
 
@@ -41,6 +44,18 @@ var UpdateClass = function() {
             });
         });
     }
-
+    var drawPostData = function() {
+        var postTable = ele.postTable.DataTable({
+            searching: true,
+            pagination: true,
+            lengthMenu: 20,
+            lengthChange: false,
+            info: false,
+            dom: "lrtip",
+        });
+        ele.search.on('keyup', function(e) {
+            postTable.column(4).search(e.target.value).draw();
+        })
+    }
 
 }
