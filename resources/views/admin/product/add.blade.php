@@ -28,8 +28,7 @@
                             <textarea name="content" id="desc"value="{{ old('content') }}" class="ckeditor"></textarea>
                             <label>Hình ảnh</label>
                             <div id="uploadFile">
-                                <input type="file" url-update="{{ route('Upload.files') }}" 
-                                    id="upload-thumb">
+                                <input type="file" url-update="{{ route('Upload.files') }}" id="upload-thumb">
                                 <div id="image_show">
                                 </div>
                                 <input type="hidden" name="thumb" id="thumb">

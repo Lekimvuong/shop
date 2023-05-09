@@ -21,7 +21,7 @@
             </a>
             <ul class="sub-menu">
                 <li class="nav-item">
-                    <a href="{{route('postCats.add')}}" title="" class="nav-link">Thêm mới danh mục</a>
+                    <a href="{{route('postCats.add')}}" title="" class="nav-link">Thêm mới bài viết </a>
                 </li>
                 <li class="nav-item">
                     <a href="{{route('postCats.list')}}" title="" class="nav-link">Danh Mục bài viết</a>
@@ -35,7 +35,7 @@
             </a>
             <ul class="sub-menu">
                 <li class="nav-item">
-                    <a href="{{route('products.add')}}" title="" class="nav-link">Thêm mới</a>
+                    <a href="{{route('products.add')}}" title="" class="nav-link">Thêm mới sản phẩm</a>
                 </li>
                 <li class="nav-item">
                     <a href="{{route('products.list')}}" title="" class="nav-link">Danh sách sản phẩm</a>

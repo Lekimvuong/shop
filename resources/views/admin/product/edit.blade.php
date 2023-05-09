@@ -58,7 +58,7 @@
                                 <input type="radio" id="no_active" class="radio-check-2" value="0"{{$product->active == 0 ? 'checked =""':''}} name="active">
                                 Không
                             </div>
-                            <button type="submit" name="btn-submit" id="btn-submit">Thêm mới</button>
+                            <button type="submit" name="btn-submit" id="btn-submit">Cập nhật</button>
                         </form>
                     </div>
                 </div>

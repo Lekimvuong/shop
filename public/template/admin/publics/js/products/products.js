@@ -10,7 +10,7 @@ var UpdateClass = function() {
     }
 
     this.init = function() {
-        ele.thumb = $('#upload-multiplethumb');
+        ele.thumb = $('#upload-thumb');
         ele.postTable = $('#product-table');
         ele.search = $('#search');
     }

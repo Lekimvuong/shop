@@ -41,6 +41,7 @@ Route::middleware(['auth'])->group(function () {
             Route::post('add', [ProductController::class, 'store'])->name('products.add.store');
             Route::get('list', [ProductController::class, 'index'])->name('products.list');
             Route::get('edit/{product}', [ProductController::class, 'show'])->name('products.show');
+            Route::post('edit/{product}', [ProductController::class, 'update'])->name('products.update');
         });
          //Upload
          Route::post('upload/services', [UploadController::class, 'store'])->name('Upload.files');
