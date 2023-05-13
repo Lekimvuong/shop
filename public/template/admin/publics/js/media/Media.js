@@ -1,4 +1,4 @@
-var UpdateClass = function() {
+var MediaClass = function() {
     var vars = {
         datatable: {},
 
@@ -11,26 +11,26 @@ var UpdateClass = function() {
 
     this.init = function() {
         ele.thumb = $('#upload-thumb');
-        ele.postTable = $('#product-table');
-        ele.search = $('#search');
     }
 
     this.bindEvents = function() {
         updateThumb();
-        drawPostData();
     }
     var updateThumb = function() {
 
         ele.thumb.on('change', function() {
-            const form = new FormData();
-            form.append('file', $(this)[0].files[0]);
+            var formData = new FormData();
+            var files = $('#upload-thumb')[0].files;
             var $url = $(this).attr('url-update');
+            for (var i = 0; i < files.length; i++) {
+                formData.append('files[]', files[i]);
+            }
             $.ajax({
                 processData: false,
                 contentType: false,
                 type: 'POST',
                 datatype: 'JSON',
-                data: form,
+                data: formData,
                 url: $url,
                 success: function(results) {
                     if (results.error == false) {
@@ -39,24 +39,11 @@ var UpdateClass = function() {
                         $('#thumb').val(results.url);
                         $('#name_image').val(results.name);
                     } else {
-                        alert('Upload File Lỗi!');
+                        alert('Upload File Lỗi rồi kìa !');
                     }
                 },
             });
         });
-    }
-    var drawPostData = function() {
-        var postTable = ele.postTable.DataTable({
-            searching: true,
-            pagination: true,
-            lengthMenu: 20,
-            lengthChange: false,
-            info: false,
-            dom: "lrtip",
-        });
-        ele.search.on('keyup', function(e) {
-            postTable.column(4).search(e.target.value).draw();
-        })
     }
 
 }

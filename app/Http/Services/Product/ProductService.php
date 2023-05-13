@@ -2,6 +2,7 @@
 namespace App\http\Services\Product;
 use App\Models\Product;
 use App\Models\productCat;
+use App\Models\Media;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Session;
 
@@ -36,6 +37,11 @@ public function insert($request){
     try {
         $request->except('_token', 'btn-submit');
         Product::create($request->all());
+        Media::create([
+            'name' => (string) $request->input('name_image'),
+            'thumb' => (string) $request->input('thumb'),
+            'product_id' => (string) $request->input('cat_id'),
+        ]);
 
         Session::flash('success', 'Thêm sản phẩm thành công');
     } catch (\Exception $err) {

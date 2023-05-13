@@ -45,5 +45,8 @@ Route::middleware(['auth'])->group(function () {
         });
          //Upload
          Route::post('upload/services', [UploadController::class, 'store'])->name('Upload.files');
+         Route::get('upload/services/add', [UploadController::class, 'create'])->name('Upload.add');
+         Route::post('upload/services/add', [UploadController::class, 'multiStore'])->name('Upload.multifiles');
+         Route::get('upload/services/list', [UploadController::class, 'index'])->name('Upload.list');
     });
 });

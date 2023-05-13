@@ -20,4 +20,27 @@ class UploadService
         }
 
     }
+    public function getNameMedia($request)
+    {
+        $name = $request->file('file')->getClientOriginalName();
+        return $name;
+
+    }
+    public function multipleStore($request)
+    {
+        if($request->hasfile('files'))
+        {
+            foreach($request->file('files') as $image)
+            {
+                $pathFull = 'uploads/' . date("Y/m/d");
+                    $name = $image->getClientOriginalName();
+                    $image->storeAs(
+                        'public/' . $pathFull, $name
+                    );
+            }
+            return '/shop/public/storage/' . $pathFull . '/' . $name;
+        }
+       
+    }
+
 }

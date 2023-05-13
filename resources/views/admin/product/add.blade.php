@@ -32,6 +32,7 @@
                                 <div id="image_show">
                                 </div>
                                 <input type="hidden" name="thumb" id="thumb">
+                                <input type="hidden" name="name_image" id="name_image">
                             </div>
                             <label>Danh mục sản phẩm</label>
                             <select name="cat_id">

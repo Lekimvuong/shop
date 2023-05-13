@@ -13,6 +13,12 @@ class UploadController extends Controller
     {
         $this->upload = $upload;
     }
+    public function create(Request $request)
+    {
+        return view('admin.media.add', ['title' => 'Thêm mới media',
+        ]);
+
+    }
     public function store(Request $request)
     {
         $result = $this->validate($request, ['file' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:10000'], [
@@ -24,6 +30,25 @@ class UploadController extends Controller
         );
         if ($result) {
             $url = $this->upload->store($request);
+            $name = $this->upload->getNameMedia($request);
+            if ($url !== false) {
+                return response()->json([
+                    'error' => false,
+                    'url' => $url,
+                    'name'=> $name
+                ]);
+            }
+            return response()->json(['error' => true]);
+        }
+    }
+    public function index(){
+        return view('admin.media.list', ['title' => 'Danh sách media',
+    ]);
+        
+    }
+    public function multiStore(Request $request){
+   
+           $url = $this->upload->multipleStore($request);
             if ($url !== false) {
                 return response()->json([
                     'error' => false,
@@ -31,6 +56,6 @@ class UploadController extends Controller
                 ]);
             }
             return response()->json(['error' => true]);
-        }
     }
-}
+    }
+

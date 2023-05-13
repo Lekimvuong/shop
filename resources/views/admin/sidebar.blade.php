@@ -97,7 +97,10 @@
             </a>
             <ul class="sub-menu">
                 <li class="nav-item">
-                    <a href="?page=list_media" title="" class="nav-link">Danh sách media</a>
+                    <a href="{{route('Upload.add')}}" title="" class="nav-link">Thêm mới Media</a>
+                </li>
+                <li class="nav-item">
+                    <a href="{{route('Upload.list')}}" title="" class="nav-link">Danh sách media</a>
                 </li>
             </ul>
         </li>
