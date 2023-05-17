@@ -1,8 +1,8 @@
 <?php
 namespace App\http\Services\Product;
+use App\Models\Media;
 use App\Models\Product;
 use App\Models\productCat;
-use App\Models\Media;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Session;
 
@@ -35,14 +35,8 @@ public function insert($request){
     }
 
     try {
-        $request->except('_token', 'btn-submit');
+        $request->except('_token', 'btn-submit', );
         Product::create($request->all());
-        Media::create([
-            'name' => (string) $request->input('name_image'),
-            'thumb' => (string) $request->input('thumb'),
-            'product_id' => (string) $request->input('cat_id'),
-        ]);
-
         Session::flash('success', 'Thêm sản phẩm thành công');
     } catch (\Exception $err) {
         Session::flash('error', 'Thêm sản phẩm lỗi');
@@ -56,7 +50,6 @@ public function get()
 {
     return Product::with('product_cat')->orderByDesc('id')->paginate(10);
 }
-
 public function update($request, $product)
 {
     $isValidPrice = $this->isValidPrice($request);
@@ -74,5 +67,17 @@ public function update($request, $product)
         return false;
     }
     return true;
+}
+public function destroy($request)
+{
+    $id = (int) $request->input('id');
+    $media = Media::where('product_id', $id);
+    $product = Product::where('id', $id)->first();
+    if ($product) {
+        $product->delete();
+        $media->delete();
+        return true;
+    } 
+    return false;
 }
 }

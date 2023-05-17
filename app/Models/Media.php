@@ -13,4 +13,9 @@ class Media extends Model
         'thumb',
         'product_id',
     ];
+
+     public function cat_id(){
+         return $this->hasOne(Product::class, 'id', 'product_id');
+
+     }
 }

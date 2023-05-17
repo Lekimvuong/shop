@@ -36,26 +36,35 @@
                                 </tr>
                             </thead>
                             <tbody>
+                                @php
+                                $t = 0; 
+                                @endphp
+                                @foreach ($Medias as $key => $Media)
+                               
+                                @php
+                                $t++;
+                                @endphp
                                 <tr>
                                     <td><input type="checkbox" name="checkItem" class="checkItem"></td>
-                                    <td><span class="tbody-text">1</h3></span>
+                                    <td><span class="tbody-text">{{ $t}}</h3></span>
                                     <td>
                                         <div class="tbody-thumb">
-                                            <img src="public/images/img-product.png" alt="">
+                                            <img src="{{ $Media->thumb }}" alt="">
                                         </div>
                                     </td>
                                     <td class="clearfix">
                                         <div class="tb-title fl-left">
-                                            <a href="" title="">IMG_1402.jpg</a>
+                                            <a href="" title="">{{ $Media->name }}</a>
                                         </div>
                                         <ul class="list-operation fl-right">
                                             <li><a href="" title="Sửa" class="edit"><i class="fa fa-pencil" aria-hidden="true"></i></a></li>
                                             <li><a href="" title="Xóa" class="delete"><i class="fa fa-trash" aria-hidden="true"></i></a></li>
                                         </ul>
                                     </td>
-                                    <td><span class="tbody-text">Admin</span></td>
-                                    <td><span class="tbody-text">12-07-2016</span></td>
+                                    <td><span class="tbody-text">{{ $Media->cat_id->name }}</span></td>
+                                    <td><span class="tbody-text">{{$Media->updated_at}}</span></td>
                                 </tr>
+                                @endforeach
                             </tbody>
                         </table>
                     </div>

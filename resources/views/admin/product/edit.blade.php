@@ -27,7 +27,7 @@
                             <label for="content">Chi tiết</label>
                             <textarea name="content" id="desc" class="ckeditor">{{ $product->content }}</textarea>
                             <label>Hình ảnh</label>
-                            <div id="uploadFile">
+                            {{-- <div id="uploadFile">
                                 <input type="file" url-update="{{ route('Upload.files') }}" 
                                     id="upload-thumb">
                                 <div id="image_show">
@@ -36,12 +36,12 @@
                                     </a>
                                 </div>
                                 <input type="hidden" name="thumb" value ="{{$product->thumb}}"id="thumb">
-                            </div>
+                            </div> --}}
                             <label>Danh mục sản phẩm</label>
                             <select name="cat_id">
                                 <option value="">-- Chọn danh mục --</option>
                                 @foreach($productCats as $item)
-                                <option value="{{ $item->id }}"{{$product->cat_id==$item->id ? 'selected':''}}>{{ $item->name }}</option>
+                                <option value="{{ $item->id }}"{{$product->cat_id==$item->id ? 'selected' : ''}}>{{ $item->name }}</option>
                                 @endforeach
                             </select>
                             {{-- <label>Trạng thái</label>

@@ -31,8 +31,6 @@ class ProductRequest extends FormRequest
             'description' => 'required',
             'content' => 'required',
             'cat_id' => 'required',
-            'thumb'=>'required'
-
         ];
     }
 
@@ -50,7 +48,6 @@ class ProductRequest extends FormRequest
             'code.required' => 'Vui lòng nhập mã code cho sản phẩm',
             'code.max' => 'Mã code không được quá 255 ký tự',
             'cat_id.required' => 'Vui lòng chọn Danh mục cho sản phẩm',
-            'thumb.required'=>'Vui lòng chọn ảnh'
         ];
     }
 }

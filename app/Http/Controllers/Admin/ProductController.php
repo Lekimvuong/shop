@@ -45,24 +45,12 @@ class ProductController extends Controller
      */
     public function show(Product $product)
     {
-        return view('admin.product.edit',
-        ['title' => 'Chỉnh sửa thông tin sản phẩm' ,
-        'product' => $product,
-        'productCats' => $this->productService->getproductCats(),
-        ]);
+        $data['title'] = 'Chỉnh sửa thông tin sản phẩm';
+        $data['product'] = $product;
+        $data['productCats'] = $this->productService->getproductCats();
+        return view('admin.product.edit', $data);
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(string $id)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     */
     public function update(ProductRequest $request, Product $product)
     {
         $result = $this->productService->update($request, $product);
@@ -76,8 +64,16 @@ class ProductController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(Request $request)
     {
-        //
+        $result = $this->productService->destroy($request);
+        if ($result) {
+            return response()->json([
+                'error' => false
+            ]);
+        }
+        return response()->json([
+            'error' => true
+        ]);
     }
 }

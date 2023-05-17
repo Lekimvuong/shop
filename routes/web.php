@@ -42,9 +42,11 @@ Route::middleware(['auth'])->group(function () {
             Route::get('list', [ProductController::class, 'index'])->name('products.list');
             Route::get('edit/{product}', [ProductController::class, 'show'])->name('products.show');
             Route::post('edit/{product}', [ProductController::class, 'update'])->name('products.update');
+            Route::delete('destroy', [ProductController::class, 'destroy'])->name('products.delete');
         });
          //Upload
          Route::post('upload/services', [UploadController::class, 'store'])->name('Upload.files');
+         Route::post('upload/services', [UploadController::class, 'insertImages'])->name('Upload.images');
          Route::get('upload/services/add', [UploadController::class, 'create'])->name('Upload.add');
          Route::post('upload/services/add', [UploadController::class, 'multiStore'])->name('Upload.multifiles');
          Route::get('upload/services/list', [UploadController::class, 'index'])->name('Upload.list');

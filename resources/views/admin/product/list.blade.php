@@ -75,7 +75,7 @@
                                         </div>
                                         <ul class="list-operation fl-right">
                                             <li><a href="{{route('products.show', ['product' => $product->id])}}" title="Sửa" class="edit"><i class="fa fa-pencil" aria-hidden="true"></i></a></li>
-                                            <li><a href="" title="Xóa" class="delete"><i class="fa fa-trash" aria-hidden="true"></i></a></li>
+                                            <li><a url-delete="{{route('products.delete')}}" title="Xóa" class="delete remove-row"  data-id="{{$product->id}}"><i class="fa fa-trash" aria-hidden="true"></i></a></li>
                                         </ul>
                                     </td>
                                     <td><span class="tbody-text">{{ $product->price }}</span></td>
@@ -104,7 +104,7 @@
     <script type="text/javascript" src="{{ asset('template/admin/publics/js/products/products.js') }}"></script>
     <script type="text/javascript">
         $(document).ready(function() {
-            var instance = new UpdateClass();
+            var instance = new ProductClass();
             instance.run();
         });
     </script>

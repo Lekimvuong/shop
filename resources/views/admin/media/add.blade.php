@@ -12,19 +12,21 @@
                 <div class="section" id="detail-page">
                     <div class="section-detail">
                         @include('admin.alert')
-                        <form method="POST" enctype="multipart/form-data">
+                        <form method="POST" action = "{{ route('Upload.images') }}" enctype="multipart/form-data">
                             {{ csrf_field() }}
                             <label>Hình ảnh</label>
                             <div id="uploadFile">
                                 <input type="file" name="files[]" url-handle="{{ route('Upload.multifiles') }}" id="upload-thumb" multiple>
-                                <div id="image_show">
+                                <div id="errorMessages" style="display: none; color: red;"></div>
+                                <div id ="show_images" style = "display: flex">
                                 </div>
-                                <input type="hidden" name="thumb" id="thumb">
-                
                             </div>
                             <label>Sản phẩm</label>
-                            <select name="cat_id">
+                            <select name="product_id">
                                 <option value="">-- Chọn danh mục --</option>
+                                @foreach($product_id as $item)
+                                <option value="{{ $item->id }}">{{ $item->name }}</option>
+                                @endforeach
                             </select>
                             {{-- <label for="title">Kích hoạt</label>
                             <div class="radio-check">

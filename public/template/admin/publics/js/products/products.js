@@ -1,4 +1,4 @@
-var UpdateClass = function() {
+var ProductClass = function() {
     var vars = {
         datatable: {},
 
@@ -13,11 +13,13 @@ var UpdateClass = function() {
         ele.thumb = $('#upload-thumb');
         ele.postTable = $('#product-table');
         ele.search = $('#search');
+        ele.row = $('.remove-row');
     }
 
     this.bindEvents = function() {
         updateThumb();
         drawPostData();
+        removeRow();
     }
     var updateThumb = function() {
 
@@ -44,6 +46,32 @@ var UpdateClass = function() {
                 },
             });
         });
+    }
+    var removeRow = function() {
+        ele.row.on('click', function() {
+
+            var $id = $(this).data('id');
+            var $url = $(this).attr('url-delete');
+            $.app.pushConfirmNoti({
+                title: 'Bạn có muốn xóa không ?',
+                callback: function() {
+                    $.ajax({
+                        type: 'DELETE',
+                        datatype: 'JSON',
+                        data: { 'id': $id },
+                        url: $url,
+                        success: function(result) {
+                            if (result.error == false) {
+                                $.app.pushNoty('success');
+                                location.reload();
+                            } else {
+                                $.app.pushNoty('error', 'Lỗi! Vui lòng thử lại');
+                            }
+                        }
+                    });
+                }
+            });
+        })
     }
     var drawPostData = function() {
         var postTable = ele.postTable.DataTable({

@@ -21,10 +21,12 @@ var MediaClass = function() {
         ele.thumb.on('change', function() {
             var formData = new FormData();
             var files = $('#upload-thumb')[0].files;
+            var TotalFiles = $('#upload-thumb')[0].files.length; //Total files
             var $url = $(this).attr('url-update');
-            for (var i = 0; i < files.length; i++) {
+            for (var i = 0; i < TotalFiles; i++) {
                 formData.append('files[]', files[i]);
             }
+            formData.append('TotalFiles', TotalFiles);
             $.ajax({
                 processData: false,
                 contentType: false,
@@ -34,12 +36,19 @@ var MediaClass = function() {
                 url: $url,
                 success: function(results) {
                     if (results.error == false) {
-                        $('#image_show').html('<a href="' + results.url + '" target="_blank">' +
-                            '<img src="' + results.url + '" width="150px"></a>');
-                        $('#thumb').val(results.url);
-                        $('#name_image').val(results.name);
+                        results.url.forEach(url => {
+                            $('#show_images').append('<div id="image_show"><a href="' + url +
+                                '" target="_blank">' + '<img src="' + url + '" width="100px"></a></div>' +
+                                '<input type="hidden" name="thumb[]" value="' + url + '" id="thumb">');
+                        });
                     } else {
-                        alert('Upload File Lỗi rồi kìa !');
+                        var errorMessages = '<ul>';
+                        $.each(results.error, function(key, value) {
+                            errorMessages += '<li>' + value + '</li>';
+                        });
+                        errorMessages += '</ul>';
+
+                        $('#errorMessages').html(errorMessages).show();
                     }
                 },
             });

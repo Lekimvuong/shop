@@ -15,4 +15,9 @@ class productCat extends Model
         'content',
         'active'
     ];
+
+    public function products()
+    {
+        return $this->hasMany(Product::class, 'cat_id', 'id');
+    }
 }

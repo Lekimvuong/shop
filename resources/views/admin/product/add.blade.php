@@ -12,7 +12,7 @@
                 <div class="section" id="detail-page">
                     <div class="section-detail">
                         @include('admin.alert')
-                        <form method="POST" enctype="multipart/form-data">
+                        <form method="POST"enctype="multipart/form-data">
                             {{ csrf_field() }}
                             <label for="name">Tên sản phẩm</label>
                             <input type="text" name="name" value="{{ old('product_name') }}"id="product-name">
@@ -26,14 +26,14 @@
                             <textarea name="description"value="{{ old('short-desc') }}" id="desc"></textarea>
                             <label for="content">Chi tiết</label>
                             <textarea name="content" id="desc"value="{{ old('content') }}" class="ckeditor"></textarea>
-                            <label>Hình ảnh</label>
-                            <div id="uploadFile">
+                            {{-- <label>Hình ảnh</label>
+                             <div id="uploadFile">
                                 <input type="file" url-update="{{ route('Upload.files') }}" id="upload-thumb">
                                 <div id="image_show">
                                 </div>
                                 <input type="hidden" name="thumb" id="thumb">
                                 <input type="hidden" name="name_image" id="name_image">
-                            </div>
+                            </div> --}} 
                             <label>Danh mục sản phẩm</label>
                             <select name="cat_id">
                                 <option value="">-- Chọn danh mục --</option>
