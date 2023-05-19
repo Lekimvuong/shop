@@ -4,6 +4,7 @@ use App\Models\Product;
 use App\Models\Media;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Session;
+use Illuminate\Support\Facades\Storage;
 class UploadService
 {
     // public function store($request)
@@ -57,7 +58,7 @@ public function insert($request){
     try {
         foreach ($request->input('thumb') as $thumb) {
             Media::create([
-                'name'=> '1',
+                'name'=> (string)basename($thumb),
                 'thumb' => $thumb,
                 'product_id' => (int) $request->input('product_id'),
             ]);
@@ -71,5 +72,14 @@ public function insert($request){
 
     return true;
 }
-
+public function delete($request){
+    foreach ($request->input('urlImage') as $path) {
+        if( $path){
+            $relative_path = str_replace('/storage/', '', $path);
+            Storage::delete($relative_path);
+         return true;
+         }
+    }
+   
+}
 }

@@ -76,4 +76,18 @@ class UploadController extends Controller
         $this->upload->insert($request);
         return redirect()->back();
     }
+
+    public function delete(Request $request)
+    {
+        $status = $this->upload->delete($request);
+        if($status!= false){
+            return response()->json([       //Nếu pass thì return ở đây
+                'success' => true,
+            ]);
+        }
+        return response()->json([       //Nếu pass thì return ở đây
+            'success' => false,
+        ]);
+
+    }
 }

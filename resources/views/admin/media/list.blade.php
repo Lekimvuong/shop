@@ -54,7 +54,7 @@
                                     </td>
                                     <td class="clearfix">
                                         <div class="tb-title fl-left">
-                                            <a href="" title="">{{ $Media->name }}</a>
+                                            <span title="">{{ $Media->name }}</span>
                                         </div>
                                         <ul class="list-operation fl-right">
                                             <li><a href="" title="Sửa" class="edit"><i class="fa fa-pencil" aria-hidden="true"></i></a></li>

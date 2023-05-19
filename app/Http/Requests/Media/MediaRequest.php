@@ -28,7 +28,7 @@ class MediaRequest extends FormRequest
     public function messages(): array
     {
         return [
-            'files.required'=>'Vui lòng nhập tiêu đề bài viết'
+            'files.required'=>'Vui lòng thêm ảnh'
         ];
     }
 }
