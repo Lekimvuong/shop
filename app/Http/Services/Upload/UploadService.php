@@ -7,23 +7,24 @@ use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Storage;
 class UploadService
 {
-    // public function store($request)
-    // {
-    //     if ($request->hasFile('file')) {
-    //         try {
-    //             $pathFull = 'uploads/' . date("Y/m/d");
-    //             $name = $request->file('file')->getClientOriginalName();
-    //             $request->file('file')->storeAs(
-    //                 'public/' . $pathFull, $name
-    //             );
+     public function store($request)
+     {
+         if ($request->hasFile('file')) {
+             try {
+                $pathFull = 'uploads/' . date("Y/m/d");
+                $image = $request->file('file');
+                 $name = $image->getClientOriginalName();
+                 $image->storeAs(
+                    'public/' . $pathFull, $name
+                 );
 
-    //             return '/shop/public/storage/' . $pathFull . '/' . $name;
-    //         } catch (\Exception $error) {
-    //             return false;
-    //         }
-    //     }
+                 return '/storage/' . $pathFull . '/' . $name;
+             } catch (\Exception $error) {
+                 return false;
+             }
+         }
 
-    // }
+     }
    
     public function multipleStore($request)
     {
@@ -76,10 +77,21 @@ public function delete($request){
     foreach ($request->input('urlImage') as $path) {
         if( $path){
             $relative_path = str_replace('/storage/', '', $path);
-            Storage::delete($relative_path);
+            $storage_path = '/public/' . $relative_path;
+            $isFile = Storage::exists($storage_path);
+            if ($isFile) {
+                Storage::delete($storage_path);
+            }
          return true;
+         }
+         else{
+            return false;
          }
     }
    
+}
+public function update($request, $media)
+{
+    return true;
 }
 }

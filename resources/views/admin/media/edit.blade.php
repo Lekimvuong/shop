@@ -6,28 +6,32 @@
             <div id="content" class="fl-right">
                 <div class="section" id="title-page">
                     <div class="clearfix">
-                        <h3 id="index" class="fl-left">{{$title}}</h3>
+                        <h3 id="index" class="fl-left">{{ $title }}</h3>
                     </div>
                 </div>
                 <div class="section" id="detail-page">
                     <div class="section-detail">
                         @include('admin.alert')
-                        <form method="POST" action="{{ route('Upload.images') }}" enctype="multipart/form-data">
+                        <form method="POST" action="{{ route('Upload.update', ['media' => $media->id])}}">
                             {{ csrf_field() }}
                             <label>Hình ảnh</label>
                             <div id="uploadFile">
-                                <input type="file" name="files[]" url-handle="{{ route('Upload.multifiles') }}"
-                                    id="upload-thumb" multiple>
-                                <div id="errorMessages" style="display: none; color: red;"></div>
-                                <div id="show_images" style="display: flex">
+                                <input type="file" url-update="{{route('Update.image')}}" id="updateThumb">
+                                <div id="image_show">
+                                    <a href="" target ="blank">
+                                        <img src="{{$media->thumb}}" width ="100px">
+                                    </a>
                                 </div>
+                                <input type="hidden" name="thumb" value ="{{$media->thumb}}"id="thumb">
                             </div>
-                            <button type="button" name="btn-delete" url-delete="{{ route('Upload.delete') }}"id="deleteImage" style="display: none;">Xóa ảnh</button>
+                            {{-- <button type="button" name="btn-delete"
+                                url-delete="{{ route('Upload.delete') }}"id="deleteImage" style="display: none;">Xóa
+                                ảnh</button> --}}
                             <label>Sản phẩm</label>
                             <select name="product_id">
                                 <option value="">-- Chọn danh mục --</option>
-                                @foreach ($product_id as $item)
-                                    <option value="{{ $item->id }}">{{ $item->name }}</option>
+                                @foreach ($products as $item)
+                                <option value="{{ $item->id }}"{{$media->product_id==$item->id ? 'selected' : ''}}>{{ $item->name }}</option>
                                 @endforeach
                             </select>
                             {{-- <label for="title">Kích hoạt</label>

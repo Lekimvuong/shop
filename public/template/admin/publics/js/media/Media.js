@@ -11,14 +11,16 @@ var MediaClass = function() {
 
     this.init = function() {
         ele.thumb = $('#upload-thumb');
-        ele.deleThumb = $('#deleteImage')
+        ele.deleThumb = $('#deleteImage');
+        ele.updateThumb = $('#updateThumb');
     }
 
     this.bindEvents = function() {
-        updateThumb();
+        uploadThumb();
         deletethumb();
+        updateThumb();
     }
-    var updateThumb = function() {
+    var uploadThumb = function() {
 
         ele.thumb.on('change', function() {
             var formData = new FormData();
@@ -78,6 +80,30 @@ var MediaClass = function() {
                 }
             })
         })
+    }
+    var updateThumb = function() {
+        ele.updateThumb.change(function() {
+            const form = new FormData();
+            form.append('file', $(this)[0].files[0]);
+            var $url = $(this).attr('url-update');
+            $.ajax({
+                type: 'POST',
+                datatype: 'JSON',
+                data: form,
+                processData: false,
+                contentType: false,
+                url: $url,
+                success: function(results) {
+                    if (results.error == false) {
+                        $("#image_show").html('<a href="' + results.url + '" target="_blank">' +
+                            '<img src="' + results.url + '" width="100px"></a>');
+                        $("#thumb").val(results.url);
+                    } else {
+                        alert('Upload File Lỗi!');
+                    }
+                },
+            });
+        });
     }
 
 }

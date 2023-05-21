@@ -45,11 +45,13 @@ Route::middleware(['auth'])->group(function () {
             Route::delete('destroy', [ProductController::class, 'destroy'])->name('products.delete');
         });
          //Upload
-         Route::post('upload/services', [UploadController::class, 'store'])->name('Upload.files');
          Route::post('upload/services', [UploadController::class, 'insertImages'])->name('Upload.images');
          Route::get('upload/services/add', [UploadController::class, 'create'])->name('Upload.add');
+         Route::post('upload/add', [UploadController::class, 'store'])->name('Update.image');
          Route::post('upload/services/add', [UploadController::class, 'multiStore'])->name('Upload.multifiles');
          Route::get('upload/services/list', [UploadController::class, 'index'])->name('Upload.list');
          Route::delete('upload/services/delete', [UploadController::class, 'delete'])->name('Upload.delete');
+         Route::get('upload/services/edit/{media}', [UploadController::class, 'show'])->name('Upload.edit');
+         Route::post('upload/services/edit/{media}', [UploadController::class, 'update'])->name('Upload.update');
     });
 });

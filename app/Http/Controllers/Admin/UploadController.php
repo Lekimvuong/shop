@@ -7,6 +7,7 @@ use App\Http\Requests\Media\MediaRequest;
 use App\http\Services\Upload\UploadService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
+use App\Models\Media;
 
 class UploadController extends Controller
 {
@@ -22,32 +23,34 @@ class UploadController extends Controller
         ]);
 
     }
-    // public function store(Request $request)
-    // {
-    //     $result = $this->validate($request, ['file' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:10000'], [
-    //         'file.required' => 'Ảnh đại diện không được trống',
-    //         'file.image' => 'File upload phải là file ảnh',
-    //         'file.nimes' => 'File upload phải là jpeg, png, jpg, gif, svg',
-    //         'file.max' => 'File không lớn hơn 10000',
-    //     ]
-    //     );
-    //     if ($result) {
-    //         $url = $this->upload->store($request);
-    //         if ($url !== false) {
-    //             return response()->json([
-    //                 'error' => false,
-    //                 'url' => $url,
-    //             ]);
-    //         }
-    //         return response()->json(['error' => true]);
-    //     }
-    // }
-    public function index()
+       public function index()
     {
         return view('admin.media.list', ['title' => 'Danh sách media',
         'Medias' => $this->upload->get()
         ]);
 
+    }
+    public function store(Request $request)
+    {
+        $rules = [
+            'file' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:10000',
+        ];
+
+        $validator = Validator::make($request->all(), $rules);   //Validate theo rule ở $rule
+        if ($validator->passes())   //Check có pass các rules trên ko
+        {
+            $url = $this->upload->store($request);
+            if ($url !== false) 
+            {
+                return response()->json([       //Nếu pass thì return ở đây
+                    'error' => false,
+                    'url' => $url,
+                ]);
+            }
+        }  
+        return response()->json([
+            'error' => $validator->errors(),
+        ]);
     }
     public function multiStore(Request $request)
     {
@@ -89,5 +92,22 @@ class UploadController extends Controller
             'success' => false,
         ]);
 
+    }
+    public function show(Media $media)
+    {
+        $data['title'] = 'Chỉnh sửa thông tin Media';
+        $data['media'] = $media;
+        $data['products'] = $this->upload->getProductId();
+        return view('admin.Media.edit', $data);
+    }
+
+    public function update(Request $request,Media $media)
+    {
+        $result = $this->upload->update($request, $media);
+        if($result){
+            return redirect()->route('Upload.list');
+        }
+        return redirect()->back();
+       
     }
 }
