@@ -17,12 +17,15 @@
                             <label>Hình ảnh</label>
                             <div id="uploadFile">
                                 <input type="file" url-update="{{route('Update.image')}}" id="updateThumb">
+                                <div id="errorMessages" style="display: none; color: red;"></div>
                                 <div id="image_show">
                                     <a href="" target ="blank">
-                                        <img src="{{$media->thumb}}" width ="100px">
+                                        <img src="{{$media->thumb}}" width ="100px" id = "urlImage">
                                     </a>
                                 </div>
-                                <input type="hidden" name="thumb" value ="{{$media->thumb}}"id="thumb">
+                                <input type="hidden" name="thumb" id="thumb">
+                                <input type="hidden" name="name" id="name_image">
+                                <input type="hidden" name="oldName" id ="oldThumb" value ="{{$media->thumb}}">
                             </div>
                             {{-- <button type="button" name="btn-delete"
                                 url-delete="{{ route('Upload.delete') }}"id="deleteImage" style="display: none;">Xóa
@@ -42,7 +45,7 @@
                                 <input type="radio" id="no_active" class="radio-check-2" value="0" name="active">
                                 Không
                             </div> --}}
-                            <button type="submit" name="btn-submit" id="btn-submit">Thêm mới</button>
+                            <button type="submit" name="btn-submit" id="btn-submit">Cập nhật</button>
                         </form>
                     </div>
                 </div>

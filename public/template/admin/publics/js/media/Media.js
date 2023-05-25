@@ -98,12 +98,37 @@ var MediaClass = function() {
                         $("#image_show").html('<a href="' + results.url + '" target="_blank">' +
                             '<img src="' + results.url + '" width="100px"></a>');
                         $("#thumb").val(results.url);
+                        $("#name_image").val(results.name);
+                        deleteOldThumb();
                     } else {
-                        alert('Upload File Lỗi!');
+                        var errorMessages = '<ul>';
+                        $.each(results.error, function(key, value) {
+                            errorMessages += '<li>' + value + '</li>';
+                        });
+                        errorMessages += '</ul>';
+
+                        $('#errorMessages').html(errorMessages).show();
                     }
                 },
             });
         });
+    }
+
+    var deleteOldThumb = function() {
+        var $input = document.querySelector('#oldThumb').value;
+        console.log($input);
+        $.ajax({
+            type: 'delete',
+            datatype: 'JSON',
+            data: { 'input': $input },
+            url: '/admin/upload/services/deleteOld',
+            success: function(response) {
+                if (response.success == true) {
+
+                }
+            }
+        });
+
     }
 
 }

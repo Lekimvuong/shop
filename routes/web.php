@@ -51,6 +51,7 @@ Route::middleware(['auth'])->group(function () {
          Route::post('upload/services/add', [UploadController::class, 'multiStore'])->name('Upload.multifiles');
          Route::get('upload/services/list', [UploadController::class, 'index'])->name('Upload.list');
          Route::delete('upload/services/delete', [UploadController::class, 'delete'])->name('Upload.delete');
+         Route::delete('upload/services/deleteOld', [UploadController::class, 'deleteOld']);
          Route::get('upload/services/edit/{media}', [UploadController::class, 'show'])->name('Upload.edit');
          Route::post('upload/services/edit/{media}', [UploadController::class, 'update'])->name('Upload.update');
     });

@@ -39,12 +39,15 @@ class UploadController extends Controller
         $validator = Validator::make($request->all(), $rules);   //Validate theo rule ở $rule
         if ($validator->passes())   //Check có pass các rules trên ko
         {
-            $url = $this->upload->store($request);
-            if ($url !== false) 
+            $urls = $this->upload->store($request);
+            $name = $urls[0];
+            $url = $urls[1];
+            if ($urls!== false) 
             {
                 return response()->json([       //Nếu pass thì return ở đây
                     'error' => false,
                     'url' => $url,
+                    'name'=> $name
                 ]);
             }
         }  
@@ -109,5 +112,19 @@ class UploadController extends Controller
         }
         return redirect()->back();
        
+    }
+
+    public function deleteOld(Request $request)
+    {
+        $status = $this->upload->deleteOld($request);
+        if($status!= false){
+            return response()->json([       //Nếu pass thì return ở đây
+                'success' => true,
+            ]);
+        }
+        return response()->json([       //Nếu pass thì return ở đây
+            'success' => false,
+        ]);
+
     }
 }
