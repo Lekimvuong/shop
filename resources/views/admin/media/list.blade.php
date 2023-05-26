@@ -17,14 +17,14 @@
                             <li class="all"><a href="">Tất cả <span class="count">(69)</span></a></li>
                         </ul>
                         <form method="GET" class="form-s fl-right">
-                            <input type="text" name="s" id="s">
+                            <input type="text" name="s" id="search">
                             <input type="submit" name="sm_s" value="Tìm kiếm">
                         </form>
                     </div>
                     <div class="actions">
                     </div>
                     <div class="table-responsive">
-                        <table class="table list-table-wp">
+                        <table id="Media_table" class="table list-table-wp">
                             <thead>
                                 <tr>
                                     <td><input type="checkbox" name="checkAll" id="checkAll"></td>
@@ -58,7 +58,7 @@
                                         </div>
                                         <ul class="list-operation fl-right">
                                             <li><a href="{{route('Upload.edit', ['media' => $Media->id])}}" title="Sửa" class="edit"><i class="fa fa-pencil" aria-hidden="true"></i></a></li>
-                                            <li><a href="" title="Xóa" class="delete"><i class="fa fa-trash" aria-hidden="true"></i></a></li>
+                                            <li><a url-delete="{{route('Upload.destroy')}}" title="Xóa" data-id="{{$Media->id}}"class="removeRow"><i class="fa fa-trash" aria-hidden="true"></i></a></li>
                                         </ul>
                                     </td>
                                     <td><span class="tbody-text">{{ $Media->cat_id->name }}</span></td>
@@ -73,26 +73,18 @@
             <div class="section" id="paging-wp">
                 <div class="section-detail clearfix">
                     <p id="desc" class="fl-left">Chọn vào checkbox để lựa chọn tất cả</p>
-                    <ul id="list-paging" class="fl-right">
-                        <li>
-                            <a href="" title=""><</a>
-                        </li>
-                        <li>
-                            <a href="" title="">1</a>
-                        </li>
-                        <li>
-                            <a href="" title="">2</a>
-                        </li>
-                        <li>
-                            <a href="" title="">3</a>
-                        </li>
-                        <li>
-                            <a href="" title="">></a>
-                        </li>
-                    </ul>
                 </div>
             </div>
         </div>
     </div>
 </div>
+@endsection
+@section('script')
+    <script type="text/javascript" src="{{ asset('template/admin/publics/js/media/Media.js') }}"></script>
+    <script type="text/javascript">
+        $(document).ready(function() {
+            var instance = new MediaClass();
+            instance.run();
+        });
+    </script>
 @endsection

@@ -12,12 +12,12 @@
                 <div class="section" id="detail-page">
                     <div class="section-detail">
                         @include('admin.alert')
-                        <form method="POST"enctype="multipart/form-data">
+                        <form method="POST" action="{{ route('products.add.store') }}" enctype="multipart/form-data">
                             {{ csrf_field() }}
                             <label for="name">Tên sản phẩm</label>
-                            <input type="text" name="name" value="{{ old('product_name') }}"id="product-name">
+                            <input type="text" name="name" value="{{ old('name') }}"id="product-name">
                             <label for="code">Mã sản phẩm</label>
-                            <input type="text" name="code"value="{{ old('product_code') }}" id="product-code">
+                            <input type="text" name="code"value="{{ old('code') }}" id="product-code">
                             <label for="price">Giá sản phẩm</label>
                             <input type="text" name="price" value="{{ old('price') }}" id="price">
                             <label for="price_sale">Giá sale</label>
@@ -26,14 +26,24 @@
                             <textarea name="description"value="{{ old('short-desc') }}" id="desc"></textarea>
                             <label for="content">Chi tiết</label>
                             <textarea name="content" id="desc"value="{{ old('content') }}" class="ckeditor"></textarea>
-                            {{-- <label>Hình ảnh</label>
-                             <div id="uploadFile">
-                                <input type="file" url-update="{{ route('Upload.files') }}" id="upload-thumb">
+                            <label>Hình ảnh</label>
+                             {{-- <div id="uploadFile">
+                                <input type="file" url-update="{{ route('Update.image') }}" id="upload-thumb">
+                                <div id="errorMessages" style="display: none; color: red;"></div>
                                 <div id="image_show">
                                 </div>
                                 <input type="hidden" name="thumb" id="thumb">
                                 <input type="hidden" name="name_image" id="name_image">
-                            </div> --}} 
+                                <input type="hidden" name="oldImage" id ="oldThumb">
+                            </div>  --}}
+                            <div id="uploadFile">
+                                <input type="file" name="files[]" url-handle="{{ route('Upload.multifiles') }}"
+                                    id="upload-thumb" multiple>
+                                <div id="errorMessages" style="display: none; color: red;"></div>
+                                <div id="show_images" style="display: flex">
+                                </div>
+                            </div>
+                            <button type="button" name="btn-delete" url-delete="{{ route('Upload.delete') }}"id="deleteImage" style="display: none;">Xóa ảnh</button>
                             <label>Danh mục sản phẩm</label>
                             <select name="cat_id">
                                 <option value="">-- Chọn danh mục --</option>
@@ -67,7 +77,7 @@
     <script type="text/javascript" src="{{ asset('template/admin/publics/js/products/products.js') }}"></script>
     <script type="text/javascript">
         $(document).ready(function() {
-            var instance = new UpdateClass();
+            var instance = new ProductClass();
             instance.run();
         });
     </script>

@@ -30,6 +30,8 @@ class UploadController extends Controller
         ]);
 
     }
+
+    // update ảnh 
     public function store(Request $request)
     {
         $rules = [
@@ -55,6 +57,8 @@ class UploadController extends Controller
             'error' => $validator->errors(),
         ]);
     }
+    
+    //thêm ảnh
     public function multiStore(Request $request)
     {
         $rules = [
@@ -125,6 +129,17 @@ class UploadController extends Controller
         return response()->json([       //Nếu pass thì return ở đây
             'success' => false,
         ]);
-
+    }
+    public function destroy(Request $request)
+    {
+        $result = $this->upload->destroy($request);
+        if ($result) {
+            return response()->json([
+                'error' => false
+            ]);
+        }
+        return response()->json([
+            'error' => true
+        ]);
     }
 }

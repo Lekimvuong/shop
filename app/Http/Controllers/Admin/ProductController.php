@@ -7,6 +7,7 @@ use App\Http\Requests\Product\ProductRequest;
 use App\http\Services\Product\ProductService;
 use App\Models\Product;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
 
 class ProductController extends Controller
 {
@@ -28,6 +29,7 @@ class ProductController extends Controller
     {
         return view('admin.product.add', ['title' => 'Thêm mới sản phẩm',
             'productCats' => $this->productService->getproductCats(),
+            
         ]);
     }
 
@@ -39,7 +41,6 @@ class ProductController extends Controller
         $this->productService->insert($request);
         return redirect()->back();
     }
-
     /**
      * Display the specified resource.
      */

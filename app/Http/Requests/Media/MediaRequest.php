@@ -22,13 +22,15 @@ class MediaRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'files'=>'required'
+            'files'=>'required',
+            'product_id'=>'required'
         ];
     }
     public function messages(): array
     {
         return [
-            'files.required'=>'Vui lòng thêm ảnh'
+            'files.required'=>'Vui lòng thêm ảnh',
+            'product_id.required'=>'Chọn sản phẩm'
         ];
     }
 }

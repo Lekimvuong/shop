@@ -54,5 +54,6 @@ Route::middleware(['auth'])->group(function () {
          Route::delete('upload/services/deleteOld', [UploadController::class, 'deleteOld']);
          Route::get('upload/services/edit/{media}', [UploadController::class, 'show'])->name('Upload.edit');
          Route::post('upload/services/edit/{media}', [UploadController::class, 'update'])->name('Upload.update');
+         Route::delete('upload/services/destroy', [UploadController::class, 'destroy'])->name('Upload.destroy');
     });
 });

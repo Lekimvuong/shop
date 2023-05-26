@@ -127,6 +127,15 @@ class UploadService
                     return false;
                 }
         }
-
     }
+    public function destroy($request)
+{
+    $id = (int) $request->input('id');
+    $media = Media::where('id', $id);
+    if ($media) {
+        $media->delete();
+        return true;
+    } 
+    return false;
+}
 }

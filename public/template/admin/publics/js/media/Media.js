@@ -13,15 +13,19 @@ var MediaClass = function() {
         ele.thumb = $('#upload-thumb');
         ele.deleThumb = $('#deleteImage');
         ele.updateThumb = $('#updateThumb');
+        ele.postTable = $('#Media_table');
+        ele.search = $('#search');
+        ele.row = $('.removeRow');
     }
 
     this.bindEvents = function() {
         uploadThumb();
         deletethumb();
         updateThumb();
+        drawPostData();
+        removeRow();
     }
     var uploadThumb = function() {
-
         ele.thumb.on('change', function() {
             var formData = new FormData();
             var files = $('#upload-thumb')[0].files;
@@ -116,7 +120,6 @@ var MediaClass = function() {
 
     var deleteOldThumb = function() {
         var $input = document.querySelector('#oldThumb').value;
-        console.log($input);
         $.ajax({
             type: 'delete',
             datatype: 'JSON',
@@ -130,5 +133,42 @@ var MediaClass = function() {
         });
 
     }
-
+    var drawPostData = function() {
+        var postTable = ele.postTable.DataTable({
+            searching: true,
+            pagination: true,
+            lengthMenu: 20,
+            lengthChange: false,
+            info: false,
+            dom: "lrtip",
+        });
+        ele.search.on('keyup', function(e) {
+            postTable.column(3).search(e.target.value).draw();
+        })
+    }
+    var removeRow = function() {
+        ele.row.on('click', function() {
+            var $id = $(this).data('id');
+            var $url = $(this).attr('url-delete');
+            $.app.pushConfirmNoti({
+                title: 'Bạn có muốn xóa không ?',
+                callback: function() {
+                    $.ajax({
+                        type: 'DELETE',
+                        datatype: 'JSON',
+                        data: { 'id': $id },
+                        url: $url,
+                        success: function(result) {
+                            if (result.error == false) {
+                                $.app.pushNoty('success');
+                                location.reload();
+                            } else {
+                                $.app.pushNoty('error', 'Lỗi! Vui lòng thử lại');
+                            }
+                        }
+                    });
+                }
+            });
+        })
+    }
 }
