@@ -69,11 +69,13 @@ class UploadController extends Controller
         if ($validator->passes())   //Check có pass các rules trên ko
         {
             $url = $this->upload->multipleStore($request);
+            $count = $count = count($url);
             if ($url !== false) 
             {
                 return response()->json([       //Nếu pass thì return ở đây
                     'error' => false,
                     'url' => $url,
+                    'count'=> $count
                 ]);
             }
         }  
@@ -91,11 +93,11 @@ class UploadController extends Controller
     {
         $status = $this->upload->delete($request);
         if($status!= false){
-            return response()->json([       //Nếu pass thì return ở đây
+            return response()->json([       
                 'success' => true,
             ]);
         }
-        return response()->json([       //Nếu pass thì return ở đây
+        return response()->json([       
             'success' => false,
         ]);
 

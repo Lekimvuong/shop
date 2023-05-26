@@ -13,17 +13,17 @@ class UploadService
     {
         if ($request->hasFile('file')) {
             try {
-                $urls =array();
+                $urls = array();
                 $pathFull = 'uploads/' . date("Y/m/d");
                 $image = $request->file('file');
                 $name = $image->getClientOriginalName();
-                $urls[]=$name;
+                $urls[] = $name;
                 $image->storeAs(
                     'public/' . $pathFull, $name
                 );
                 $url = '/storage/' . $pathFull . '/' . $name;
-                $urls[]=$url;
-                return $urls ;
+                $urls[] = $url;
+                return $urls;
             } catch (\Exception $error) {
                 return false;
             }
@@ -82,20 +82,21 @@ class UploadService
     }
     public function delete($request)
     {
-        foreach ($request->input('urlImage') as $path) {
-            if ($path) {
-                $relative_path = str_replace('/storage/', '', $path);
-                $storage_path = '/public/' . $relative_path;
-                $isFile = Storage::exists($storage_path);
-                if ($isFile) {
-                    Storage::delete($storage_path);
+        if ($request->input('urlImage')) {
+            foreach ($request->input('urlImage') as $path) {
+                if ($path) {
+                    $relative_path = str_replace('/storage/', '', $path);
+                    $storage_path = '/public/' . $relative_path;
+                    $isFile = Storage::exists($storage_path);
+                    if ($isFile) {
+                        Storage::delete($storage_path);
+                    }
                 }
-                return true;
-            } else {
-                return false;
             }
+            return true;
+        } else {
+            return false;
         }
-
     }
     public function update($request, $media)
     {
@@ -114,28 +115,27 @@ class UploadService
     public function deleteOld($request)
     {
         if ($request->input('input')) {
-            
-                $path = $request->input('input');
-                $relative_path = str_replace('/storage/', '', $path);
-                $storage_path = '/public/' . $relative_path;
-                $isFile = Storage::exists($storage_path);
-                if ($isFile) {
-                    Storage::delete($storage_path);
-                    return true;
-                }
-                else {
-                    return false;
-                }
+
+            $path = $request->input('input');
+            $relative_path = str_replace('/storage/', '', $path);
+            $storage_path = '/public/' . $relative_path;
+            $isFile = Storage::exists($storage_path);
+            if ($isFile) {
+                Storage::delete($storage_path);
+                return true;
+            } else {
+                return false;
+            }
         }
     }
     public function destroy($request)
-{
-    $id = (int) $request->input('id');
-    $media = Media::where('id', $id);
-    if ($media) {
-        $media->delete();
-        return true;
-    } 
-    return false;
-}
+    {
+        $id = (int) $request->input('id');
+        $media = Media::where('id', $id);
+        if ($media) {
+            $media->delete();
+            return true;
+        }
+        return false;
+    }
 }

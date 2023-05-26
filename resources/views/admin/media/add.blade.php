@@ -21,6 +21,7 @@
                                 <div id="errorMessages" style="display: none; color: red;"></div>
                                 <div id="show_images" style="display: flex">
                                 </div>
+                                <div id="countThumbs"style=" color: red;"></div>
                             </div>
                             <button type="button" name="btn-delete" url-delete="{{ route('Upload.delete') }}"id="deleteImage" style="display: none;">Xóa ảnh</button>
                             <label>Sản phẩm</label>

@@ -20,7 +20,6 @@ var MediaClass = function() {
 
     this.bindEvents = function() {
         uploadThumb();
-        deletethumb();
         updateThumb();
         drawPostData();
         removeRow();
@@ -29,7 +28,7 @@ var MediaClass = function() {
         ele.thumb.on('change', function() {
             var formData = new FormData();
             var files = $('#upload-thumb')[0].files;
-            var TotalFiles = $('#upload-thumb')[0].files.length; //Total files
+            var TotalFiles = $('#upload-thumb')[0].files.length;
             var $url = $(this).attr('url-handle');
             for (var i = 0; i < TotalFiles; i++) {
                 formData.append('files[]', files[i]);
@@ -51,6 +50,9 @@ var MediaClass = function() {
                                 '<input type="hidden" name="thumb[]" value="' + url + '" id="thumb">');
                         });
                         $('#deleteImage').show();
+                        countImage();
+                        deletethumb();
+
                     } else {
                         var errorMessages = '<ul>';
                         $.each(results.error, function(key, value) {
@@ -79,8 +81,8 @@ var MediaClass = function() {
                 success: function(response) {
                     if (response.success == true) {
                         $('input[name="delete_image"]:checked').closest('.image_show').remove();
+                        countImage();
                     }
-
                 }
             })
         })
@@ -129,9 +131,16 @@ var MediaClass = function() {
                 if (response.success == true) {
 
                 }
+
             }
         });
 
+    }
+    var countImage = function() {
+        var imageContainer = document.getElementById('show_images');
+        var images = imageContainer.getElementsByTagName('img');
+        var imageCount = images.length;
+        document.querySelector('#countThumbs').innerHTML = `<p>Đã tải lên ${imageCount} ảnh.</p>`
     }
     var drawPostData = function() {
         var postTable = ele.postTable.DataTable({
