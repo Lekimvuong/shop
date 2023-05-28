@@ -16,11 +16,14 @@ class Product extends Model
         'description',
         'content',
         'cat_id',
-        'active',
-        'thumb'
+        'active'
     ];
 
     public function product_cat(){
         return $this->hasOne(productCat::class, 'id', 'cat_id');
+    }
+    public function Media()
+    {
+        return $this->hasMany(Media::class, 'product_id', 'id');
     }
 }

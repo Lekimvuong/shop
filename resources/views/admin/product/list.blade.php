@@ -13,12 +13,12 @@
             <div class="section" id="detail-page">
                 <div class="section-detail">
                     <div class="filter-wp clearfix">
-                        <ul class="post-status fl-left">
+                        {{-- <ul class="post-status fl-left">
                             <li class="all"><a href="">Tất cả <span class="count">(69)</span></a> |</li>
                             <li class="publish"><a href="">Đã đăng <span class="count">(51)</span></a> |</li>
                             <li class="pending"><a href="">Chờ xét duyệt<span class="count">(0)</span> |</a></li>
                             <li class="pending"><a href="">Thùng rác<span class="count">(0)</span></a></li>
-                        </ul>
+                        </ul> --}}
                         <form method="GET" class="form-s fl-right">
                             <input type="text" name="s" id="search">
                             <input type="submit" name="sm_s" value="Tìm kiếm">
@@ -42,7 +42,6 @@
                                     <td><input type="checkbox" name="checkAll" id="checkAll"></td>
                                     <td><span class="thead-text">STT</span></td>
                                     <td><span class="thead-text">Mã sản phẩm</span></td>
-                                    <td><span class="thead-text">Hình ảnh</span></td>
                                     <td><span class="thead-text">Tên sản phẩm</span></td>
                                     <td><span class="thead-text">Giá</span></td>
                                     <td><span class="thead-text">Giá Sale</span></td>
@@ -64,11 +63,6 @@
                                     <td><input type="checkbox" name="checkItem" class="checkItem"></td>
                                     <td><span class="tbody-text">{{ $t}}</h3></span>
                                     <td><span class="tbody-text">{{ $product->code }}</h3></span>
-                                    <td>
-                                        <div class="tbody-thumb">
-                                            <img src="{{ $product->thumb }}" alt="">
-                                        </div>
-                                    </td>
                                     <td class="clearfix">
                                         <div class="tb-title fl-left">
                                             <a href="" title="">{{ $product->name }}</a>

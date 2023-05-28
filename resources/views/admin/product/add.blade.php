@@ -27,7 +27,7 @@
                             <label for="content">Chi tiết</label>
                             <textarea name="content" id="desc"value="{{ old('content') }}" class="ckeditor"></textarea>
                             <label>Hình ảnh</label>
-                             {{-- <div id="uploadFile">
+                            {{-- <div id="uploadFile">
                                 <input type="file" url-update="{{ route('Update.image') }}" id="upload-thumb">
                                 <div id="errorMessages" style="display: none; color: red;"></div>
                                 <div id="image_show">
@@ -40,15 +40,17 @@
                                 <input type="file" name="files[]" url-handle="{{ route('Upload.multifiles') }}"
                                     id="upload-thumb" multiple>
                                 <div id="errorMessages" style="display: none; color: red;"></div>
-                                <div id="show_images" style="display: flex">
-                                </div>
+                                <div id="show_images" style="display: flex"></div>
+                                <div id="countThumbs"style=" color: red;"></div>
                             </div>
-                            <button type="button" name="btn-delete" url-delete="{{ route('Upload.delete') }}"id="deleteImage" style="display: none;">Xóa ảnh</button>
+                            <button type="button" name="btn-delete"
+                                url-delete="{{ route('Upload.delete') }}"id="deleteImage" style="display: none;">Xóa
+                                ảnh</button>
                             <label>Danh mục sản phẩm</label>
                             <select name="cat_id">
                                 <option value="">-- Chọn danh mục --</option>
-                                @foreach($productCats as $item)
-                                <option value="{{ $item->id }}">{{ $item->name }}</option>
+                                @foreach ($productCats as $item)
+                                    <option value="{{ $item->id }}">{{ $item->name }}</option>
                                 @endforeach
                             </select>
                             {{-- <label>Trạng thái</label>

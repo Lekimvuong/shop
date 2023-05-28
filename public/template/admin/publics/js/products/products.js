@@ -78,10 +78,12 @@ var ProductClass = function() {
                         results.url.forEach(url => {
                             $('#show_images').append('<div class="image_show" data-path="' + url + '"><input type="checkbox" name="delete_image" value="' + url + '" >Xóa</input><a href="' + url +
                                 '" target="_blank">' +
-                                '<img src="' + url + '" width="100px"></a></div>' +
-                                '<input type="hidden" name="thumb[]" value="' + url + '" id="thumb">');
+                                '<img src="' + url + '" width="100px"></a><input type="hidden" name="thumb[]" value="' + url + '" class="thumb"></div>'
+                            );
                         });
                         $('#deleteImage').show();
+                        countImage();
+                        deletethumb();
                     } else {
                         var errorMessages = '<ul>';
                         $.each(results.error, function(key, value) {
@@ -109,6 +111,7 @@ var ProductClass = function() {
                 success: function(response) {
                     if (response.success == true) {
                         $('input[name="delete_image"]:checked').closest('.image_show').remove();
+                        countImage();
                     }
 
                 }
@@ -167,5 +170,14 @@ var ProductClass = function() {
                 }
             }
         });
+    }
+    var countImage = function() {
+        var imageContainer = document.getElementById('show_images');
+        var images = imageContainer.getElementsByTagName('img');
+        var imageCount = images.length;
+        document.querySelector('#countThumbs').innerHTML = `<p>Đã tải lên ${imageCount} ảnh.</p>`
+        if (imageCount == 0) {
+            $('#deleteImage').hide();
+        }
     }
 }

@@ -50,7 +50,7 @@ class ProductCatController extends Controller
     public function show(productCat $productCat)
     {
         return view('admin.productCat.edit',
-            ['title' => 'Chỉnh sửa danh mục sản phẩm' . $productCat->name,
+            ['title' => 'Chỉnh sửa danh mục sản phẩm '.$productCat->name,
                 'productCat' => $productCat,
                 'productCats' => $this->productCatService->getParent()
             ]);

@@ -27,16 +27,28 @@
                             <label for="content">Chi tiết</label>
                             <textarea name="content" id="desc" class="ckeditor">{{ $product->content }}</textarea>
                             <label>Hình ảnh</label>
-                            {{-- <div id="uploadFile">
-                                <input type="file" url-update="{{ route('Upload.files') }}" 
-                                    id="upload-thumb">
-                                <div id="image_show">
-                                    <a href="" target ="blank">
-                                        <img src="{{$product->thumb}}" width ="100px"alt="">
-                                    </a>
+                            <div id="uploadFile">
+                                <input type="file" name="files[]" url-handle="{{ route('Upload.multifiles') }}"
+                                    id="upload-thumb" multiple>
+                                <div id="errorMessages" style="display: none; color: red;"></div>
+                                <div id="show_images" style="display: flex">
+                                    @foreach($Medias as $media)
+                                    @if($product->id==$media->product_id)
+                                    <div id="image_show">
+                                        <input type="checkbox" name="delete_image" value="">Xóa
+                                        <a href="" target ="blank">
+                                            <img src="{{$media->thumb}}" width ="100px" id = "urlImage">
+                                        </a>
+                                        <input type="hidden" name="thumb[]" value="" class="thumb">
+                                    </div>
+                                    @endif
+                                    @endforeach
                                 </div>
-                                <input type="hidden" name="thumb" value ="{{$product->thumb}}"id="thumb">
-                            </div> --}}
+                                <div id="countThumbs"style=" color: red;"></div>
+                            </div>
+                            <button type="button" name="btn-delete"
+                                url-delete="{{ route('Upload.delete') }}"id="deleteImage" style="display: none;">Xóa
+                                ảnh</button>
                             <label>Danh mục sản phẩm</label>
                             <select name="cat_id">
                                 <option value="">-- Chọn danh mục --</option>

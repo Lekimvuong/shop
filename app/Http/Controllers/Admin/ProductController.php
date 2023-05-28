@@ -38,7 +38,9 @@ class ProductController extends Controller
      */
     public function store(ProductRequest $request)
     {
-        $this->productService->insert($request);
+     $product = $this->productService->insert($request);
+     $thumbs = $request->input('thumb');
+     $this->productService->addThumb($product, $thumbs);
         return redirect()->back();
     }
     /**
@@ -49,6 +51,7 @@ class ProductController extends Controller
         $data['title'] = 'Chỉnh sửa thông tin sản phẩm';
         $data['product'] = $product;
         $data['productCats'] = $this->productService->getproductCats();
+        $data['Medias'] = $this->productService->getMedia();
         return view('admin.product.edit', $data);
     }
 
