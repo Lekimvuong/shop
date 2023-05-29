@@ -34,12 +34,12 @@
                                 <div id="show_images" style="display: flex">
                                     @foreach($Medias as $media)
                                     @if($product->id==$media->product_id)
-                                    <div id="image_show">
-                                        <input type="checkbox" name="delete_image" value="">Xóa
+                                    <div class="image_show" data-path="{{$media->thumb}}">
+                                        <input type="checkbox"name="delete_image" value="{{$media->thumb}}">Xóa
                                         <a href="" target ="blank">
                                             <img src="{{$media->thumb}}" width ="100px" id = "urlImage">
                                         </a>
-                                        <input type="hidden" name="thumb[]" value="" class="thumb">
+                                        <input type="hidden" name="thumb[]" value="{{$media->thumb}}" class="thumb">
                                     </div>
                                     @endif
                                     @endforeach
@@ -47,7 +47,7 @@
                                 <div id="countThumbs"style=" color: red;"></div>
                             </div>
                             <button type="button" name="btn-delete"
-                                url-delete="{{ route('Upload.delete') }}"id="deleteImage" style="display: none;">Xóa
+                                url-delete="{{ route('Upload.delete')}}"id="deleteImage">Xóa
                                 ảnh</button>
                             <label>Danh mục sản phẩm</label>
                             <select name="cat_id">
@@ -82,7 +82,7 @@
     <script type="text/javascript" src="{{ asset('template/admin/publics/js/products/products.js') }}"></script>
     <script type="text/javascript">
         $(document).ready(function() {
-            var instance = new UpdateClass();
+            var instance = new ProductClass();
             instance.run();
         });
     </script>

@@ -16,7 +16,8 @@ class UploadService
                 $urls = array();
                 $pathFull = 'uploads/' . date("Y/m/d");
                 $image = $request->file('file');
-                $name = $image->getClientOriginalName();
+                $extension = $image->getClientOriginalName();
+                $name = '('.time().')' . '.' . $extension;
                 $urls[] = $name;
                 $image->storeAs(
                     'public/' . $pathFull, $name
@@ -39,7 +40,8 @@ class UploadService
                 $images = $request->file('files');
                 foreach ($images as $image) {
                     $pathFull = 'uploads/' . date("Y/m/d");
-                    $name = $image->getClientOriginalName();
+                    $extension = $image->getClientOriginalName();
+                    $name = time() . '.' . $extension;
                     $image->storeAs(
                         'public/' . $pathFull, $name
                     );
@@ -90,6 +92,7 @@ class UploadService
                     $isFile = Storage::exists($storage_path);
                     if ($isFile) {
                         Storage::delete($storage_path);
+                        Media::where('thumb', $path)->delete();
                     }
                 }
             }

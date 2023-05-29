@@ -57,8 +57,10 @@ class ProductController extends Controller
 
     public function update(ProductRequest $request, Product $product)
     {
-        $result = $this->productService->update($request, $product);
-        if($result){
+        $products = $this->productService->update($request, $product);
+        $thumbss = $request->input('thumb');
+        $this->productService->addThumb($products,$thumbss);
+        if($products){
             return redirect()->route('products.list');
         }
         return redirect()->back();

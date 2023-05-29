@@ -157,19 +157,25 @@ var ProductClass = function() {
         })
     }
 
-    var deleteOldThumb = function() {
-        var $input = document.querySelector('#oldThumb').value;
-        $.ajax({
-            type: 'delete',
-            datatype: 'JSON',
-            data: { 'input': $input },
-            url: '/admin/upload/services/deleteOld',
-            success: function(response) {
-                if (response.success == true) {
-
+    var deletethumb = function() {
+        ele.deleThumb.on('click', function() {
+            var $urlImage = [];
+            var $url = $(this).attr('url-delete');
+            $('input[name="delete_image"]:checked').each(function() {
+                $urlImage.push($(this).closest('.image_show').data('path'))
+            });
+            $.ajax({
+                url: $url,
+                type: 'delete',
+                data: { 'urlImage': $urlImage },
+                success: function(response) {
+                    if (response.success == true) {
+                        $('input[name="delete_image"]:checked').closest('.image_show').remove();
+                        countImage();
+                    }
                 }
-            }
-        });
+            })
+        })
     }
     var countImage = function() {
         var imageContainer = document.getElementById('show_images');

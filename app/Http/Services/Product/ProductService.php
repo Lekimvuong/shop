@@ -63,12 +63,11 @@ class ProductService
         if ($isValidPrice == false) {
             return false;
         }
-
         try {
             $product->fill($request->input());
             $product->save();
             Session::flash('success', 'Cập nhật thành công');
-            return true;
+            return $product;
         } catch (\Exception $err) {
             Session::flash('error', 'Cập nhật thất bại');
             Log::info($err->getMessage());
