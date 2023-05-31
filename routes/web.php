@@ -6,6 +6,7 @@ use App\Http\Controllers\Admin\ProductController;
 use App\Http\Controllers\Admin\Users\Logincontroller;
 use App\Http\Controllers\Admin\UploadController;
 use App\Http\Controllers\Admin\ProductCatController;
+use App\Http\Controllers\Admin\SliderController;
 
 Route::get('admin/users/login', [LoginController::class, 'index'])->name('login');
 Route::post('admin/users/login/store', [LoginController::class, 'store']);
@@ -43,6 +44,15 @@ Route::middleware(['auth'])->group(function () {
             Route::get('edit/{product}', [ProductController::class, 'show'])->name('products.show');
             Route::post('edit/{product}', [ProductController::class, 'update'])->name('products.update');
             Route::delete('destroy', [ProductController::class, 'destroy'])->name('products.delete');
+        });
+         //Sliders
+         Route::prefix('Sliders')->group(function () {
+            Route::get('add', [SliderController::class, 'create'])->name('slider.add');
+            Route::post('add', [SliderController::class, 'store'])->name('slider.add.store');
+            Route::get('list', [SliderController::class, 'index'])->name('slider.list');
+            Route::get('edit/{slider}', [SliderController::class, 'show'])->name('slider.show');
+            Route::post('edit/{slider}', [SliderController::class, 'update'])->name('slider.update');
+            Route::delete('destroy', [SliderController::class, 'destroy'])->name('slider.delete');
         });
          //Upload
          Route::post('upload/services', [UploadController::class, 'insertImages'])->name('Upload.images');
