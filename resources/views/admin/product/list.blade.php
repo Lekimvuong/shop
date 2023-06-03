@@ -76,7 +76,7 @@
                                     <td><span class="tbody-text">{{ $product->price_sale}}</span></td>
                                     <td><span class="tbody-text">{{ $product->product_cat?->name}}</span></td>
                                     <td><span class="tbody-text">{!! \App\Helpers\Helper::active($product->active) !!}</span></td>
-                                    <td><span class="tbody-text">{{ $product->updated_at }}</span></td>
+                                    <td><span class="tbody-text">{{ $product->created_at }}</span></td>
                                 </tr>
                                 @endforeach
                             </tbody>

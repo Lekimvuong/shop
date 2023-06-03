@@ -11,9 +11,11 @@
             </div>
             <div class="section" id="detail-page">
                 <div class="section-detail">
-                    <form method="POST">
+                    @include('admin.alert')
+                    <form method="POST" action="{{ route('slider.add.store') }}">
+                        {{ csrf_field() }}
                         <label for="title">Tên slider</label>
-                        <input type="text" name="title" id="title">
+                        <input type="text" name="name" id="name">
                         <label for="title">Link</label>
                         <input type="text" name="url" value="{{ old('url') }}" id="url">
                         {{-- <label for="desc">Mô tả</label>
@@ -25,19 +27,16 @@
                             <input type="file" url-update="{{route('Update.image')}}" id="updateThumb">
                             <div id="errorMessages" style="display: none; color: red;"></div>
                             <div id="image_show">
-                                <a href="" target ="blank">
-                                    <img src="" width ="100px" id = "urlImage">
-                                </a>
                             </div>
                             <input type="hidden" name="thumb" id="thumb">
                             <input type="hidden" name="name" id="name_image">
                             <input type="hidden" name="oldName" id ="oldThumb" value ="">
                         </div>
                         <label>Trạng thái</label>
-                        <select name="status">
+                        <select name="active">
                             <option value="">-- Chọn trạng thái --</option>
                             <option value="1">Công khai</option>
-                            <option value="2">Chờ duyệt</option>
+                            <option value="0">Chờ duyệt</option>
                         </select>
                         <button type="submit" name="btn-submit" id="btn-submit">Cập nhật</button>
                     </form>
@@ -48,10 +47,10 @@
 </div>
 @endsection
 @section('script')
-    <script type="text/javascript" src="{{ asset('template/admin/publics/js/media/Media.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('template/admin/publics/js/sliders/sliders.js') }}"></script>
     <script type="text/javascript">
         $(document).ready(function() {
-            var instance = new MediaClass();
+            var instance = new SliderClass();
             instance.run();
         });
     </script>

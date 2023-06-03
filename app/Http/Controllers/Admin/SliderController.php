@@ -19,4 +19,31 @@ class SliderController extends Controller
         return view('admin.slider.add', ['title' => 'Thêm mới slider',
         ]);
     }
+    public function store(Request $request)
+    {$this->validate($request, [
+        'name' => 'required',
+        'url' => 'required',
+        'sort_by' => 'required',
+        'active' => 'required',
+    ],
+        [
+            'name.required' => 'Vui lòng nhập tên',
+            'url.required' => 'Vui lòng nhập URL',
+            'sort_by.required' => 'Vui lòng nhập sort by',
+            'active.required' => 'Vui lòng nhập trạng thái active',
+        ]
+    );
+        $this->slider->insert($request);
+        return redirect()->back();
+
+    }
+
+    public function index()
+    {
+        return view('admin.slider.list', ['title' => 'Danh sách slider',
+       'sliders'=> $this->slider->get()
+        ]);
+      
+    }
+
 }

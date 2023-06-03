@@ -43,6 +43,10 @@ class Helper
     {
         return $active == 0 ? '<span>Không</span>' : '<span>Có</span>';
     }
+    public static function active_1($active = 0) :string
+    {
+        return $active == 0 ? '<span>Chờ duyệt</span>' : '<span>Công khai</span>';
+    }
 
     public static function productCat($productCats, $parent_id = 0, $char = '')
     {

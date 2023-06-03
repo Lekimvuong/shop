@@ -62,7 +62,7 @@
                                         </ul>
                                     </td>
                                     <td><span class="tbody-text">{{ $Media->cat_id->name }}</span></td>
-                                    <td><span class="tbody-text">{{$Media->updated_at}}</span></td>
+                                    <td><span class="tbody-text">{{$Media->created_at}}</span></td>
                                 </tr>
                                 @endforeach
                             </tbody>

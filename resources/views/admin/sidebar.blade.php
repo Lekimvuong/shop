@@ -86,7 +86,7 @@
                     <a href="{{route('slider.add')}}" title="" class="nav-link">Thêm mới</a>
                 </li>
                 <li class="nav-item">
-                    <a href="?page=list_slider" title="" class="nav-link">Danh sách slider</a>
+                    <a href="{{route('slider.list')}}" title="" class="nav-link">Danh sách slider</a>
                 </li>
             </ul>
         </li>

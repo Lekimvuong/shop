@@ -7,7 +7,6 @@ use App\Http\Requests\Product\ProductRequest;
 use App\http\Services\Product\ProductService;
 use App\Models\Product;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Validator;
 
 class ProductController extends Controller
 {
