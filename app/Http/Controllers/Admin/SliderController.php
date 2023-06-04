@@ -75,6 +75,18 @@ class SliderController extends Controller
         else{
             return redirect()->back();
         }
-        
+    }
+    public function destroy(Request $request)
+    {
+        $result = $this->slider->destroy($request);
+        if ($result) {
+            return response()->json([
+                'error' => false,
+            ]);
+        }
+        return response()->json([
+            'error' => true,
+        ]);
+
     }
 }

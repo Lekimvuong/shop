@@ -73,7 +73,7 @@
                                                 <ul class="list-operation fl-right">
                                                     <li><a href="{{route('slider.show', ['slider' => $slider->id])}}" title="Sửa"  class="edit"><i
                                                                 class="fa fa-pencil" aria-hidden="true"></i></a></li>
-                                                    <li><a href="" title="Xóa" class="delete"><i
+                                                    <li><a url-delete="{{route('slider.delete')}}"data-id="{{$slider->id}}" title="Xóa" class="removeRow"><i
                                                                 class="fa fa-trash" aria-hidden="true"></i></a></li>
                                                 </ul>
                                             </td>

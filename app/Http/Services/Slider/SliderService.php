@@ -36,4 +36,14 @@ class SliderService{
         }
         return true;
     }
+    public function destroy($request)
+    {
+        $id = (int) $request->input('id');
+        $slider = Slider::where('id', $id)->first();
+        if ($slider) {
+            Slider::where('id', $id)->delete();
+            return true;
+        } 
+        return false;
+    }
 }
