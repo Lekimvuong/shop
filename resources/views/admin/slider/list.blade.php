@@ -41,7 +41,7 @@
                                     <tr>
                                         <td><input type="checkbox" name="checkAll" id="checkAll"></td>
                                         <td><span class="thead-text">STT</span></td>
-                                        <td><span class="thead-text">Người tạo</span></td>
+                                        <td><span class="thead-text">tên</span></td>
                                         <td><span class="thead-text">Hình ảnh</span></td>
                                         <td><span class="thead-text">Link</span></td>
                                         <td><span class="thead-text">Thứ tự</span></td>
@@ -71,7 +71,7 @@
                                                     <a href="" title="">{{ $slider->url }}</a>
                                                 </div>
                                                 <ul class="list-operation fl-right">
-                                                    <li><a href="" title="Sửa" class="edit"><i
+                                                    <li><a href="{{route('slider.show', ['slider' => $slider->id])}}" title="Sửa"  class="edit"><i
                                                                 class="fa fa-pencil" aria-hidden="true"></i></a></li>
                                                     <li><a href="" title="Xóa" class="delete"><i
                                                                 class="fa fa-trash" aria-hidden="true"></i></a></li>

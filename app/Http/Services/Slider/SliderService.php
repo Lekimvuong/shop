@@ -22,4 +22,18 @@ class SliderService{
     {
         return SLider::orderByDesc('id')->paginate(10);
     }
+    public function update($slider, $request) :bool
+    {
+       
+        try {
+            $slider->fill($request->input());
+            $slider->save();
+            Session::flash('success', 'Cập nhật thành công');
+        } catch (\Exception $err) {
+            Session::flash('error', 'Cập nhật thất bại');
+            Log::info($err->getMessage());
+            return false;
+        }
+        return true;
+    }
 }
