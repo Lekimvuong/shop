@@ -44,12 +44,14 @@ class UploadController extends Controller
             $urls = $this->upload->store($request);
             $name = $urls[0];
             $url = $urls[1];
+            $public_id = $urls[2];
             if ($urls!== false) 
             {
                 return response()->json([       //Nếu pass thì return ở đây
                     'error' => false,
                     'url' => $url,
-                    'name'=> $name
+                    'name'=> $name,
+                    'public_id' => $public_id
                 ]);
             }
         }  

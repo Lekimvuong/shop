@@ -41,7 +41,7 @@ var SliderClass = function() {
                             '<img src="' + results.url + '" width="100px"></a>');
                         $("#thumb").val(results.url);
                         $("#name_image").val(results.name);
-                        $("#oldThumb").val(results.url);
+                        $("#oldThumb").val(results.public_id);
                     } else {
                         var errorMessages = '<ul>';
                         $.each(results.error, function(key, value) {

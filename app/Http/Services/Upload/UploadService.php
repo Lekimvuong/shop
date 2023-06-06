@@ -3,6 +3,7 @@ namespace App\http\Services\Upload;
 
 use App\Models\Media;
 use App\Models\Product;
+use CloudinaryLabs\CloudinaryLaravel\Facades\Cloudinary;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Storage;
@@ -13,17 +14,26 @@ class UploadService
     {
         if ($request->hasFile('file')) {
             try {
-                $urls = array();
-                $pathFull = 'uploads/' . date("Y/m/d");
-                $image = $request->file('file');
-                $extension = $image->getClientOriginalName();
+                 $urls = array();
+                // $pathFull = 'uploads/' . date("Y/m/d");
+                // $image = $request->file('file');
+                // $extension = $image->getClientOriginalName();
+                // $name = '('.time().')' . '.' . $extension;
+                // $urls[] = $name;
+                // $image->storeAs(
+                //     'public/' . $pathFull, $name
+                // );
+                // $url = '/storage/' . $pathFull . '/' . $name;
+                // $urls[] = $url;
+                // return $urls;
+                $image_name = $request->file('file');
+                $extension = $image_name->getClientOriginalName();
                 $name = '('.time().')' . '.' . $extension;
-                $urls[] = $name;
-                $image->storeAs(
-                    'public/' . $pathFull, $name
-                );
-                $url = '/storage/' . $pathFull . '/' . $name;
-                $urls[] = $url;
+                $urls[] = $name ;
+                $uploadedFileUrl = Cloudinary::upload($image_name->getRealPath())->getSecurePath();
+                $urls[] = $uploadedFileUrl;
+                $publicId = basename(parse_url($uploadedFileUrl, PHP_URL_PATH), '.' . pathinfo($uploadedFileUrl, PATHINFO_EXTENSION));
+                $urls[] = $publicId;
                 return $urls;
             } catch (\Exception $error) {
                 return false;
@@ -117,19 +127,13 @@ class UploadService
     }
     public function deleteOld($request)
     {
-        if ($request->input('input')) {
-
             $path = $request->input('input');
-            $relative_path = str_replace('/storage/', '', $path);
-            $storage_path = '/public/' . $relative_path;
-            $isFile = Storage::exists($storage_path);
-            if ($isFile) {
-                Storage::delete($storage_path);
+            if ($path ) {
+                Cloudinary::destroy($path);
                 return true;
-            } else {
+            } 
                 return false;
-            }
-        }
+        
     }
     public function destroy($request)
     {
