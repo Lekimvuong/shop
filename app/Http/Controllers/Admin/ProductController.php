@@ -28,7 +28,7 @@ class ProductController extends Controller
     {
         return view('admin.product.add', ['title' => 'Thêm mới sản phẩm',
             'productCats' => $this->productService->getproductCats(),
-            
+
         ]);
     }
 
@@ -37,9 +37,9 @@ class ProductController extends Controller
      */
     public function store(ProductRequest $request)
     {
-     $product = $this->productService->insert($request);
-     $thumbs = $request->input('thumb');
-     $this->productService->addThumb($product, $thumbs);
+        $product = $this->productService->insert($request);
+
+        $this->productService->addThumb($product, $request);
         return redirect()->back();
     }
     /**
@@ -56,14 +56,15 @@ class ProductController extends Controller
 
     public function update(ProductRequest $request, Product $product)
     {
+        //trả về products đã được update
         $products = $this->productService->update($request, $product);
-        $thumbss = $request->input('thumb');
-        $this->productService->addThumb($products,$thumbss);
-        if($products){
+        //Thêm ảnh vào media khi đã chọn xong ảnh
+        $this->productService->addThumb($product, $request);
+        if ($products) {
             return redirect()->route('products.list');
         }
         return redirect()->back();
-       
+
     }
 
     /**
@@ -74,11 +75,11 @@ class ProductController extends Controller
         $result = $this->productService->destroy($request);
         if ($result) {
             return response()->json([
-                'error' => false
+                'error' => false,
             ]);
         }
         return response()->json([
-            'error' => true
+            'error' => true,
         ]);
     }
 }

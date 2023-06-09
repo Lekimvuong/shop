@@ -76,16 +76,18 @@ class ProductService
 
     }
 
-    public function addThumb($product, $thumbs)
+    public function addThumb($product, $request)
     {
         try {
-            foreach ($thumbs as $thumb) {
-                Media::create([
-                    'name' => (string) basename($thumb),
-                    'thumb' => $thumb,
-                    'product_id' => (int) $product->id,
-                ]);
-            }
+            if($request->input('thumb')){
+                foreach ($request->input('thumb') as $thumb) {
+                    Media::create([
+                        'name' => (string)$request->input('image_name'),
+                        'thumb' => $thumb,
+                        'product_id' => (int) $product->id,
+                    ]);
+                }
+            };
             Session::flash('success', 'Thêm hình ảnh thành công');
             return true;
         } catch (\Exception $err) {

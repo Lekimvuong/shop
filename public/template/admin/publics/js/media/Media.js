@@ -45,7 +45,7 @@ var MediaClass = function() {
                     if (results.error == false) {
                         results.url.forEach(url => {
                             $('#show_images').append('<div class="image_show" data-path="' + url + '"><input type="checkbox" name="delete_image" value="' + url + '" >Xóa</input><a href="' + url +
-                                '" target="_blank">' +
+                                '" target="_blank">' + '<input type="hidden" name="image_name" value="' + results.name + '" class="image_name"></input>' +
                                 '<img src="' + url + '" width="100px"></a><input type="hidden" name="thumb[]" value="' + url + '" class="thumb"></div>'
                             );
                         });
@@ -66,29 +66,9 @@ var MediaClass = function() {
             });
         });
     }
-
-    var deletethumb = function() {
-        ele.deleThumb.on('click', function() {
-            var $urlImage = [];
-            var $url = $(this).attr('url-delete');
-            $('input[name="delete_image"]:checked').each(function() {
-                $urlImage.push($(this).closest('.image_show').data('path'))
-            });
-            $.ajax({
-                url: $url,
-                type: 'delete',
-                data: { 'urlImage': $urlImage },
-                success: function(response) {
-                    if (response.success == true) {
-                        $('input[name="delete_image"]:checked').closest('.image_show').remove();
-                        countImage();
-                    }
-                }
-            })
-        })
-    }
     var updateThumb = function() {
         ele.updateThumb.change(function() {
+            deleteOldThumb();
             const form = new FormData();
             form.append('file', $(this)[0].files[0]);
             var $url = $(this).attr('url-update');
@@ -105,7 +85,7 @@ var MediaClass = function() {
                             '<img src="' + results.url + '" width="100px"></a>');
                         $("#thumb").val(results.url);
                         $("#name_image").val(results.name);
-                        deleteOldThumb();
+                        $("#oldThumb").val(results.public_id);
                     } else {
                         var errorMessages = '<ul>';
                         $.each(results.error, function(key, value) {
@@ -134,7 +114,26 @@ var MediaClass = function() {
 
             }
         });
-
+    }
+    var deletethumb = function() {
+        ele.deleThumb.on('click', function() {
+            var $urlImage = [];
+            var $url = $(this).attr('url-delete');
+            $('input[name="delete_image"]:checked').each(function() {
+                $urlImage.push($(this).closest('.image_show').data('path'))
+            });
+            $.ajax({
+                url: $url,
+                type: 'delete',
+                data: { 'urlImage': $urlImage },
+                success: function(response) {
+                    if (response.success == true) {
+                        $('input[name="delete_image"]:checked').closest('.image_show').remove();
+                        countImage();
+                    }
+                }
+            })
+        })
     }
     var countImage = function() {
         var imageContainer = document.getElementById('show_images');

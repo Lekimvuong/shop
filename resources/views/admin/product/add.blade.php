@@ -27,15 +27,6 @@
                             <label for="content">Chi tiết</label>
                             <textarea name="content" id="desc"value="{{ old('content') }}" class="ckeditor"></textarea>
                             <label>Hình ảnh</label>
-                            {{-- <div id="uploadFile">
-                                <input type="file" url-update="{{ route('Update.image') }}" id="upload-thumb">
-                                <div id="errorMessages" style="display: none; color: red;"></div>
-                                <div id="image_show">
-                                </div>
-                                <input type="hidden" name="thumb" id="thumb">
-                                <input type="hidden" name="name_image" id="name_image">
-                                <input type="hidden" name="oldImage" id ="oldThumb">
-                            </div>  --}}
                             <div id="uploadFile">
                                 <input type="file" name="files[]" url-handle="{{ route('Upload.multifiles') }}"
                                     id="upload-thumb" multiple>

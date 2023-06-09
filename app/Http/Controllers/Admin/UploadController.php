@@ -8,7 +8,7 @@ use App\http\Services\Upload\UploadService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use App\Models\Media;
-
+use CloudinaryLabs\CloudinaryLaravel\Facades\Cloudinary;
 class UploadController extends Controller
 {
     protected $upload; // Tạo thuộc tính cho class
@@ -70,14 +70,17 @@ class UploadController extends Controller
         $validator = Validator::make($request->all(), $rules);   //Validate theo rule ở $rule
         if ($validator->passes())   //Check có pass các rules trên ko
         {
-            $url = $this->upload->multipleStore($request);
-            $count = $count = count($url);
-            if ($url !== false) 
+            $urls = $this->upload->multipleStore($request);
+            $name_image = $urls[0];
+            $url = $urls[1];
+            $count = count($url);
+            if ($url!== false) 
             {
                 return response()->json([       //Nếu pass thì return ở đây
                     'error' => false,
                     'url' => $url,
-                    'count'=> $count
+                    'count'=> $count,
+                    'name'=> $name_image,
                 ]);
             }
         }  
@@ -124,6 +127,11 @@ class UploadController extends Controller
 
     public function deleteOld(Request $request)
     {
+        //xóa ảnh cũ đầu tiên khi chưa có sẵn Public_id
+        $path = $request->input('input');
+        $publicId = basename(parse_url($path, PHP_URL_PATH), '.' . pathinfo($path, PATHINFO_EXTENSION));
+        //Các ảnh sau này đã có publicid
+        Cloudinary::destroy($publicId);
         $status = $this->upload->deleteOld($request);
         if($status!= false){
             return response()->json([       //Nếu pass thì return ở đây

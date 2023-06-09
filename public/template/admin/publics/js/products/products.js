@@ -18,44 +18,11 @@ var ProductClass = function() {
     }
 
     this.bindEvents = function() {
-            uploadThumb();
-            // updateThumb();
-            drawPostData();
-            removeRow();
-            deletethumb();
-        }
-        // var updateThumb = function() {
-        //     ele.thumb.change(function() {
-        //         deleteOldThumb();
-        //         const form = new FormData();
-        //         form.append('file', $(this)[0].files[0]);
-        //         var $url = $(this).attr('url-update');
-        //         $.ajax({
-        //             type: 'POST',
-        //             datatype: 'JSON',
-        //             data: form,
-        //             processData: false,
-        //             contentType: false,
-        //             url: $url,
-        //             success: function(results) {
-        //                 if (results.error == false) {
-        //                     $("#image_show").html('<a href="' + results.url + '" target="_blank">' +
-        //                         '<img src="' + results.url + '" width="100px"></a>');
-        //                     $("#thumb").val(results.url);
-        //                     $("#oldThumb").val(results.url);
-        //                     $("#name_image").val(results.name);
-        //                 } else {
-        //                     var errorMessages = '<ul>';
-        //                     $.each(results.error, function(key, value) {
-        //                         errorMessages += '<li>' + value + '</li>';
-        //                     });
-        //                     errorMessages += '</ul>';
-        //                     $('#errorMessages').html(errorMessages).show();
-        //                 }
-        //             },
-        //         });
-        //     });
-        // }
+        uploadThumb();
+        drawPostData();
+        removeRow();
+        deletethumb();
+    }
     var uploadThumb = function() {
         ele.thumb.on('change', function() {
             var formData = new FormData();
@@ -77,7 +44,7 @@ var ProductClass = function() {
                     if (results.error == false) {
                         results.url.forEach(url => {
                             $('#show_images').append('<div class="image_show" data-path="' + url + '"><input type="checkbox" name="delete_image" value="' + url + '" >Xóa</input><a href="' + url +
-                                '" target="_blank">' +
+                                '" target="_blank">' + '<input type="hidden" name="image_name" value="' + results.name + '" class="image_name"></input>' +
                                 '<img src="' + url + '" width="100px"></a><input type="hidden" name="thumb[]" value="' + url + '" class="thumb"></div>'
                             );
                         });

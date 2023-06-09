@@ -39,7 +39,6 @@
                                         <a href="" target ="blank">
                                             <img src="{{$media->thumb}}" width ="100px" id = "urlImage">
                                         </a>
-                                        <input type="hidden" name="thumb[]" value="{{$media->thumb}}" class="thumb">
                                     </div>
                                     @endif
                                     @endforeach
