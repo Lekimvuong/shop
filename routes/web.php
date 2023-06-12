@@ -67,3 +67,5 @@ Route::middleware(['auth'])->group(function () {
          Route::delete('upload/services/destroy', [UploadController::class, 'destroy'])->name('Upload.destroy');
     });
 });
+
+Route::get('/', [App\Http\Controllers\MainController::class, 'index'])->name('main');

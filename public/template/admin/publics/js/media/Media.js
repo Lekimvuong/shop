@@ -44,7 +44,7 @@ var MediaClass = function() {
                 success: function(results) {
                     if (results.error == false) {
                         results.url.forEach(url => {
-                            $('#show_images').append('<div class="image_show" data-path="' + url + '"><input type="checkbox" name="delete_image" value="' + url + '" >Xóa</input><a href="' + url +
+                            $('#show_images').append('<div class="image_show" data-path="' + url + '"><div class="checkbox-container"><input type="checkbox" name="delete_image"value="' + url + '" ></div><a href="' + url +
                                 '" target="_blank">' + '<input type="hidden" name="image_name" value="' + results.name + '" class="image_name"></input>' +
                                 '<img src="' + url + '" width="100px"></a><input type="hidden" name="thumb[]" value="' + url + '" class="thumb"></div>'
                             );

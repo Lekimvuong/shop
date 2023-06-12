@@ -31,14 +31,7 @@
                                     <option value="{{ $item->id }}">{{ $item->name }}</option>
                                 @endforeach
                             </select>
-                            {{-- <label for="title">Kích hoạt</label>
-                            <div class="radio-check">
-                                <input type="radio" id="active" class="radio-check-1" name="active" value="1"> Có
-                            </div>
-                            <div class="radio-check">
-                                <input type="radio" id="no_active" class="radio-check-2" value="0" name="active">
-                                Không
-                            </div> --}}
+                            <div></div>
                             <button type="submit" name="btn-submit" id="btn-submit">Thêm mới</button>
                         </form>
                     </div>
