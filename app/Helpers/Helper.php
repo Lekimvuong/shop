@@ -1,7 +1,8 @@
 <?php
 
 namespace app\Helpers;
-
+use NumberFormatter;
+use Illuminate\Support\Str;
 class Helper
 {
     public $count;
@@ -81,5 +82,37 @@ class Helper
 
         }
         return $html;
+    }
+
+    public static function product_cat($productCat, $parent_id = 0):string
+    {
+        $html = '';
+        foreach ($productCat as $key => $item) {
+            if ($item->parent_id == $parent_id) {
+                $html .= '
+                    <li>
+                        <a href="/danh-muc/' . $item->id . '-' . Str::slug($item->name, '-') . ' .html">
+                            '. $item->name .'
+                        </a>';
+                unset($productCat[$key]);
+                if (self::isChild($productCat, $item->id)) {
+                    $html .= '<ul class="sub-menu">';
+                    $html .= self::product_cat($productCat, $item->id);
+                    $html .= '</ul>';
+                }
+
+                $html .=' </li>';
+            }
+        }
+
+        return $html;
+    }
+    public static function isChild($productCat, $id):bool {
+        foreach ($productCat as $item) {
+            if ($item->parent_id == $id) {
+                return true;
+            } 
+        }
+        return false;
     }
 }
