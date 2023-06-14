@@ -115,4 +115,9 @@ class Helper
         }
         return false;
     }
+
+    public static function currencyFormat($money) {
+        $fmt = new NumberFormatter( 'de_DE', NumberFormatter::CURRENCY );
+        return $fmt->formatCurrency($money, "VND")."\n";
+    }
 }

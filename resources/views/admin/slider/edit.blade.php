@@ -31,7 +31,7 @@
                                     <img src="{{$slider->thumb}}" width ="100px" id = "urlImage">
                                 </a>
                             </div>
-                            <input type="hidden" name="thumb" id="thumb">
+                            <input type="hidden" name="thumb" id="thumb" value ="{{$slider->thumb}}">
                             <input type="hidden" name="name_image" id="name_image">
                             <input type="hidden" name="oldName" id ="oldThumb" value ="{{$slider->thumb}}">
                         </div>

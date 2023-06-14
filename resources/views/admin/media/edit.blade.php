@@ -24,7 +24,7 @@
                                     </a>
                                 </div>
                                 <input type="hidden" name="thumb" id="thumb" value ="{{$media->thumb}}">
-                                <input type="hidden" name="name" id="name_image" value ="{{$media->name}}"">
+                                <input type="hidden" name="name" id="name_image" value ="{{$media->name}}">
                                 <input type="hidden" name="oldName" id ="oldThumb" value ="{{$media->thumb}}">
                             </div>
                             {{-- <button type="button" name="btn-delete"
