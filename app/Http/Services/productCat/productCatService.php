@@ -2,7 +2,7 @@
 namespace App\http\Services\productCat;
 use App\Models\productCat;
 use Illuminate\Support\Facades\Session;
-
+use Illuminate\Support\Facades\Log;
 class productCatService{
     public function getParent()
     {
@@ -40,18 +40,21 @@ class productCatService{
         } 
         return false;
     }
-    public function update($request, $productCat) :bool
+    public function update($request, $productCat) 
     {
        if($request ->input('parent_id') != $productCat->id){
-        $productCat->parent_id = (int) $request->input('parent_id');
+        try {
+            $productCat->fill($request->input());
+            $productCat->save();
+            Session::flash('success', 'Cập nhật thành công');
+            return true;
+        } catch (\Exception $err) {
+            Session::flash('error', 'Cập nhật thất bại');
+            Log::info($err->getMessage());
+            return false;
+        }
        }
-       $productCat->name = (string) $request->input('name');
-        $productCat->description = (string) $request->input('description');
-        $productCat->content = (string) $request->input('content');
-        $productCat->active = (int) $request->input('active');
-        $productCat->save();
-        session::flash('success', 'update danh mục thành công');
-       return true;
+       
     }
 
 }

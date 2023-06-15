@@ -2,7 +2,7 @@
 namespace App\http\Services\PostCat;
 use App\Models\PostCat;
 use Illuminate\Support\Facades\Session;
-
+use Illuminate\Support\Facades\Log;
 /**
  * Summary of PostService
  */
@@ -45,17 +45,20 @@ class PostCatService
         } 
         return false;
     }
-    public function update($request, $postCat) :bool
+    public function update($request, $postCat)
     {
        if($request ->input('parent_id') != $postCat->id){
-        $postCat->parent_id = (int) $request->input('parent_id');
+        try {
+            $postCat->fill($request->input());
+            $postCat->save();
+            Session::flash('success', 'Cập nhật thành công');
+            return true;
+        } catch (\Exception $err) {
+            Session::flash('error', 'Cập nhật thất bại');
+            Log::info($err->getMessage());
+            return false;
+        }
        }
-        $postCat->name = (string) $request->input('name');
-        $postCat->description = (string) $request->input('description');
-        $postCat->content = (string) $request->input('content');
-        $postCat->active = (int) $request->input('active');
-        $postCat->save();
-        session::flash('success', 'update danh mục thành công');
-       return true;
+       
     }
 }

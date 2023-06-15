@@ -5,7 +5,6 @@ namespace App\Http\View\Composers;
 
 use App\Models\Product;
 use Illuminate\View\View;
- 
 class ProductHotComposer
 {
     protected $users;
@@ -18,9 +17,11 @@ class ProductHotComposer
     
     public function compose(View $view)
     {
-        $products = Product::where('active', 1)
+        $products = Product::with('media')
+        ->where('active', 1)
             ->select('id', 'name', 'price', 'price_sale')
-            ->limit(8)
+            ->whereBetween('price_sale', [10000000, 30000000])
+            ->limit(6)
             ->orderByDesc('id')
             ->get();
         $view->with('products', $products);

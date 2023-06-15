@@ -31,10 +31,10 @@
                         </select>
                         <label for="title">Kích hoạt</label>
                         <div class="radio-check">
-                            <input type="radio" id="active" class="mr-4" name="active" {{$postCat->active == 1 ? 'checked =""':''}}value="1">  Có
+                            <input type="radio" id="active" class="mr-4" name="active" {{$postCat->active == 1 ? 'checked' : ''}} value="1">  Có
                         </div>
                         <div class="radio-check">
-                            <input type="radio" id="no_active" class="mr-4"  name="active"{{$postCat->active == 0 ? 'checked =""':''}}value="0">  Không
+                            <input type="radio" id="no_active" class="mr-4"  name="active"{{$postCat->active == 0 ? 'checked' : ''}} value="0">  Không
                         </div>
                         <button type="submit" name="btn-submit" id="btn-submit">Cập nhật</button>
                         @csrf

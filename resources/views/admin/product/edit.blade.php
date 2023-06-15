@@ -63,10 +63,10 @@
                             </select> --}}
                             <label for="title">Kích hoạt</label>
                             <div class="radio-check">
-                                <input type="radio" id="active" class="radio-check-1" name="active"{{$product->active == 1 ? 'checked =""':''}} value="1"> Có
+                                <input type="radio" id="active" class="radio-check-1" name="active"{{$product->active == 1 ? 'checked' : ''}} value="1"> Có
                             </div>
                             <div class="radio-check">
-                                <input type="radio" id="no_active" class="radio-check-2" value="0"{{$product->active == 0 ? 'checked =""':''}} name="active">
+                                <input type="radio" id="no_active" class="radio-check-2" value="0"{{$product->active == 0 ? 'checked' : ''}} name="active">
                                 Không
                             </div>
                             <button type="submit" name="btn-submit" id="btn-submit">Cập nhật</button>
