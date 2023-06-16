@@ -20,7 +20,7 @@ class ProductHotComposer
         $products = Product::with('media')
         ->where('active', 1)
             ->select('id', 'name', 'price', 'price_sale')
-            ->whereBetween('price_sale', [10000000, 30000000])
+            ->whereBetween('price_sale', [9000000, 30000000])
             ->limit(6)
             ->orderByDesc('id')
             ->get();

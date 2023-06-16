@@ -120,4 +120,14 @@ class Helper
         $fmt = new NumberFormatter( 'de_DE', NumberFormatter::CURRENCY );
         return $fmt->formatCurrency($money, "VND")."\n";
     }
+    public static function getArrayCatId($productCat, $id)                //Lấy ra mảng cat_id con   
+    {
+        $array_id = array();
+        foreach ($productCat as $cat) {
+            if ($cat->parent_id !== 0 && $cat->parent_id == $id) {
+                $array_id[] = $cat->id;
+            }
+        }
+        return $array_id;
+    }
 }

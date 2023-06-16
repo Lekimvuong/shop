@@ -46,130 +46,46 @@
                 </div>
             </div>
          @include('product_hot')
+         @foreach ($productCats as $productCat)
             <div class="section" id="list-product-wp">
                 <div class="section-head">
-                    <h3 class="section-title">Điện thoại</h3>
+                    <h3 class="section-title">{{ $productCat->name }}</h3>
                 </div>
                 <div class="section-detail">
                     <ul class="list-item clearfix">
+                        @php
+                        $t = 0;
+                        @endphp
+                        @foreach ($products as $product)
+                        @if ($t < 8)
+                        @if (in_array($product->cat_id, \App\Helpers\Helper::getArrayCatId($allProductCats, $productCat->id)))
+                        @php
+                        $t++;
+                        @endphp
                         <li>
-                            <a href="?page=detail_product" title="" class="thumb">
-                                <img src="template/public/images/img-pro-16.png">
+                            <a href="" title="" class="thumb">
+                                <img src="{{ $product->media[1]->thumb }}">
                             </a>
-                            <a href="?page=detail_product" title="" class="product-name">Motorola Moto G5S Plus</a>
+                            <a href="" title="" class="product-name">{{ $product->name }}</a>
                             <div class="price">
-                                <span class="new">6.990.000đđ</span>
-                                <span class="old">8.990.000đđ</span>
+                                <span class="new">{{ \App\Helpers\Helper::currencyFormat($product->price_sale) }}</span>
+                                <span class="old">{{ \App\Helpers\Helper::currencyFormat($product->price) }}</span>
                             </div>
                             <div class="action clearfix">
-                                <a href="?page=cart" title="Thêm giỏ hàng" class="add-cart fl-left">Thêm giỏ hàng</a>
-                                <a href="?page=checkout" title="Mua ngay" class="buy-now fl-right">Mua ngay</a>
+                                <a href="/add-cart/{{$product->id}}" title="Thêm giỏ hàng" class="add-cart fl-left">Thêm giỏ hàng</a>
+                                <a href="/checkout/{{$product->id}}" title="Mua ngay" class="buy-now fl-right">Mua ngay</a>
                             </div>
                         </li>
-                        <li>
-                            <a href="?page=detail_product" title="" class="thumb">
-                                <img src="template/public/images/img-pro-15.png">
-                            </a>
-                            <a href="?page=detail_product" title="" class="product-name">Samsung Galaxy A5</a>
-                            <div class="price">
-                                <span class="new">7.990.000đ</span>
-                                <span class="old">9.990.000đ</span>
-                            </div>
-                            <div class="action clearfix">
-                                <a href="?page=cart" title="Thêm giỏ hàng" class="add-cart fl-left">Thêm giỏ hàng</a>
-                                <a href="?page=checkout" title="Mua ngay" class="buy-now fl-right">Mua ngay</a>
-                            </div>
-                        </li>
-                        <li>
-                            <a href="?page=detail_product" title="" class="thumb">
-                                <img src="template/public/images/img-pro-14.png">
-                            </a>
-                            <a href="?page=detail_product" title="" class="product-name">Sony Xperia XA Ultra</a>
-                            <div class="price">
-                                <span class="new">6.990.000đ</span>
-                                <span class="old">7.990.000đ</span>
-                            </div>
-                            <div class="action clearfix">
-                                <a href="?page=cart" title="Thêm giỏ hàng" class="add-cart fl-left">Thêm giỏ hàng</a>
-                                <a href="?page=checkout" title="Mua ngay" class="buy-now fl-right">Mua ngay</a>
-                            </div>
-                        </li>
-                        <li>
-                            <a href="?page=detail_product" title="" class="thumb">
-                                <img src="template/public/images/img-pro-13.png">
-                            </a>
-                            <a href="?page=detail_product" title="" class="product-name">Huawei Nova 2i</a>
-                            <div class="price">
-                                <span class="new">5.990.000đ</span>
-                                <span class="old">8.990.000đ</span>
-                            </div>
-                            <div class="action clearfix">
-                                <a href="?page=cart" title="Thêm giỏ hàng" class="add-cart fl-left">Thêm giỏ hàng</a>
-                                <a href="?page=checkout" title="Mua ngay" class="buy-now fl-right">Mua ngay</a>
-                            </div>
-                        </li>
-                        <li>
-                            <a href="?page=detail_product" title="" class="thumb">
-                                <img src="template/public/images/img-pro-12.png">
-                            </a>
-                            <a href="?page=detail_product" title="" class="product-name">Xiaomi Mi A1</a>
-                            <div class="price">
-                                <span class="new">5.990.000đ</span>
-                                <span class="old">6.990.000đ</span>
-                            </div>
-                            <div class="action clearfix">
-                                <a href="?page=cart" title="Thêm giỏ hàng" class="add-cart fl-left">Thêm giỏ hàng</a>
-                                <a href="?page=checkout" title="Mua ngay" class="buy-now fl-right">Mua ngay</a>
-                            </div>
-                        </li>
-                        <li>
-                            <a href="?page=detail_product" title="" class="thumb">
-                                <img src="template/public/images/img-pro-11.png">
-                            </a>
-                            <a href="?page=detail_product" title="" class="product-name">HTC U Ultra Sapphire</a>
-                            <div class="price">
-                                <span class="new">16.490.000đ</span>
-                                <span class="old">18.490.000đ</span>
-                            </div>
-                            <div class="action clearfix">
-                                <a href="?page=cart" title="Thêm giỏ hàng" class="add-cart fl-left">Thêm giỏ hàng</a>
-                                <a href="?page=checkout" title="Mua ngay" class="buy-now fl-right">Mua ngay</a>
-                            </div>
-                        </li>
-                        <li>
-                            <a href="?page=detail_product" title="" class="thumb">
-                                <img src="template/public/images/img-pro-08.png">
-                            </a>
-                            <a href="?page=detail_product" title="" class="product-name">Sony Xperia XZ Dual</a>
-                            <div class="price">
-                                <span class="new">9.990.000đ</span>
-                                <span class="old">10.990.000đ</span>
-                            </div>
-                            <div class="action clearfix">
-                                <a href="?page=cart" title="Thêm giỏ hàng" class="add-cart fl-left">Thêm giỏ hàng</a>
-                                <a href="?page=checkout" title="Mua ngay" class="buy-now fl-right">Mua ngay</a>
-                            </div>
-                        </li>
-                        <li>
-                            <a href="?page=detail_product" title="" class="thumb">
-                                <img src="template/public/images/img-pro-10.png">
-                            </a>
-                            <a href="?page=detail_product" title="" class="product-name">Bphone 2017</a>
-                            <div class="price">
-                                <span class="new">9.790.000đ</span>
-                                <span class="old">10.790.000đ</span>
-                            </div>
-                            <div class="action clearfix">
-                                <a href="?page=cart" title="Thêm giỏ hàng" class="add-cart fl-left">Thêm giỏ hàng</a>
-                                <a href="?page=checkout" title="Mua ngay" class="buy-now fl-right">Mua ngay</a>
-                            </div>
-                        </li>
+                        @endif
+                        @endif
+                        @endforeach
                     </ul>
                 </div>
             </div>
-            <div class="section" id="list-product-wp">
+            @endforeach
+            {{-- <div class="section" id="list-product-wp">
                 <div class="section-head">
-                    <h3 class="section-title">Laptop</h3>
+                    <h3 class="section-title">{{ $productCat->name }}</h3>
                 </div>
                 <div class="section-detail">
                     <ul class="list-item clearfix">
@@ -287,7 +203,8 @@
                         </li>
                     </ul>
                 </div>
-            </div>
+            </div> --}}
+            
         </div>
         <div class="sidebar fl-left">
             @include('productCat')

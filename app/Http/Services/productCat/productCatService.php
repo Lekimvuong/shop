@@ -54,7 +54,15 @@ class productCatService{
             return false;
         }
        }
-       
     }
-
+    public function show()                  //get những danh mục sản phẩm chính
+    {
+        return ProductCat::where('active', 1)
+        ->where('parent_id', 0)
+        ->get();
+    }
+    public function getAllCat()             //get tất cả danh mục sản phẩm
+    {
+        return ProductCat::where('active', 1)->get();
+    }
 }
