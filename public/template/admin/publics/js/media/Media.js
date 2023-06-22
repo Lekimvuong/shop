@@ -16,6 +16,8 @@ var MediaClass = function() {
         ele.postTable = $('#Media_table');
         ele.search = $('#search');
         ele.row = $('.removeRow');
+        ele.btnCreate = $('#btn-submit');
+        ele.productID = $('#product_category');
     }
 
     this.bindEvents = function() {
@@ -23,6 +25,7 @@ var MediaClass = function() {
         updateThumb();
         drawPostData();
         removeRow();
+        createProduct()
     }
     var uploadThumb = function() {
         ele.thumb.on('change', function() {
@@ -43,16 +46,16 @@ var MediaClass = function() {
                 url: $url,
                 success: function(results) {
                     if (results.error == false) {
-                        results.url.forEach(url => {
+                        $.each(results.url, function(i, url) {
                             $('#show_images').append('<div class="image_show" data-path="' + url + '"><div class="checkbox-container"><input type="checkbox" name="delete_image"value="' + url + '" ></div><a href="' + url +
-                                '" target="_blank">' + '<input type="hidden" name="image_name" value="' + results.name + '" class="image_name"></input>' +
+                                '" target="_blank">' + '<input type="hidden" name="image_name" value="' + results.name[i] + '" class="image_name"></input>' +
                                 '<img src="' + url + '" width="100px"></a><input type="hidden" name="thumb[]" value="' + url + '" class="thumb"></div>'
                             );
                         });
                         $('#deleteImage').show();
                         countImage();
                         deletethumb();
-
+                        d
                     } else {
                         var errorMessages = '<ul>';
                         $.each(results.error, function(key, value) {
@@ -180,6 +183,36 @@ var MediaClass = function() {
                     });
                 }
             });
+        })
+    }
+    var createProduct = function() {
+        $('#my_form').on('submit', function() {
+            var params = {
+                'thumb': [],
+                'name_thumb': [],
+                'product_id': ele.productID.val(),
+            }
+            event.preventDefault();
+            $("input[name='thumb[]']").each(function() {
+                params.thumb.push($(this).val());
+            });
+            $("input[name='image_name']").each(function() {
+                params.name_thumb.push($(this).val()); //CHỗ m đẩy giá trị input image_name ở mô
+            });
+            $.ajax({
+                url: '/admin/upload/services',
+                type: 'post',
+                data: {
+                    'params': params,
+                },
+                success: function(response) {
+                    if (response.success == true) {
+                        $.app.pushNoty('success');
+                    } else {
+                        $.app.pushNoty('error', 'Lỗi! Vui lòng thử lại');
+                    }
+                }
+            })
         })
     }
 }

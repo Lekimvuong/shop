@@ -12,7 +12,7 @@
                 <div class="section" id="detail-page">
                     <div class="section-detail">
                         @include('admin.alert')
-                        <form method="POST" action="{{ route('Upload.images') }}" enctype="multipart/form-data">
+                        <form method="POST" action="{{ route('Upload.images') }}" id = "my_form" enctype="multipart/form-data">
                             {{ csrf_field() }}
                             <label>Hình ảnh</label>
                             <div id="uploadFile">
@@ -25,7 +25,7 @@
                             </div>
                             <button type="button" name="btn-delete" url-delete="{{ route('Upload.delete') }}"id="deleteImage" style="display: none;">Xóa ảnh</button>
                             <label>Sản phẩm</label>
-                            <select name="product_id">
+                            <select name="product_id" id ="product_category">
                                 <option value="">-- Chọn danh mục --</option>
                                 @foreach ($product_id as $item)
                                     <option value="{{ $item->id }}">{{ $item->name }}</option>

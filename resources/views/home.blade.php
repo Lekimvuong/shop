@@ -64,7 +64,7 @@
                         @endphp
                         <li>
                             <a href="" title="" class="thumb">
-                                <img src="{{ $product->media[1]->thumb }}">
+                                <img src="{{ $product->media[0]->thumb }}">
                             </a>
                             <a href="" title="" class="product-name">{{ $product->name }}</a>
                             <div class="price">

@@ -6,7 +6,6 @@ use App\Models\Product;
 use CloudinaryLabs\CloudinaryLaravel\Facades\Cloudinary;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Session;
-use Illuminate\Support\Facades\Storage;
 
 class UploadService
 {
@@ -58,8 +57,9 @@ class UploadService
                     // );
                     $extension = $image->getClientOriginalName();
                     $name = '(' . time() . ')' . '.' . $extension;
-                    $name_image[]= $name;
+                    $name_image[] = $name;
                     $url[] = Cloudinary::upload($image->getRealPath())->getSecurePath();
+                    Session::put('image_urls', $url);
                 }
             }
             return array($name_image, $url);
@@ -78,23 +78,19 @@ class UploadService
     }
     public function insert($request)
     {
-
-        try {
-            foreach ($request->input('thumb') as $thumb) {
+        $params = $request->input('params');
+        if ($params) {
+            foreach ($params['thumb'] as $key => $item) {
                 Media::create([
-                    'name' => (string)$request->input('image_name'),
-                    'thumb' => $thumb,
-                    'product_id' => (int) $request->input('product_id'),
+                    'name' => (string)$params['name_thumb'][$key],
+                    'thumb' => (string) $item,
+                    'product_id' => (int) $params['product_id'],
                 ]);
             }
-            Session::flash('success', 'Thêm hình ảnh thành công');
-        } catch (\Exception $err) {
-            Session::flash('error', 'Thêm hình ảnh sản phẩm lỗi');
-            Log::info($err->getMessage());
+            return true;
+        } else {
             return false;
         }
-
-        return true;
     }
     public function delete($request)
     {

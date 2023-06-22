@@ -55,7 +55,7 @@ class productCatService{
         }
        }
     }
-    public function show()                  //get những danh mục sản phẩm chính
+    public function getFatherCat()                  //get những danh mục sản phẩm chính
     {
         return ProductCat::where('active', 1)
         ->where('parent_id', 0)

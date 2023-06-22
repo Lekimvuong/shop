@@ -88,11 +88,19 @@ class UploadController extends Controller
             'error' => $validator->errors(),
         ]);
     }
-    public function insertImages(MediaRequest $request)
+    public function insertImages(Request $request)
     {
-        $this->upload->insert($request);
-        return redirect()->back();
+       $status = $this->upload->insert($request);
+       if($status==true){
+        return response()->json([       
+            'success' => true,
+        ]);
     }
+    return response()->json([       
+        'success' => false,
+    ]);
+    }
+    
 
     public function delete(Request $request)
     {

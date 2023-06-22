@@ -122,12 +122,11 @@ class Helper
     }
     public static function getArrayCatId($productCat, $id)                //Lấy ra mảng cat_id con   
     {
-        $array_id = array();
-        foreach ($productCat as $cat) {
-            if ($cat->parent_id !== 0 && $cat->parent_id == $id) {
-                $array_id[] = $cat->id;
-            }
+        $array_id = [];
+        foreach($productCat as $item){
+            $array_id = $item->where('parent_id', '<>', '0')->where('parent_id', $id)->pluck('id')->toArray();
         }
+        
         return $array_id;
     }
 }

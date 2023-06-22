@@ -7,7 +7,7 @@
             @foreach ($products as $product)
             <li>
                 <a href="/san-pham/{{$product->id}}-{{\Str::slug($product->name)}}.html" title="" class="thumb">
-                    <img src="{{ $product->media[1]->thumb }}">
+                    <img src="{{ $product->media[0]->thumb }}">
                 </a>
                 <a href="/san-pham/{{$product->id}}-{{\Str::slug($product->name)}}.html" title="" class="product-name">{{ $product->name }}</a>
                 <div class="price">
@@ -20,6 +20,6 @@
                 </div>
             </li>
             @endforeach
-        </ul>
+        </ul>Của m hiện tại giống r đíng ko.,  đúng
     </div>
 </div>
