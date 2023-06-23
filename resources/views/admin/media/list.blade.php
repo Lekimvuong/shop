@@ -13,9 +13,9 @@
             <div class="section" id="detail-page">
                 <div class="section-detail">
                     <div class="filter-wp clearfix">
-                        <ul class="post-status fl-left">
+                        {{-- <ul class="post-status fl-left">
                             <li class="all"><a href="">Tất cả <span class="count">(69)</span></a></li>
-                        </ul>
+                        </ul> --}}
                         <form method="GET" class="form-s fl-right">
                             <input type="text" name="s" id="search">
                             <input type="submit" name="sm_s" value="Tìm kiếm">

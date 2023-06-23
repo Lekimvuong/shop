@@ -1,8 +1,4 @@
 var ProductClass = function() {
-    var vars = {
-        datatable: {},
-
-    };
     var ele = {};
     this.run = function() {
         this.init();
@@ -10,80 +6,14 @@ var ProductClass = function() {
     }
 
     this.init = function() {
-        ele.thumb = $('#upload-thumb');
         ele.postTable = $('#product-table');
         ele.search = $('#search');
         ele.row = $('.remove-row');
-        ele.deleThumb = $('#deleteImage');
     }
 
     this.bindEvents = function() {
-        uploadThumb();
         drawPostData();
         removeRow();
-        deletethumb();
-    }
-    var uploadThumb = function() {
-        ele.thumb.on('change', function() {
-            var formData = new FormData();
-            var files = $('#upload-thumb')[0].files;
-            var TotalFiles = $('#upload-thumb')[0].files.length; //Total files
-            var $url = $(this).attr('url-handle');
-            for (var i = 0; i < TotalFiles; i++) {
-                formData.append('files[]', files[i]);
-            }
-            formData.append('TotalFiles', TotalFiles);
-            $.ajax({
-                processData: false,
-                contentType: false,
-                type: 'POST',
-                datatype: 'JSON',
-                data: formData,
-                url: $url,
-                success: function(results) {
-                    if (results.error == false) {
-                        results.url.forEach(url => {
-                            $('#show_images').append('<div class="image_show" data-path="' + url + '"><input type="checkbox" name="delete_image" value="' + url + '" >Xóa</input><a href="' + url +
-                                '" target="_blank">' + '<input type="hidden" name="image_name" value="' + results.name + '" class="image_name"></input>' +
-                                '<img src="' + url + '" width="100px"></a><input type="hidden" name="thumb[]" value="' + url + '" class="thumb"></div>'
-                            );
-                        });
-                        $('#deleteImage').show();
-                        countImage();
-                        deletethumb();
-                    } else {
-                        var errorMessages = '<ul>';
-                        $.each(results.error, function(key, value) {
-                            errorMessages += '<li>' + value + '</li>';
-                        });
-                        errorMessages += '</ul>';
-
-                        $('#errorMessages').html(errorMessages).show();
-                    }
-                },
-            });
-        });
-    }
-    var deletethumb = function() {
-        ele.deleThumb.on('click', function() {
-            var $urlImage = [];
-            var $url = $(this).attr('url-delete');
-            $('input[name="delete_image"]:checked').each(function() {
-                $urlImage.push($(this).closest('.image_show').data('path'))
-            });
-            $.ajax({
-                url: $url,
-                type: 'delete',
-                data: { 'urlImage': $urlImage },
-                success: function(response) {
-                    if (response.success == true) {
-                        $('input[name="delete_image"]:checked').closest('.image_show').remove();
-                        countImage();
-                    }
-
-                }
-            })
-        })
     }
     var removeRow = function() {
         ele.row.on('click', function() {
@@ -114,43 +44,14 @@ var ProductClass = function() {
         var postTable = ele.postTable.DataTable({
             searching: true,
             pagination: true,
-            lengthMenu: 20,
+            pageLength: 7,
             lengthChange: false,
-            info: false,
+            info: true,
             dom: "lrtip",
+            paging: true
         });
         ele.search.on('keyup', function(e) {
             postTable.column(4).search(e.target.value).draw();
         })
-    }
-
-    var deletethumb = function() {
-        ele.deleThumb.on('click', function() {
-            var $urlImage = [];
-            var $url = $(this).attr('url-delete');
-            $('input[name="delete_image"]:checked').each(function() {
-                $urlImage.push($(this).closest('.image_show').data('path'))
-            });
-            $.ajax({
-                url: $url,
-                type: 'delete',
-                data: { 'urlImage': $urlImage },
-                success: function(response) {
-                    if (response.success == true) {
-                        $('input[name="delete_image"]:checked').closest('.image_show').remove();
-                        countImage();
-                    }
-                }
-            })
-        })
-    }
-    var countImage = function() {
-        var imageContainer = document.getElementById('show_images');
-        var images = imageContainer.getElementsByTagName('img');
-        var imageCount = images.length;
-        document.querySelector('#countThumbs').innerHTML = `<p>Đã tải lên ${imageCount} ảnh.</p>`
-        if (imageCount == 0) {
-            $('#deleteImage').hide();
-        }
     }
 }

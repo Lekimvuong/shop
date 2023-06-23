@@ -12,7 +12,7 @@
                 <div class="section" id="detail-page">
                     <div class="section-detail">
                         @include('admin.alert')
-                        <form method="POST" action="{{ route('products.add.store') }}" enctype="multipart/form-data">
+                        <form method="POST" action="{{ route('products.add.store') }}" enctype="multipart/form-data" id="form_submit">
                             {{ csrf_field() }}
                             <label for="name">Tên sản phẩm</label>
                             <input type="text" name="name" value="{{ old('name') }}"id="product-name">
@@ -23,9 +23,9 @@
                             <label for="price_sale">Giá sale</label>
                             <input type="text" name="price_sale" value="{{ old('price_sale') }}"id="price_sale">
                             <label for="description">Mô tả ngắn</label>
-                            <textarea name="description"value="{{ old('short-desc') }}" id="desc"></textarea>
+                            <textarea name="description"value="{{ old('description') }}" id="desc"></textarea>
                             <label for="content">Chi tiết</label>
-                            <textarea name="content" id="desc"value="{{ old('content') }}" class="ckeditor"></textarea>
+                            <textarea name="content" id="product_content" value="{{ old('content') }}" class="ckeditor"></textarea>
                             <label>Hình ảnh</label>
                             <div id="uploadFile">
                                 <input type="file" name="files[]" url-handle="{{ route('Upload.multifiles') }}"
@@ -38,7 +38,7 @@
                                 url-delete="{{ route('Upload.delete') }}"id="deleteImage" style="display: none;">Xóa
                                 ảnh</button>
                             <label>Danh mục sản phẩm</label>
-                            <select name="cat_id">
+                            <select name="cat_id" id ="product-cat">
                                 <option value="">-- Chọn danh mục --</option>
                                 @foreach ($productCats as $item)
                                     <option value="{{ $item->id }}">{{ $item->name }}</option>
@@ -50,14 +50,12 @@
                                 <option value="1">Chờ duyệt</option>
                                 <option value="2">Đã đăng</option>
                             </select> --}}
-                            <label for="title">Kích hoạt</label>
-                            <div class="radio-check">
-                                <input type="radio" id="active" class="radio-check-1" name="active" value="1"> Có
-                            </div>
-                            <div class="radio-check">
-                                <input type="radio" id="no_active" class="radio-check-2" value="0" name="active">
-                                Không
-                            </div>
+                            <label>Trạng thái</label>
+                        <select name="active" id ="active_product">
+                            <option value="">-- Chọn trạng thái --</option>
+                            <option value="1">Công khai</option>
+                            <option value="0">Chờ duyệt</option>
+                        </select>
                             <button type="submit" name="btn-submit" id="btn-submit">Thêm mới</button>
                         </form>
                     </div>
@@ -67,10 +65,10 @@
     </div>
 @endsection
 @section('script')
-    <script type="text/javascript" src="{{ asset('template/admin/publics/js/products/products.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('template/admin/publics/js/products/createProducts.js') }}"></script>
     <script type="text/javascript">
         $(document).ready(function() {
-            var instance = new ProductClass();
+            var instance = new CreateProductClass();
             instance.run();
         });
     </script>

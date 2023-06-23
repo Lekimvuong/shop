@@ -74,7 +74,7 @@ class UploadService
     }
     public function get()
     {
-        return Media::with('cat_id')->orderByDesc('id')->paginate(10);
+        return Media::with('cat_id')->orderByDesc('id')->get();
     }
     public function insert($request)
     {

@@ -50,10 +50,11 @@ var productCatClass = function() {
         var postTable = ele.postTable.DataTable({
             searching: true,
             pagination: true,
-            lengthMenu: 20,
+            pageLength: 7,
             lengthChange: false,
-            info: false,
+            info: true,
             dom: "lrtip",
+            paging: true
         });
         ele.search.on('keyup', function(e) {
             postTable.column(2).search(e.target.value).draw();

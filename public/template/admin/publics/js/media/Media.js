@@ -1,8 +1,4 @@
 var MediaClass = function() {
-    var vars = {
-        datatable: {},
-
-    };
     var ele = {};
     this.run = function() {
         this.init();
@@ -25,7 +21,7 @@ var MediaClass = function() {
         updateThumb();
         drawPostData();
         removeRow();
-        createProduct()
+        createMedia();
     }
     var uploadThumb = function() {
         ele.thumb.on('change', function() {
@@ -151,10 +147,11 @@ var MediaClass = function() {
         var postTable = ele.postTable.DataTable({
             searching: true,
             pagination: true,
-            lengthMenu: 20,
+            pageLength: 7,
             lengthChange: false,
-            info: false,
+            info: true,
             dom: "lrtip",
+            paging: true
         });
         ele.search.on('keyup', function(e) {
             postTable.column(3).search(e.target.value).draw();
@@ -185,7 +182,7 @@ var MediaClass = function() {
             });
         })
     }
-    var createProduct = function() {
+    var createMedia = function() {
         $('#my_form').on('submit', function() {
             var params = {
                 'thumb': [],
@@ -208,6 +205,8 @@ var MediaClass = function() {
                 success: function(response) {
                     if (response.success == true) {
                         $.app.pushNoty('success');
+                        document.querySelector('div.image_show').remove();
+
                     } else {
                         $.app.pushNoty('error', 'Lỗi! Vui lòng thử lại');
                     }

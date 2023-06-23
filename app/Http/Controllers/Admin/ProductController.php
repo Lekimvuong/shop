@@ -35,10 +35,10 @@ class ProductController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(ProductRequest $request)
+    public function store(Request $request)
     {
+        dd($request);
         $product = $this->productService->insert($request);
-
         $this->productService->addThumb($product, $request);
         return redirect()->back();
     }

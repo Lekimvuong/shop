@@ -1,8 +1,4 @@
 var SliderClass = function() {
-    var vars = {
-        datatable: {},
-
-    };
     var ele = {};
     this.run = function() {
         this.init();
