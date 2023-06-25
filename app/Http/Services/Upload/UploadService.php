@@ -88,9 +88,8 @@ class UploadService
                 ]);
             }
             return true;
-        } else {
+        } 
             return false;
-        }
     }
     public function delete($request)
     {

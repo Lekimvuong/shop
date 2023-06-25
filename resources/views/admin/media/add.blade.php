@@ -12,7 +12,7 @@
                 <div class="section" id="detail-page">
                     <div class="section-detail">
                         @include('admin.alert')
-                        <form method="POST" action="{{ route('Upload.images') }}" id = "my_form" enctype="multipart/form-data">
+                        <form method="POST" action="javascript:void(0)" id = "my_form" enctype="multipart/form-data">
                             {{ csrf_field() }}
                             <label>Hình ảnh</label>
                             <div id="uploadFile">

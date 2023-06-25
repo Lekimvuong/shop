@@ -51,7 +51,6 @@ var MediaClass = function() {
                         $('#deleteImage').show();
                         countImage();
                         deletethumb();
-                        d
                     } else {
                         var errorMessages = '<ul>';
                         $.each(results.error, function(key, value) {
@@ -189,7 +188,6 @@ var MediaClass = function() {
                 'name_thumb': [],
                 'product_id': ele.productID.val(),
             }
-            event.preventDefault();
             $("input[name='thumb[]']").each(function() {
                 params.thumb.push($(this).val());
             });

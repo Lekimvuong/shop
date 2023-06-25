@@ -13,7 +13,6 @@ var CreateProductClass = function() {
         ele.productPrice = $('#price');
         ele.productSale = $('#price_sale');
         ele.productDesc = $('#desc');
-        ele.productContent = $('#product_content');
         ele.productCat = $('#product-cat');
         ele.productActive = $('#active_product');
     }
@@ -42,9 +41,9 @@ var CreateProductClass = function() {
                 url: $url,
                 success: function(results) {
                     if (results.error == false) {
-                        results.url.forEach(url => {
+                        $.each(results.url, function(i, url) {
                             $('#show_images').append('<div class="image_show" data-path="' + url + '"><input type="checkbox" name="delete_image" value="' + url + '" >Xóa</input><a href="' + url +
-                                '" target="_blank">' + '<input type="hidden" name="image_name" value="' + results.name + '" class="image_name"></input>' +
+                                '" target="_blank">' + '<input type="hidden" name="image_name" value="' + results.name[i] + '" class="image_name"></input>' +
                                 '<img src="' + url + '" width="100px"></a><input type="hidden" name="thumb[]" value="' + url + '" class="thumb"></div>'
                             );
                         });
@@ -96,19 +95,19 @@ var CreateProductClass = function() {
     }
     var createProduct = function() {
         $('#form_submit').on('submit', function() {
+            var editor = CKEDITOR.instances.product_content;
             var params = {
                 'name': ele.productName.val(),
                 'code': ele.productCode.val(),
                 'price': ele.productPrice.val(),
                 'price_sale': ele.productSale.val(),
                 'description': ele.productDesc.val(),
-                'content': ele.productContent.val(),
+                'content': editor.getData(),
                 'productCat': ele.productCat.val(),
                 'active': ele.productActive.val(),
                 'thumb': [],
                 'name_thumb': [],
             }
-            event.preventDefault();
             $("input[name='thumb[]']").each(function() {
                 params.thumb.push($(this).val());
             });

@@ -21,9 +21,6 @@ class ProductController extends Controller
             'products' => $this->productService->get()]);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
     public function create()
     {
         return view('admin.product.add', ['title' => 'Thêm mới sản phẩm',
@@ -32,19 +29,13 @@ class ProductController extends Controller
         ]);
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
+   
     public function store(Request $request)
     {
-        dd($request);
         $product = $this->productService->insert($request);
         $this->productService->addThumb($product, $request);
-        return redirect()->back();
     }
-    /**
-     * Display the specified resource.
-     */
+  
     public function show(Product $product)
     {
         $data['title'] = 'Chỉnh sửa thông tin sản phẩm';

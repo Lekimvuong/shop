@@ -11,13 +11,14 @@
 <link href="{{ asset('template/admin/publics/css/font-awesome/css/font-awesome.min.css') }}" rel="stylesheet" type="text/css" />
 <link href="{{ asset('template/admin/publics/style.css') }}" rel="stylesheet" type="text/css" />
 <link href="{{ asset('template/admin/publics/responsive.css') }}" rel="stylesheet" type="text/css" />
-<link rel="stylesheet" href="https://cdn.datatables.net/1.13.4/css/jquery.dataTables.min.css" />
+<link rel="stylesheet" href="https://cdn.datatables.net/1.13.4/css/jquery.dataTables.css" />
+
 <script src="{{ asset('template/admin/publics/js/jquery-2.2.4.min.js') }}" type="text/javascript"></script>
 <script src="{{ asset('template/admin/publics/js/bootstrap/bootstrap.min.js') }}" type="text/javascript"></script>
 <script src="{{ asset('template/admin/publics/js/plugins/ckeditor/ckeditor.js') }}" type="text/javascript"></script>
 <script src="{{ asset('template/admin/publics/js/main.js') }}" type="text/javascript"></script>
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-<script type="text/javascript" src="https://cdn.datatables.net/1.13.4/js/jquery.dataTables.min.js"></script>
+<script type="text/javascript" src="https://cdn.datatables.net/1.13.4/js/jquery.dataTables.js"></script>
 <script src="{{ asset('template/admin/publics/js/base.app.js') }}" type="text/javascript"></script>
     </head>
     <body>

@@ -3,7 +3,6 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\Media\MediaRequest;
 use App\http\Services\Upload\UploadService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
@@ -67,7 +66,8 @@ class UploadController extends Controller
             'files.*' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:10000',
         ];
 
-        $validator = Validator::make($request->all(), $rules);   //Validate theo rule ở $rule
+        $validator = Validator::make($request->all(), $rules); 
+          //Validate theo rule ở $rule
         if ($validator->passes())   //Check có pass các rules trên ko
         {
             $urls = $this->upload->multipleStore($request);
@@ -90,15 +90,26 @@ class UploadController extends Controller
     }
     public function insertImages(Request $request)
     {
-       $status = $this->upload->insert($request);
-       if($status==true){
-        return response()->json([       
-            'success' => true,
+        //rules của request params
+        $rules = [
+            'params.thumb' => 'required',
+            'params.product_id' => 'required',
+        ];
+        $validator = Validator::make($request->all(), $rules);
+        if ($validator->fails()) {
+            return response()->json([       
+                'success' => false,
+            ]);
+        }
+            $status = $this->upload->insert($request);
+            if($status==true){
+             return response()->json([       
+                 'success' => true,
+             ]);
+         }
+            return response()->json([       
+            'success' => false,
         ]);
-    }
-    return response()->json([       
-        'success' => false,
-    ]);
     }
     
 

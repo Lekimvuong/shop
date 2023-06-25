@@ -12,7 +12,7 @@
                 <div class="section" id="detail-page">
                     <div class="section-detail">
                         @include('admin.alert')
-                        <form method="POST" action="{{ route('products.add.store') }}" enctype="multipart/form-data" id="form_submit">
+                        <form method="POST" action="javascript:void(0)" enctype="multipart/form-data" id="form_submit">
                             {{ csrf_field() }}
                             <label for="name">Tên sản phẩm</label>
                             <input type="text" name="name" value="{{ old('name') }}"id="product-name">
@@ -25,7 +25,7 @@
                             <label for="description">Mô tả ngắn</label>
                             <textarea name="description"value="{{ old('description') }}" id="desc"></textarea>
                             <label for="content">Chi tiết</label>
-                            <textarea name="content" id="product_content" value="{{ old('content') }}" class="ckeditor"></textarea>
+                            <textarea name="content" class ="ckeditor" id="product_content" value=""></textarea>
                             <label>Hình ảnh</label>
                             <div id="uploadFile">
                                 <input type="file" name="files[]" url-handle="{{ route('Upload.multifiles') }}"
@@ -44,12 +44,6 @@
                                     <option value="{{ $item->id }}">{{ $item->name }}</option>
                                 @endforeach
                             </select>
-                            {{-- <label>Trạng thái</label>
-                            <select name="status">
-                                <option value="0">-- Chọn danh mục --</option>
-                                <option value="1">Chờ duyệt</option>
-                                <option value="2">Đã đăng</option>
-                            </select> --}}
                             <label>Trạng thái</label>
                         <select name="active" id ="active_product">
                             <option value="">-- Chọn trạng thái --</option>
