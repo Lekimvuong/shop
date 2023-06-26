@@ -41,10 +41,10 @@
     </div>
 @endsection
 @section('script')
-    <script type="text/javascript" src="{{ asset('template/admin/publics/js/media/Media.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('template/admin/publics/js/media/createMedia.js') }}"></script>
     <script type="text/javascript">
         $(document).ready(function() {
-            var instance = new MediaClass();
+            var instance = new CreateMediaClass();
             instance.run();
         });
     </script>

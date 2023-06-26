@@ -7,7 +7,7 @@ use App\Http\Requests\Product\ProductRequest;
 use App\http\Services\Product\ProductService;
 use App\Models\Product;
 use Illuminate\Http\Request;
-
+use Illuminate\Support\Facades\Validator;
 class ProductController extends Controller
 {
     protected $productService;
@@ -28,12 +28,30 @@ class ProductController extends Controller
 
         ]);
     }
-
-   
     public function store(Request $request)
     {
+        $rules = [
+            'params.name' => 'required|max:255|',
+            'params.code' => 'required|max:255',
+            'params.price' => 'required|integer',
+            'params.price_sale' => 'required|integer',
+            'params.description' => 'required',
+            'params.content' => 'required',
+            'params.cat_id' => 'required',
+            'params.active' => 'required',
+            'params.thumb' => 'required'
+        ];
+        $validator = Validator::make($request->all(), $rules);
+        if ($validator->fails()) {
+            return response()->json([       
+                'success' => false,
+            ]);
+        }
         $product = $this->productService->insert($request);
-        $this->productService->addThumb($product, $request);
+       $this->productService->addThumb($product, $request);
+        return response()->json([       
+            'success' => true,
+        ]);
     }
   
     public function show(Product $product)
@@ -49,8 +67,9 @@ class ProductController extends Controller
     {
         //trả về products đã được update
         $products = $this->productService->update($request, $product);
-        //Thêm ảnh vào media khi đã chọn xong ảnh
-        $this->productService->addThumb($product, $request);
+        $thumbs = $request->input('thumb');
+        $nameThumb = $request->input('image_name');
+        $this->productService->addThumbupdate($product, $thumbs, $nameThumb);
         if ($products) {
             return redirect()->route('products.list');
         }

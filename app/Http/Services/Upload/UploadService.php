@@ -82,14 +82,14 @@ class UploadService
         if ($params) {
             foreach ($params['thumb'] as $key => $item) {
                 Media::create([
-                    'name' => (string)$params['name_thumb'][$key],
+                    'name' => (string) $params['name_thumb'][$key],
                     'thumb' => (string) $item,
                     'product_id' => (int) $params['product_id'],
                 ]);
             }
             return true;
-        } 
-            return false;
+        }
+        return false;
     }
     public function delete($request)
     {
@@ -134,8 +134,11 @@ class UploadService
     {
         $id = (int) $request->input('id');
         $media = Media::where('id', $id);
+        $urlThumb = $media->pluck('thumb');
+        $publicId = basename(parse_url($urlThumb, PHP_URL_PATH), '.' . pathinfo($urlThumb, PATHINFO_EXTENSION));
         if ($media) {
             $media->delete();
+            Cloudinary::destroy($publicId);
             return true;
         }
         return false;

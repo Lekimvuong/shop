@@ -15,17 +15,17 @@
                         <form method="POST" enctype="multipart/form-data">
                             {{ csrf_field() }}
                             <label for="name">Tên sản phẩm</label>
-                            <input type="text" name="name" value="{{ $product->name }}"id="product-name">
+                            <input type="text" name="name" value="{{$product->name }}"id="product-name">
                             <label for="code">Mã sản phẩm</label>
-                            <input type="text" name="code"value="{{ $product->code }}" id="product-code">
+                            <input type="text" name="code"value="{{$product->code }}" id="product-code">
                             <label for="price">Giá sản phẩm</label>
-                            <input type="text" name="price" value="{{ $product->price }}" id="price">
+                            <input type="text" name="price" value="{{$product->price }}" id="price">
                             <label for="price_sale">Giá sale</label>
-                            <input type="text" name="price_sale" value="{{ $product->price_sale }}"id="price_sale">
+                            <input type="text" name="price_sale" value="{{$product->price_sale }}"id="price_sale">
                             <label for="description">Mô tả ngắn</label>
                             <textarea name="description" id="desc">{{ $product->description }}</textarea>
                             <label for="content">Chi tiết</label>
-                            <textarea name="content" id="desc" class="ckeditor">{{ $product->content }}</textarea>
+                            <textarea name="content" id="desc" class="ckeditor">{{$product->content}}</textarea>
                             <label>Hình ảnh</label>
                             <div id="uploadFile">
                                 <input type="file" name="files[]" url-handle="{{ route('Upload.multifiles') }}"
@@ -55,20 +55,12 @@
                                 <option value="{{ $item->id }}"{{$product->cat_id==$item->id ? 'selected' : ''}}>{{ $item->name }}</option>
                                 @endforeach
                             </select>
-                            {{-- <label>Trạng thái</label>
-                            <select name="status">
-                                <option value="0">-- Chọn danh mục --</option>
-                                <option value="1">Chờ duyệt</option>
-                                <option value="2">Đã đăng</option>
-                            </select> --}}
-                            <label for="title">Kích hoạt</label>
-                            <div class="radio-check">
-                                <input type="radio" id="active" class="radio-check-1" name="active"{{$product->active == 1 ? 'checked' : ''}} value="1"> Có
-                            </div>
-                            <div class="radio-check">
-                                <input type="radio" id="no_active" class="radio-check-2" value="0"{{$product->active == 0 ? 'checked' : ''}} name="active">
-                                Không
-                            </div>
+                            <label for="active">Kích hoạt</label>
+                            <select name="active" id ="active_product">
+                                <option value="">-- Chọn trạng thái --</option>
+                                <option value="1"{{$product->active == 1 ? 'selected' : ''}}>Công khai</option>
+                                <option value="0"{{$product->active == 0 ? 'selected' : ''}}>Chờ duyệt</option>
+                            </select>
                             <button type="submit" name="btn-submit" id="btn-submit">Cập nhật</button>
                         </form>
                     </div>

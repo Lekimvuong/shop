@@ -59,11 +59,11 @@
     </div>
 @endsection
 @section('script')
-    <script type="text/javascript" src="{{ asset('template/admin/publics/js/products/createProducts.js') }}"></script>
-    <script type="text/javascript">
-        $(document).ready(function() {
-            var instance = new CreateProductClass();
-            instance.run();
-        });
-    </script>
+<script type="text/javascript" src="{{ asset('template/admin/publics/js/products/products.js') }}"></script>
+<script type="text/javascript">
+    $(document).ready(function() {
+        var instance = new ProductClass();
+        instance.run();
+    });
+</script>
 @endsection
