@@ -3,9 +3,10 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use App\Models\Slider;
 use App\http\Services\Slider\SliderService;
+use App\Models\Slider;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
 
 class SliderController extends Controller
 {
@@ -21,30 +22,37 @@ class SliderController extends Controller
         ]);
     }
     public function store(Request $request)
-    {$this->validate($request, [
-        'name' => 'required',
-        'url' => 'required',
-        'sort_by' => 'required',
-        'active' => 'required',
-    ],
-        [
-            'name.required' => 'Vui lòng nhập tên',
-            'url.required' => 'Vui lòng nhập URL',
-            'sort_by.required' => 'Vui lòng nhập sort by',
-            'active.required' => 'Vui lòng nhập trạng thái active',
-        ]
-    );
-        $this->slider->insert($request);
-        return redirect()->back();
+    {
+        $rules = [
+            'params.name' => 'required|max:255|',
+            'params.url' => 'required',
+            'params.sort_by' => 'required',
+            'params.active' => 'required',
+        ];
+        $validator = Validator::make($request->all(), $rules);
+        if ($validator->fails()) {
+            return response()->json([
+                'success' => false,
+            ]);
+        }
+        $status = $this->slider->insert($request);
+        if ($status == true) {
+            return response()->json([
+                'success' => true,
+            ]);
+        }
+        return response()->json([
+            'success' => false,
+        ]);
 
     }
 
     public function index()
     {
         return view('admin.slider.list', ['title' => 'Danh sách slider',
-       'sliders'=> $this->slider->get()
+            'sliders' => $this->slider->get(),
         ]);
-      
+
     }
     public function show(Slider $slider)
     {
@@ -69,10 +77,9 @@ class SliderController extends Controller
         );
         $results = $this->slider->update($slider, $request);
 
-        if($results){
+        if ($results) {
             return redirect()->route('slider.list');
-        }
-        else{
+        } else {
             return redirect()->back();
         }
     }

@@ -28,9 +28,9 @@ class ViewServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        View::composer('productCat', ProductCatComposer::class);
-        View::composer('slider', SliderComposer::class);
-        View::composer('product_new', ProductNewComposer::class);
-        View::composer('product_hot', ProductHotComposer::class);
+        View::composer('home.productCat', ProductCatComposer::class);
+        View::composer('home.slider', SliderComposer::class);
+        View::composer('home.product_new', ProductNewComposer::class);
+        View::composer('home.product_hot', ProductHotComposer::class);
     }
 }

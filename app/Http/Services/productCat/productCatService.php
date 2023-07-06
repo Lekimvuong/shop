@@ -22,6 +22,7 @@ class productCatService{
                 'parent_id' => (int) $request->input('parent_id'),
                 'description' => (string) $request->input('description'),
                 'content' => (string) $request->input('content'),
+                'slug' => (string) $request->input('slug'),
                 'active' => (string) $request->input('active'),
             ]);
             session::flash('success', 'tạo danh mục sản phẩm thành công');
@@ -64,5 +65,23 @@ class productCatService{
     public function getAllCat()             //get tất cả danh mục sản phẩm
     {
         return ProductCat::where('active', 1)->get();
+    }
+    public function getId($id)
+    {
+        return ProductCat::where('id', $id)->where('active', 1)->firstOrFail();
+    }
+    public function getproduct($productCat)
+    {
+        return $productCat->products()->select('id','name','price', 'price_sale')->where('active', 1)
+        ->orderbyDesc('id')
+        ->paginate(12);
+    }
+
+    public function getParentCat($productCat)           //Query Parent category
+    {
+        $parentId = $productCat->parent_id;
+        if ($parentId != 0) {
+            return ProductCat::where('active', 1)->where('id', $parentId)->first();
+        }
     }
 }

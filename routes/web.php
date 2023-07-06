@@ -69,3 +69,5 @@ Route::middleware(['auth'])->group(function () {
 });
 
 Route::get('/', [App\Http\Controllers\MainController::class, 'index'])->name('main');
+#Product
+Route::get('danh-muc/{id}-{slug}.html', [App\Http\Controllers\ProductCatController::class, 'index'])->name('show.productCat');

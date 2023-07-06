@@ -15,6 +15,8 @@
                     <form method="POST">
                         <label for="name">Tiêu đề</label>
                         <input type="text" name="name" id="name" placeholder="Nhập tiêu đề">
+                         <label for="title">Slug ( Friendly_url )</label>
+                        <input type="text" name="slug" id="slug">
                         <label for="description">Mô tả ngắn</label>
                         <textarea name="description" id="description"></textarea>
                         {{-- <input type="text" name="slug" id="slug"> --}}

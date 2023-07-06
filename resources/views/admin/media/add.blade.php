@@ -26,7 +26,7 @@
                             <button type="button" name="btn-delete" url-delete="{{ route('Upload.delete') }}"id="deleteImage" style="display: none;">Xóa ảnh</button>
                             <label>Sản phẩm</label>
                             <select name="product_id" id ="product_category">
-                                <option value="">-- Chọn danh mục --</option>
+                                <option value="">-- Chọn sản phẩm --</option>
                                 @foreach ($product_id as $item)
                                     <option value="{{ $item->id }}">{{ $item->name }}</option>
                                 @endforeach

@@ -16,10 +16,10 @@ class MainController extends Controller
     public function index()
     {
         $data['title']= 'Vượng Store | Mua hàng online giá tốt';
-        $data['productCats' ] = $this->productCat->getFatherCat();
+        $data['fatherCats' ] = $this->productCat->getFatherCat();
         $data['products'] = $this->product->get();
         $data['allProductCats' ] = $this->productCat->getAllCat();
-        return view('home', $data);
+        return view('home.home', $data);
     }
 }
 

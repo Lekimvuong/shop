@@ -18,6 +18,7 @@ var ProductClass = function() {
         ele.productDesc = $('#desc');
         ele.productCat = $('#product-cat');
         ele.productActive = $('#active_product');
+        //ele.modal = $('.show_modal');
     }
     this.bindEvents = function() {
         createProduct();
@@ -25,6 +26,7 @@ var ProductClass = function() {
         deletethumb();
         drawPostData();
         removeRow();
+        //showModal();
     }
     var uploadThumb = function() {
         ele.thumb.on('change', function() {
@@ -46,7 +48,7 @@ var ProductClass = function() {
                 success: function(results) {
                     if (results.error == false) {
                         $.each(results.url, function(i, url) {
-                            $('#show_images').append('<div class="image_show" data-path="' + url + '"><input type="checkbox" name="delete_image" value="' + url + '" >Xóa</input><a href="' + url +
+                            $('#show_images').append('<div class="image_show" data-path="' + url + '"><div class="checkbox-container"><input type="checkbox" name="delete_image"value="' + url + '" ></div><a href="' + url +
                                 '" target="_blank">' + '<input type="hidden" name="image_name[]" value="' + results.name[i] + '" class="image_name"></input>' +
                                 '<img src="' + url + '" width="100px"></a><input type="hidden" name="thumb[]" value="' + url + '" class="thumb"></div>'
                             );
@@ -72,7 +74,7 @@ var ProductClass = function() {
             var $urlImage = [];
             var $url = $(this).attr('url-delete');
             $('input[name="delete_image"]:checked').each(function() {
-                $urlImage.push($(this).closest('.image_show').data('path'))
+                $urlImage.push($(this).val())
             });
             $.ajax({
                 url: $url,
@@ -110,12 +112,12 @@ var ProductClass = function() {
                 'cat_id': ele.productCat.val(),
                 'active': ele.productActive.val(),
                 'thumb': [],
-                'name_thumb': [],
+                'name_thumb': []
             }
             $("input[name='thumb[]']").each(function() {
                 params.thumb.push($(this).val());
             });
-            $("input[name='image_name']").each(function() {
+            $("input[name='image_name[]']").each(function() {
                 params.name_thumb.push($(this).val()); //CHỗ m đẩy giá trị input image_name ở mô
             });
             $.ajax({
@@ -162,17 +164,26 @@ var ProductClass = function() {
         })
     }
     var drawPostData = function() {
-        var postTable = ele.postTable.DataTable({
-            searching: true,
-            pagination: true,
-            pageLength: 7,
-            lengthChange: false,
-            info: true,
-            dom: "lrtip",
-            paging: true
-        });
-        ele.search.on('keyup', function(e) {
-            postTable.column(4).search(e.target.value).draw();
-        })
-    }
+            var postTable = ele.postTable.DataTable({
+                searching: true,
+                pagination: true,
+                pageLength: 7,
+                lengthChange: false,
+                info: true,
+                dom: "lrtip",
+                paging: true
+            });
+            ele.search.on('keyup', function(e) {
+                postTable.column(4).search(e.target.value).draw();
+            })
+        }
+        // var showModal = function() {
+        //     ele.modal.on('click', function() {
+        //         var dataPath = $(this).data('path');
+        //         var dataId = $(this).data('id');
+        //         $("#image_show").html('<img src="' + dataPath + '" width="100px"></a>')
+
+
+    //     })
+    // }
 }

@@ -21,7 +21,7 @@ class ProductHotComposer
         ->where('active', 1)
             ->select('id', 'name', 'price', 'price_sale')
             ->whereBetween('price_sale', [9000000, 30000000])
-            ->limit(6)
+            ->limit(16)
             ->orderByDesc('id')
             ->get();
         $view->with('products', $products);

@@ -76,7 +76,7 @@ var MediaClass = function() {
             paging: true
         });
         ele.search.on('keyup', function(e) {
-            postTable.column(3).search(e.target.value).draw();
+            postTable.column(4).search(e.target.value).draw();
         })
     }
     var removeRow = function() {

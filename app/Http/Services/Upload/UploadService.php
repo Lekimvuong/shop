@@ -59,7 +59,6 @@ class UploadService
                     $name = '(' . time() . ')' . '.' . $extension;
                     $name_image[] = $name;
                     $url[] = Cloudinary::upload($image->getRealPath())->getSecurePath();
-                    Session::put('image_urls', $url);
                 }
             }
             return array($name_image, $url);

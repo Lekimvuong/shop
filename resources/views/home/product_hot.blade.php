@@ -4,12 +4,17 @@
     </div>
     <div class="section-detail">
         <ul class="list-item">
+            @php
+            @endphp
             @foreach ($products as $product)
             <li>
                 <a href="/san-pham/{{$product->id}}-{{\Str::slug($product->name)}}.html" title="" class="thumb">
                     <img src="{{ $product->media[0]->thumb }}">
                 </a>
-                <a href="/san-pham/{{$product->id}}-{{\Str::slug($product->name)}}.html" title="" class="product-name">{{ $product->name }}</a>
+                <a href="/san-pham/{{$product->id}}-{{\Str::slug($product->name)}}.html" title="" style ="
+                    white-space: nowrap;
+                    overflow: hidden;
+                    text-overflow: ellipsis;" class="product-name">{{ $product->name }}</a>
                 <div class="price">
                     <span class="new">{{ \App\Helpers\Helper::currencyFormat($product->price_sale) }}</span>
                     <span class="old">{{ \App\Helpers\Helper::currencyFormat($product->price) }}</span>
@@ -20,6 +25,6 @@
                 </div>
             </li>
             @endforeach
-        </ul>Của m hiện tại giống r đíng ko.,  đúng
+        </ul>
     </div>
 </div>

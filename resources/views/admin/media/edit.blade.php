@@ -37,14 +37,6 @@
                                 <option value="{{ $item->id }}"{{$media->product_id==$item->id ? 'selected' : ''}}>{{ $item->name }}</option>
                                 @endforeach
                             </select>
-                            {{-- <label for="title">Kích hoạt</label>
-                            <div class="radio-check">
-                                <input type="radio" id="active" class="radio-check-1" name="active" value="1"> Có
-                            </div>
-                            <div class="radio-check">
-                                <input type="radio" id="no_active" class="radio-check-2" value="0" name="active">
-                                Không
-                            </div> --}}
                             <button type="submit" name="btn-submit" id="btn-submit">Cập nhật</button>
                         </form>
                     </div>

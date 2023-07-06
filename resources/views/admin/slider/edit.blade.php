@@ -29,11 +29,12 @@
                             <div id="image_show">
                                 <a href="{{$slider->thumb}}" target ="blank">
                                     <img src="{{$slider->thumb}}" width ="100px" id = "urlImage">
+                                    <input type="hidden" name="thumb" id="thumb" value ="{{$slider->thumb}}">
+                                    <input type="hidden" name="name_image" id="name_image">
                                 </a>
                             </div>
-                            <input type="hidden" name="thumb" id="thumb" value ="{{$slider->thumb}}">
-                            <input type="hidden" name="name_image" id="name_image">
                             <input type="hidden" name="oldName" id ="oldThumb" value ="{{$slider->thumb}}">
+                            <button type="button" name="btn-delete" url-delete="{{ route('Upload.delete') }}"id="deleteImage" style="display: none;">Xóa ảnh</button>
                         </div>
                         <label>Trạng thái</label>
                         <select name="active">

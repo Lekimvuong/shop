@@ -91,7 +91,7 @@ class Helper
             if ($item->parent_id == $parent_id) {
                 $html .= '
                     <li>
-                        <a href="/danh-muc/' . $item->id . '-' . Str::slug($item->name, '-') . ' .html">
+                        <a href="'.route('show.productCat', ['id' =>  $item->id, 'slug'=>$item->slug]).'">
                             '. $item->name .'
                         </a>';
                 unset($productCat[$key]);
@@ -120,13 +120,14 @@ class Helper
         $fmt = new NumberFormatter( 'de_DE', NumberFormatter::CURRENCY );
         return $fmt->formatCurrency($money, "VND")."\n";
     }
-    public static function getArrayCatId($productCat, $id)                //Lấy ra mảng cat_id con   
+    public static function getArrayCatId($productCats, $id)                //Lấy ra mảng cat_id con   
     {
         $array_id = [];
-        foreach($productCat as $item){
+        foreach($productCats as $item){
             $array_id = $item->where('parent_id', '<>', '0')->where('parent_id', $id)->pluck('id')->toArray();
         }
-        
         return $array_id;
+        
     }
+    
 }

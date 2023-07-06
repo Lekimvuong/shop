@@ -39,7 +39,6 @@ class ProductController extends Controller
             'params.content' => 'required',
             'params.cat_id' => 'required',
             'params.active' => 'required',
-            'params.thumb' => 'required'
         ];
         $validator = Validator::make($request->all(), $rules);
         if ($validator->fails()) {

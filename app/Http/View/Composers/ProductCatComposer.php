@@ -18,7 +18,7 @@ class ProductCatComposer
     
     public function compose(View $view)
     {
-        $productCat = productCat::select('id', 'name', 'parent_id')->where('active', 1)->get();
+        $productCat = productCat::select('id', 'name', 'parent_id', 'slug')->where('active', 1)->get();
         $view->with('productCat', $productCat);
     }
 }

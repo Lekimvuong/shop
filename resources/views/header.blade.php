@@ -49,7 +49,7 @@
                     </div>
                     <div id="head-body" class="clearfix">
                         <div class="wp-inner">
-                            <a href="?page=home" title="" id="logo" class="fl-left"><img src="template/public/images/logo.png"/></a>
+                            <a href="{{ route('main') }}" title="" id="logo" class="fl-left"><img src="/template/public/images/logo.png"/></a>
                             <div id="search-wp" class="fl-left">
                                 <form method="POST" action="">
                                     <input type="text" name="s" id="s" placeholder="Nhập từ khóa tìm kiếm tại đây!">

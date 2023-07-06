@@ -13,6 +13,34 @@ class ProductService
     {
         return productCat::get();
     }
+
+    public function filters($filters = []) { //function này để có thể dùng chung. sau này có query thêm điều kiện nào cứ viết thêm vào function này
+        $query = Product::query();// Cố gắng viết kiểu flexible như này.
+
+        if(!empty($filters['relations'])) {
+            $query = $query->with($filters['relations']);
+        }
+
+        if(isset($filters['status'])) {
+            $status = intval($filters['status']);
+            $query = $query->where('status', $status);
+        }
+
+        if (!empty($filters['orderBy'])) {
+            $query = $query->orderBy($filters['orderBy']);
+        }
+
+        if (!empty($filters['orderByDesc'])) {
+            $query = $query->orderByDesc($filters['orderByDesc']);
+        }
+
+        if (!empty($filters['perPage'])) {
+            $perPage = intval($filters['perPage']);
+            $data = $query->paginate($perPage);
+        } else {
+            $data = $query->get();
+        }
+    }
     protected function isValidPriceCreate($request)
     {
         if (
@@ -60,13 +88,13 @@ class ProductService
         }
            return $product;
     }
-    public function get()
-    {
-        return Product::with('product_cat')->orderByDesc('id')->paginate(10);
-    }
     public function getMedia()
     {
         return Media::get();
+    }
+    public function get()
+    {
+        return Product::get();
     }
     public function update($request, $product)
     {
@@ -90,8 +118,12 @@ class ProductService
     public function addThumb($product, $request)
     {
         $params = $request->input('params');
+        $thumb = $request->input('params.thumb');
         $productId = $product-> id;
-        if ($params) {
+        if ($thumb=='') {
+           return true;
+        }
+        else{
             foreach ($params['thumb'] as $key => $item) {
                 Media::create([
                     'name' => (string) $params['name_thumb'][$key],
@@ -101,7 +133,7 @@ class ProductService
             }
             return true;
         }
-        return false;
+         
     }
     public function addThumbupdate($product, $thumbs, $nameThumb)
     {
