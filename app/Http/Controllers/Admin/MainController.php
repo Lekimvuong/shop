@@ -8,6 +8,7 @@ class MainController extends Controller
 {
     public function index()
     {
-        return view('admin.home', ['title' => 'Trang quản trị']);
+        $data['title'] = 'Trang quản trị';
+        return view('admin.home', $data);
     }
 }

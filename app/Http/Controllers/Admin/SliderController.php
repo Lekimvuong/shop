@@ -18,8 +18,8 @@ class SliderController extends Controller
     }
     public function create()
     {
-        return view('admin.slider.add', ['title' => 'Thêm mới slider',
-        ]);
+        $data['title'] = 'Thêm mới slider';
+        return view('admin.slider.add', $data);
     }
     public function store(Request $request)
     {
@@ -49,9 +49,9 @@ class SliderController extends Controller
 
     public function index()
     {
-        return view('admin.slider.list', ['title' => 'Danh sách slider',
-            'sliders' => $this->slider->get(),
-        ]);
+        $data['title'] = 'Danh sách slider';
+        $data['sliders'] = $this->slider->get();
+        return view('admin.slider.list', $data);
 
     }
     public function show(Slider $slider)

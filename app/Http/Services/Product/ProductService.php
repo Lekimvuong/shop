@@ -14,33 +14,32 @@ class ProductService
         return productCat::get();
     }
 
-    public function filters($filters = []) { //function này để có thể dùng chung. sau này có query thêm điều kiện nào cứ viết thêm vào function này
-        $query = Product::query();// Cố gắng viết kiểu flexible như này.
-
-        if(!empty($filters['relations'])) {
-            $query = $query->with($filters['relations']);
+    public function filters($filters = []) {
+        $query = Product::query();
+    
+        if (!empty($filters['relations'])) {
+            $query->with($filters['relations']);
         }
-
-        if(isset($filters['status'])) {
+        if (isset($filters['status'])) {
             $status = intval($filters['status']);
-            $query = $query->where('status', $status);
+            $query->where('status', $status);
         }
-
+    
         if (!empty($filters['orderBy'])) {
-            $query = $query->orderBy($filters['orderBy']);
+            $query->orderBy($filters['orderBy']);
         }
-
+    
         if (!empty($filters['orderByDesc'])) {
-            $query = $query->orderByDesc($filters['orderByDesc']);
+            $query->orderByDesc($filters['orderByDesc']);
         }
-
+    
         if (!empty($filters['perPage'])) {
             $perPage = intval($filters['perPage']);
-            $data = $query->paginate($perPage);
-        } else {
-            $data = $query->get();
+            return $query->paginate($perPage);
         }
+        return $query->get();
     }
+    
     protected function isValidPriceCreate($request)
     {
         if (

@@ -16,9 +16,9 @@ class PostCatController extends Controller
     }
     public function create()
     {
-        return view('admin.postCat.add', ['title' => 'Thêm mới bài viết',
-            'postCats' => $this->postCatService->getParent(),
-        ]);
+        $data['title'] = 'Thêm mới bài viết';
+        $data['postCats'] = $this->postCatService->getParent();
+        return view('admin.postCat.add', $data);
 
     }
     public function store(CreateFormRequest $request)
@@ -29,23 +29,19 @@ class PostCatController extends Controller
     }
     public function index()
     {
-        $postCats = $this->postCatService->getAll();
-        return view('admin.postCat.list', ['title' => 'Danh mục bài viết',
-            'postCats' => $postCats
-        ]);
+        $data['title'] = 'Danh mục bài viết';
+        $data['postCats'] = $this->postCatService->getAll();
+        return view('admin.postCat.list', $data);
     }
     public function show(PostCat $postCat)
     {
-
-        return view('admin.postCat.edit',
-            ['title' => 'Chỉnh sửa danh mục bài viết' . $postCat->name, //$post này chính là bản ghi cần lấy để edit
-                'postCat' => $postCat,
-                'postCats' => $this->postCatService->getParent(),
-            ]);
+        $data['title'] = 'Chỉnh sửa danh mục bài viết -' . ' '.$postCat->name;
+        $data['postCat'] = $postCat;
+        $data['postCats'] = $this->postCatService->getParent();
+        return view('admin.postCat.edit', $data);
     }
     public function update(PostCat $postCat, CreateFormRequest $request)
     {
-
         $this->postCatService->update($request, $postCat);
         return redirect()->route('postCats.list');
     }

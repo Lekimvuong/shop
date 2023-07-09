@@ -17,16 +17,16 @@ class UploadController extends Controller
     }
     public function create(Request $request)
     {
-        return view('admin.media.add', ['title' => 'Thêm mới media',
-            'product_id' => $this->upload->getProductId(),
-        ]);
+        $data['title'] = 'Thêm mới media';
+        $data['product_id'] = $this->upload->getProductId();
+        return view('admin.media.add', $data);
 
     }
        public function index()
     {
-        return view('admin.media.list', ['title' => 'Danh sách media',
-        'Medias' => $this->upload->get()
-        ]);
+        $data['title'] = 'Danh sách media';
+        $data['Medias'] = $this->upload->get();
+        return view('admin.media.list', $data);
 
     }
 

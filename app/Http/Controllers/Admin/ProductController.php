@@ -17,16 +17,16 @@ class ProductController extends Controller
     }
     public function index()
     {
-        return view('admin.product.list', ['title' => 'Danh sách sản phẩm',
-            'products' => $this->productService->get()]);
+        $data['title'] = 'Danh sách sản phẩm';
+        $data['products'] = $this->productService->get();
+        return view('admin.product.list', $data);
     }
 
     public function create()
     {
-        return view('admin.product.add', ['title' => 'Thêm mới sản phẩm',
-            'productCats' => $this->productService->getproductCats(),
-
-        ]);
+        $data['title'] = 'Thêm mới sản phẩm';
+        $data['productCats'] = $this->productService->getproductCats();
+        return view('admin.product.add', $data);
     }
     public function store(Request $request)
     {

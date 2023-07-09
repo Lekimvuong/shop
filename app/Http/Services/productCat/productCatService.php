@@ -1,6 +1,7 @@
 <?php
 namespace App\http\Services\productCat;
 use App\Models\productCat;
+use App\Models\Product;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Log;
 class productCatService{
@@ -70,14 +71,23 @@ class productCatService{
     {
         return ProductCat::where('id', $id)->where('active', 1)->firstOrFail();
     }
-    public function getproduct($productCat)
+    public function getProduct($productCat)     //Query list products theo category    
     {
-        return $productCat->products()->select('id','name','price', 'price_sale')->where('active', 1)
-        ->orderbyDesc('id')
-        ->paginate(12);
+        if ($productCat->parent_id == 0) {
+            $cats = $productCat->childrens;
+            $catId = array();
+            foreach ($cats as $cat) {
+                $catId[] = $cat->id;
+            }
+            $products = Product::with('media')->whereIn('cat_id', $catId)->where('active', 1);
+            return $products;
+           
+        } else {
+            $products = $productCat->products()->with('media')->where('active', 1);
+            return $products;
+        }
     }
-
-    public function getParentCat($productCat)           //Query Parent category
+    public function getChildrenCat($productCat)       //Lấy danh mục sản phẩm con
     {
         $parentId = $productCat->parent_id;
         if ($parentId != 0) {

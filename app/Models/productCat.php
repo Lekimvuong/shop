@@ -21,4 +21,8 @@ class productCat extends Model
     {
         return $this->hasMany(Product::class, 'cat_id', 'id');
     }
+    public function childrens()
+    {
+        return $this->hasMany(self::class, 'parent_id');
+    }
 }

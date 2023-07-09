@@ -17,16 +17,15 @@ class ProductCatController extends Controller
     }
     public function index()
     {
-        $productCats = $this->productCatService->getAll();
-        return view('admin.productCat.list', ['title' => 'Danh mục sản phẩm',
-            'productCats' => $productCats
-        ]);
+        $data['title'] = 'Danh mục sản phẩm';
+        $data['productCats'] = $this->productCatService->getAll();
+        return view('admin.productCat.list', $data);
     }
     public function create()
     {
-        return view('admin.productCat.add', ['title' => 'Danh mục sản phẩm',
-        'productCats' => $this->productCatService->getParent(),
-        ]);
+        $data['title'] = 'Thêm mới danh mục sản phẩm';
+        $data['productCats'] = $this->productCatService->getParent();
+        return view('admin.productCat.add', $data);
     }
     public function store(ProductCatRequest $request)
     {
@@ -49,11 +48,10 @@ class ProductCatController extends Controller
     }
     public function show(productCat $productCat)
     {
-        return view('admin.productCat.edit',
-            ['title' => 'Chỉnh sửa danh mục sản phẩm '.$productCat->name,
-                'productCat' => $productCat,
-                'productCats' => $this->productCatService->getParent()
-            ]);
+        $data['title'] = 'Chỉnh sửa danh mục sản phẩm '.$productCat->name;
+        $data['productCat'] = $productCat;
+        $data['productCats']= $this->productCatService->getParent();
+        return view('admin.productCat.edit',$data);
     }
     public function update(productCat $productCat, ProductCatRequest $request)
     {
