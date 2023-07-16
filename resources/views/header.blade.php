@@ -17,6 +17,9 @@
         <script src="{{ asset('template/public/js/elevatezoom-master/jquery.elevatezoom.js') }}" type="text/javascript"></script>
         <script src="{{ asset('template/public/js/bootstrap/bootstrap.min.js') }}" type="text/javascript"></script>
         <script src="{{ asset('template/public/js/carousel/owl.carousel.js') }}" type="text/javascript"></script>
+        <script src="{{ asset('template/public/js/loadingoverlay.min.js') }}" type="text/javascript"></script>
+        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+        <script src="{{ asset('template/admin/publics/js/base.app.js') }}" type="text/javascript"></script>
         <script src="{{ asset('template/public/js/main.js') }}" type="text/javascript"></script>
     </head>
     <body>

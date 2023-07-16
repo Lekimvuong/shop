@@ -4,28 +4,36 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Product\ProductRequest;
+use App\Http\Services\ProductCat\ProductCatService;
 use App\http\Services\Product\ProductService;
+use App\http\Services\Upload\UploadService;
 use App\Models\Product;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
+
 class ProductController extends Controller
 {
     protected $productService;
-    public function __construct(ProductService $productService)
+    protected $productCatService;
+    protected $uploadService;
+    public function __construct(ProductService $productService, ProductCatService $productCatService, UploadService $uploadService)
     {
         $this->productService = $productService;
+        $this->productCatService = $productCatService;
+        $this->uploadService = $uploadService;
+
     }
     public function index()
     {
         $data['title'] = 'Danh sách sản phẩm';
-        $data['products'] = $this->productService->get();
+        $data['products'] = $this->productService->filters(['orderBy' => 'id']);
         return view('admin.product.list', $data);
     }
 
     public function create()
     {
         $data['title'] = 'Thêm mới sản phẩm';
-        $data['productCats'] = $this->productService->getproductCats();
+        $data['productCats'] = $this->productCatService->filters(['orderBy' => 'id']);
         return view('admin.product.add', $data);
     }
     public function store(Request $request)
@@ -42,23 +50,23 @@ class ProductController extends Controller
         ];
         $validator = Validator::make($request->all(), $rules);
         if ($validator->fails()) {
-            return response()->json([       
+            return response()->json([
                 'success' => false,
             ]);
         }
         $product = $this->productService->insert($request);
-       $this->productService->addThumb($product, $request);
-        return response()->json([       
+        $this->productService->addThumb($product, $request);
+        return response()->json([
             'success' => true,
         ]);
     }
-  
+
     public function show(Product $product)
     {
         $data['title'] = 'Chỉnh sửa thông tin sản phẩm';
         $data['product'] = $product;
-        $data['productCats'] = $this->productService->getproductCats();
-        $data['Medias'] = $this->productService->getMedia();
+        $data['productCats'] = $this->productCatService->filters(['orderBy' => 'id']);
+        $data['Medias'] = $this->uploadService->filters(['orderBy' => 'id']);
         return view('admin.product.edit', $data);
     }
 
@@ -75,10 +83,6 @@ class ProductController extends Controller
         return redirect()->back();
 
     }
-
-    /**
-     * Remove the specified resource from storage.
-     */
     public function destroy(Request $request)
     {
         $result = $this->productService->destroy($request);

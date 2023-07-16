@@ -1,35 +1,36 @@
 <?php
 
 namespace App\Http\Controllers\Admin;
+
 use App\Http\Controllers\Controller;
 use App\Http\Requests\ProductCat\ProductCatRequest;
 use App\http\Services\productCat\productCatService;
-use Illuminate\Http\Request;
 use App\Models\productCat;
-class ProductCatController extends Controller
+use Illuminate\Http\Request;
 
+class ProductCatController extends Controller
 {
-    
+
     protected $productCatService; // Tạo thuộc tính cho class
     public function __construct(productCatService $productCatService)
-    { 
+    {
         $this->productCatService = $productCatService;
     }
     public function index()
     {
         $data['title'] = 'Danh mục sản phẩm';
-        $data['productCats'] = $this->productCatService->getAll();
+        $data['productCats'] = $this->productCatService->filters(['orderBy' => 'id']);
         return view('admin.productCat.list', $data);
     }
     public function create()
     {
         $data['title'] = 'Thêm mới danh mục sản phẩm';
-        $data['productCats'] = $this->productCatService->getParent();
+        $data['productCats'] = $this->productCatService->filters(['parent_id' => 0]);
         return view('admin.productCat.add', $data);
     }
     public function store(ProductCatRequest $request)
     {
-        $result = $this->productCatService->create($request);
+        $this->productCatService->create($request);
         return redirect()->back();
 
     }
@@ -48,10 +49,10 @@ class ProductCatController extends Controller
     }
     public function show(productCat $productCat)
     {
-        $data['title'] = 'Chỉnh sửa danh mục sản phẩm '.$productCat->name;
+        $data['title'] = 'Chỉnh sửa danh mục sản phẩm ' . $productCat->name;
         $data['productCat'] = $productCat;
-        $data['productCats']= $this->productCatService->getParent();
-        return view('admin.productCat.edit',$data);
+        $data['productCats'] = $this->productCatService->filters(['parent_id' => 0]);
+        return view('admin.productCat.edit', $data);
     }
     public function update(productCat $productCat, ProductCatRequest $request)
     {

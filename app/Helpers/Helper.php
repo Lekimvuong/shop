@@ -91,7 +91,7 @@ class Helper
             if ($item->parent_id == $parent_id) {
                 $html .= '
                     <li>
-                        <a href="'.route('show.productCat', ['id' =>  $item->id, 'slug'=>$item->slug]).'">
+                        <a href="'.route('productCat.index', ['id' =>  $item->id, 'slug'=>$item->slug]).'">
                             '. $item->name .'
                         </a>';
                 unset($productCat[$key]);

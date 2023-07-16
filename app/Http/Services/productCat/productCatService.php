@@ -1,20 +1,9 @@
 <?php
 namespace App\http\Services\productCat;
 use App\Models\productCat;
-use App\Models\Product;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Log;
 class productCatService{
-    public function getParent()
-    {
-        return productCat::where('parent_id', 0)->get();
-    }
-    public function getAll()
-    {
-        $productCats = ProductCat::get();
-        return $productCats;
-
-    }
     public function create($request)
     {
         try {
@@ -57,41 +46,41 @@ class productCatService{
         }
        }
     }
-    public function getFatherCat()                  //get những danh mục sản phẩm chính
-    {
-        return ProductCat::where('active', 1)
-        ->where('parent_id', 0)
-        ->get();
-    }
-    public function getAllCat()             //get tất cả danh mục sản phẩm
-    {
-        return ProductCat::where('active', 1)->get();
-    }
-    public function getId($id)
-    {
-        return ProductCat::where('id', $id)->where('active', 1)->firstOrFail();
-    }
-    public function getProduct($productCat)     //Query list products theo category    
-    {
-        if ($productCat->parent_id == 0) {
-            $cats = $productCat->childrens;
-            $catId = array();
-            foreach ($cats as $cat) {
-                $catId[] = $cat->id;
-            }
-            $products = Product::with('media')->whereIn('cat_id', $catId)->where('active', 1);
-            return $products;
-           
-        } else {
-            $products = $productCat->products()->with('media')->where('active', 1);
-            return $products;
-        }
-    }
-    public function getChildrenCat($productCat)       //Lấy danh mục sản phẩm con
+    public function getParentCat($productCat)       //Lấy danh mục sản phẩm cha
     {
         $parentId = $productCat->parent_id;
         if ($parentId != 0) {
             return ProductCat::where('active', 1)->where('id', $parentId)->first();
         }
+    }
+
+    public function filters($filters = []) {
+        $query = ProductCat::query();
+    
+        if (!empty($filters['relations'])) {
+            $query->with($filters['relations']);
+        }
+        if (isset($filters['parent_id'])) {
+            $parentID = intval($filters['parent_id']);
+            $query->where('parent_id', $parentID);
+        }
+        if (isset($filters['active'])) {
+            $active = intval($filters['active']);
+            $query->where('active', $active);
+        }
+        if (!empty($filters['orderBy'])) {
+            $query->orderBy($filters['orderBy']);
+        }
+        if (!empty($filters['orderByDesc'])) {
+            $query->orderByDesc($filters['orderByDesc']);
+        }
+        if (!empty($filters['perPage'])) {
+            $perPage = intval($filters['perPage']);
+            return $query->paginate($perPage);
+        }
+        if (isset($filters['id'])) {
+            return $query->where('id', $filters['id'])->first();
+        }
+        return $query->get();
     }
 }

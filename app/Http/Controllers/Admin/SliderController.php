@@ -46,7 +46,6 @@ class SliderController extends Controller
         ]);
 
     }
-
     public function index()
     {
         $data['title'] = 'Danh sách slider';

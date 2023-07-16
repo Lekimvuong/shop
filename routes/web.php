@@ -15,7 +15,6 @@ Route::post('admin/users/login/store', [LoginController::class, 'store']);
 Route::middleware(['auth'])->group(function () {
     Route::get('admin/users/logout', [LoginController::class, 'logout'])->name('logout');
     Route::prefix('admin')->group(function () {
-        Route::get('main', [MainController::class, 'index']);
         Route::get('/', [MainController::class, 'index'])->name('admin');
 
         //PostCat
@@ -70,4 +69,7 @@ Route::middleware(['auth'])->group(function () {
 
 Route::get('/', [App\Http\Controllers\MainController::class, 'index'])->name('main');
 #Product
-Route::get('danh-muc/{id}-{slug}.html', [App\Http\Controllers\ProductCatController::class, 'index'])->name('show.productCat');
+Route::prefix('danh-muc')->group(function () {
+    Route::get('/{id}-{slug}.html', [App\Http\Controllers\ProductCatController::class, 'index'])->name('productCat.index');
+    Route::get('getData', [App\Http\Controllers\ProductCatController::class, 'getData'])->name('productCat.getData');
+});

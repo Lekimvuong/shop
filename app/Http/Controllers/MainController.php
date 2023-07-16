@@ -16,9 +16,9 @@ class MainController extends Controller
     public function index()
     {
         $data['title']= 'Vượng Store | Mua hàng online giá tốt';
-        $data['fatherCats' ] = $this->productCat->getFatherCat();
+        $data['fatherCats' ] = $this->productCat->filters(['parent_id' => 0, 'active' => 1]);
         $data['products'] = $this->product->get();
-        $data['allProductCats' ] = $this->productCat->getAllCat();
+        $data['allProductCats' ] = $this->productCat->filters(['active' => 1]);
         return view('home.home', $data);
     }
 }

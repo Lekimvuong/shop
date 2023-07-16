@@ -3,43 +3,81 @@ namespace App\http\Services\Product;
 
 use App\Models\Media;
 use App\Models\Product;
-use App\Models\productCat;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Session;
 
 class ProductService
 {
-    public function getproductCats()
-    {
-        return productCat::get();
-    }
 
-    public function filters($filters = []) {
+    public function applyFilters($sortBy, $price_sort, $categoryIds)
+    {
+        $orderBy = '';
+        $orderByDesc = '';
+        $priceRanges = [
+            1 => [0, 1000000],
+            2 => [1000000, 5000000],
+            3 => [5000000, 10000000],
+            4 => [10000000, 20000000],
+            5 => [20000000, PHP_INT_MAX], // Sử dụng PHP_INT_MAX để biểu thị giá trị vô cùng lớn
+        ];
+        if (isset($priceRanges[$price_sort])) {
+            $products = $this->filters([
+                'status' => 1,
+                'categoryIds' => $categoryIds,
+                'price_sale' => $priceRanges[$price_sort],
+                'perPage' => 20,
+            ]);
+        } else {
+            if ($sortBy == 'a-z') {
+                $orderBy = 'name';
+            } elseif ($sortBy == 'z-a') {
+                $orderByDesc = 'name';
+            } elseif ($sortBy == 'asc') {
+                $orderBy = 'price_sale';
+            } elseif ($sortBy == 'desc') {
+                $orderByDesc = 'price_sale';
+            }
+            $products = $this->filters([
+                'status' => 1,
+                'categoryIds' => $categoryIds,
+                'orderBy' => $orderBy,
+                'orderByDesc' => $orderByDesc,
+                'perPage' => 20,
+            ]);
+        }
+
+        return $products;
+    }
+    public function filters($filters = [])
+    {
         $query = Product::query();
-    
         if (!empty($filters['relations'])) {
             $query->with($filters['relations']);
         }
         if (isset($filters['status'])) {
             $status = intval($filters['status']);
-            $query->where('status', $status);
+            $query->where('active', $status);
         }
-    
+
+        if (!empty($filters['categoryIds'])) {
+            $query = $query->whereIn('cat_id', $filters['categoryIds']);
+        }
+        if (!empty($filters['price_sale'])) {
+            $query = $query->whereBetween('price_sale', $filters['price_sale']);
+        }
         if (!empty($filters['orderBy'])) {
             $query->orderBy($filters['orderBy']);
         }
-    
+
         if (!empty($filters['orderByDesc'])) {
             $query->orderByDesc($filters['orderByDesc']);
         }
-    
         if (!empty($filters['perPage'])) {
             $perPage = intval($filters['perPage']);
             return $query->paginate($perPage);
         }
         return $query->get();
     }
-    
     protected function isValidPriceCreate($request)
     {
         if (
@@ -74,26 +112,18 @@ class ProductService
             return false;
         }
         if ($params) {
-             $product =  Product::create([
-                    'name' => (string) $params['name'],
-                    'code' => (string) $params['code'],
-                    'price' => (int) $params['price'],
-                    'price_sale'=> (int) $params['price_sale'],
-                    'description'=>(string)$params['description'],
-                    'content'=>(string)$params['content'],
-                    'cat_id'=>(int) $params['cat_id'],
-                    'active'=>(int) $params['active'],
-                ]);
+            $product = Product::create([
+                'name' => (string) $params['name'],
+                'code' => (string) $params['code'],
+                'price' => (int) $params['price'],
+                'price_sale' => (int) $params['price_sale'],
+                'description' => (string) $params['description'],
+                'content' => (string) $params['content'],
+                'cat_id' => (int) $params['cat_id'],
+                'active' => (int) $params['active'],
+            ]);
         }
-           return $product;
-    }
-    public function getMedia()
-    {
-        return Media::get();
-    }
-    public function get()
-    {
-        return Product::get();
+        return $product;
     }
     public function update($request, $product)
     {
@@ -118,11 +148,10 @@ class ProductService
     {
         $params = $request->input('params');
         $thumb = $request->input('params.thumb');
-        $productId = $product-> id;
-        if ($thumb=='') {
-           return true;
-        }
-        else{
+        $productId = $product->id;
+        if ($thumb == '') {
+            return true;
+        } else {
             foreach ($params['thumb'] as $key => $item) {
                 Media::create([
                     'name' => (string) $params['name_thumb'][$key],
@@ -132,7 +161,7 @@ class ProductService
             }
             return true;
         }
-         
+
     }
     public function addThumbupdate($product, $thumbs, $nameThumb)
     {

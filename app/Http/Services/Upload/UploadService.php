@@ -67,14 +67,6 @@ class UploadService
         }
 
     }
-    public function getProductId()
-    {
-        return Product::get();
-    }
-    public function get()
-    {
-        return Media::with('cat_id')->orderByDesc('id')->get();
-    }
     public function insert($request)
     {
         $params = $request->input('params');
@@ -141,5 +133,24 @@ class UploadService
             return true;
         }
         return false;
+    }
+
+    public function filters($filters = []) {
+        $query = Media::query();
+    
+        if (!empty($filters['relations'])) {
+            $query->with($filters['relations']);
+        }
+        if (!empty($filters['orderBy'])) {
+            $query->orderBy($filters['orderBy']);
+        }
+        if (!empty($filters['orderByDesc'])) {
+            $query->orderByDesc($filters['orderByDesc']);
+        }
+        if (!empty($filters['perPage'])) {
+            $perPage = intval($filters['perPage']);
+            return $query->paginate($perPage);
+        }
+        return $query->get();
     }
 }

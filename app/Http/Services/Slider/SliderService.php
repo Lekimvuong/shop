@@ -56,4 +56,6 @@ class SliderService
         }
         return false;
     }
+
+    
 }
