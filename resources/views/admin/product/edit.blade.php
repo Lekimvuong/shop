@@ -23,7 +23,7 @@
                             <label for="price_sale">Giá sale</label>
                             <input type="text" name="price_sale" value="{{ $product->price_sale }}"id="price_sale">
                             <label for="description">Mô tả ngắn</label>
-                            <textarea name="description" id="desc">{{ $product->description }}</textarea>
+                            <textarea name="description" id="desc" class ="ckeditor">{{ $product->description }}</textarea>
                             <label for="content">Chi tiết</label>
                             <textarea name="content" id="desc" class="ckeditor">{{ $product->content }}</textarea>
                             <label>Hình ảnh</label>

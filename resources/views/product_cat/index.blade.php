@@ -11,11 +11,11 @@
                     </li>
                     @if ($parentCat)
                     <li>
-                        <a href="" title="">{{ $parentCat->name }}</a>
+                        <a href="{{route('productCat.index', ['id' =>  $parentCat->id, 'slug'=>$parentCat->slug])}}" title="">{{ $parentCat->name }}</a>
                     </li>
                     @endif
                     <li>
-                        <a href="" title="">{{ $productCat->name }}</a>
+                        <a href="{{route('productCat.index', ['id' =>  $productCat->id, 'slug'=>$productCat->slug])}}" title="">{{ $productCat->name }}</a>
                     </li>
                 </ul>
             </div>
@@ -44,6 +44,11 @@
                     {{-- Load sản phẩm ở đây --}}
                 </div>
             </div>
+            {{-- <div class="section" id="paging-wp">
+                <div class="section-detail">
+                    <button id="load-more">Load more</button>
+                </div>
+            </div> --}}
         </div>
         <div class="sidebar fl-left">
             @include('home.productCat')
@@ -82,39 +87,7 @@
                                 </tr>
                             </tbody>
                         </table>
-                        {{-- <table>
-                            <thead>
-                                <tr>
-                                    <td colspan="2">Hãng</td>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td><input type="radio" name="r-brand"></td>
-                                    <td>Acer</td>
-                                </tr>
-                                <tr>
-                                    <td><input type="radio" name="r-brand"></td>
-                                    <td>Apple</td>
-                                </tr>
-                                <tr>
-                                    <td><input type="radio" name="r-brand"></td>
-                                    <td>Hp</td>
-                                </tr>
-                                <tr>
-                                    <td><input type="radio" name="r-brand"></td>
-                                    <td>Lenovo</td>
-                                </tr>
-                                <tr>
-                                    <td><input type="radio" name="r-brand"></td>
-                                    <td>Samsung</td>
-                                </tr>
-                                <tr>
-                                    <td><input type="radio" name="r-brand"></td>
-                                    <td>Toshiba</td>
-                                </tr>
-                            </tbody>
-                        </table> --}}
+
                         <table>
                             <thead>
                                 <tr>

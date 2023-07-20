@@ -6,6 +6,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link href="{{ asset('template/public/css/bootstrap/bootstrap-theme.min.css') }}" rel="stylesheet" type="text/css"/>
         <link href="{{ asset('template/public/css/bootstrap/bootstrap.min.css" rel="stylesheet') }}" type="text/css"/>
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
         <link href="{{ asset('template/public/reset.css') }}" rel="stylesheet" type="text/css"/>
         <link href="{{ asset('template/public/css/carousel/owl.carousel.css') }}" rel="stylesheet" type="text/css"/>
         <link href="{{ asset('template/public/css/carousel/owl.theme.css') }}" rel="stylesheet" type="text/css"/>

@@ -4,7 +4,6 @@ var productCatClass = function() {
     var ele = {};
     this.run = function(opt) {
         options = opt
-        categoryId = options.categoryId
         categoryIds = options.categoryIds
 
         this.init();
@@ -13,19 +12,23 @@ var productCatClass = function() {
 
     this.init = function() {
         ele.productSort = $('#sort_by');
-        ele.products = $('#products_list')
-        ele.priceSort = $('input[name="r-price"]')
+        ele.products = $('#products_list');
+        ele.priceSort = $('input[name="r-price"]');
+        ele.loadMore = $('#load-more');
         loadData()
     }
 
     this.bindEvents = function() {
-        productSort();
-        productSort2();
+        handleSort();
+        handlePriceFilter();
+        handlePaging()
     }
 
     var getParam = function() {
         let params = {
             categoryIds: categoryIds,
+            priceSort: $('input[name="r-price"]:checked').val(),
+            url: ele.productSort.val()
         }
         return params
     }
@@ -41,40 +44,29 @@ var productCatClass = function() {
         $.app.ajax(window.location.origin + '/danh-muc/getData', 'GET', params, target, null, _cb)
     }
 
-    var productSort = function() {
+    var handleSort = function() {
         ele.productSort.on('change', function() {
-            var url = $(this).val();
-            var params = getParam()
-            $.ajax({
-                type: 'GET',
-                data: { 'url': url, 'categoryIds': params.categoryIds },
-                url: '/danh-muc/getData',
-                success: function(results) {
-                    var data = results.data
-                    loadproduct(data)
-                }
-            });
+            loadData()
         })
     }
-    var productSort2 = function() {
+    var handlePriceFilter = function() {
         ele.priceSort.on('change', function() {
-            var priceSort = $('input[name="r-price"]:checked').val();
-            var params = getParam()
-            console.log(priceSort);
-            $.ajax({
-                url: '/danh-muc/getData',
-                type: 'GET',
-                data: {
-                    'priceSort': priceSort,
-                    'categoryIds': params.categoryIds
-                },
-                success: function(results) {
-                    var data = results.data
-                    loadproduct(data)
-                }
-            })
+            loadData()
         })
     }
+    var handlePaging = function() {
+        $(document).on('click', '.page-link-active', function(e) {
+            e.preventDefault()
+            let url = $(this).attr('href')
+            var target = ele.products
+            var _cb = function(rs) {
+                var data = rs.data
+                loadproduct(data)
+            }
+            $.app.ajax(url, 'GET', {}, target, null, _cb)
+        })
+    }
+
     var loadproduct = function(data) {
         ele.products.html(data.htmlProductLists);
     }

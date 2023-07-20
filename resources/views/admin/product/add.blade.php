@@ -23,7 +23,7 @@
                             <label for="price_sale">Giá sale</label>
                             <input type="text" name="price_sale" value="{{ old('price_sale') }}"id="price_sale">
                             <label for="description">Mô tả ngắn</label>
-                            <textarea name="description"value="{{ old('description') }}" id="desc"></textarea>
+                            <textarea name="description"value="{{ old('description') }}" id="desc" class ="ckeditor"></textarea>
                             <label for="content">Chi tiết</label>
                             <textarea name="content" class ="ckeditor" id="product_content" value=""></textarea>
                             <label>Hình ảnh</label>

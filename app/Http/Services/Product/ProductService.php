@@ -18,14 +18,16 @@ class ProductService
             2 => [1000000, 5000000],
             3 => [5000000, 10000000],
             4 => [10000000, 20000000],
-            5 => [20000000, PHP_INT_MAX], // Sử dụng PHP_INT_MAX để biểu thị giá trị vô cùng lớn
+            5 => [20000000, PHP_INT_MAX]
         ];
         if (isset($priceRanges[$price_sort])) {
+            $range = $priceRanges[$price_sort];
             $products = $this->filters([
                 'status' => 1,
+                'relations' =>'product_cat',
                 'categoryIds' => $categoryIds,
-                'price_sale' => $priceRanges[$price_sort],
-                'perPage' => 20,
+                'price_sale' => $range,
+                'perPage' => 4,
             ]);
         } else {
             if ($sortBy == 'a-z') {
@@ -40,9 +42,10 @@ class ProductService
             $products = $this->filters([
                 'status' => 1,
                 'categoryIds' => $categoryIds,
+                'relations' =>'product_cat',
                 'orderBy' => $orderBy,
                 'orderByDesc' => $orderByDesc,
-                'perPage' => 20,
+                'perPage' => 4,
             ]);
         }
 
@@ -68,7 +71,9 @@ class ProductService
         if (!empty($filters['orderBy'])) {
             $query->orderBy($filters['orderBy']);
         }
-
+        if (isset($filters['id'])) {
+            return $query->where('id', $filters['id'])->first();
+        }
         if (!empty($filters['orderByDesc'])) {
             $query->orderByDesc($filters['orderByDesc']);
         }

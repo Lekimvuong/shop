@@ -73,3 +73,4 @@ Route::prefix('danh-muc')->group(function () {
     Route::get('/{id}-{slug}.html', [App\Http\Controllers\ProductCatController::class, 'index'])->name('productCat.index');
     Route::get('getData', [App\Http\Controllers\ProductCatController::class, 'getData'])->name('productCat.getData');
 });
+Route::get('san-pham/{id}-{slug}.html', [App\Http\Controllers\ProductController::class, 'index'])->name('product.index');
