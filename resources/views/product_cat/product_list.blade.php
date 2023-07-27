@@ -1,10 +1,10 @@
 <ul class="list-item d-flex clearfix">
     @foreach ($products as $product)
         <li>
-            <a href="{{route('product.index', ['id' =>  $product->id, 'slug'=>$product->product_cat->slug])}}" title="" class="thumb">
+            <a href="{{route('product.index', ['id' =>  $product->id, 'slug'=>Str::slug($product->name)])}}" title="" class="thumb">
                 <img src="{{ $product->media[0]->thumb }}">
             </a>
-            <a href="{{route('product.index', ['id' =>  $product->id, 'slug'=>$product->product_cat->slug])}}" title=""
+            <a href="{{route('product.index', ['id' =>  $product->id, 'slug'=>Str::slug($product->name)])}}" title=""
                 class="product-name" style="
                                 white-space: nowrap;
                                 overflow: hidden;

@@ -10,7 +10,7 @@ class ProductCatController extends Controller
 {
     protected $productCat;
     protected $product;
-    private $data;
+
 
     public function __construct(ProductCatService $productCat, ProductService $product)
     {

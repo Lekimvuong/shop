@@ -29,6 +29,14 @@
     margin-top: 25px;
 }
 
+.active img {
+    border: 2px solid #333 !important;
+}
+
+#list-thumb img {
+    border: 2px solid white;
+}
+
 #detail-product-wp .owl-carousel .owl-item {
     padding: 0px 4px;
 }

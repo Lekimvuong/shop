@@ -74,3 +74,5 @@ Route::prefix('danh-muc')->group(function () {
     Route::get('getData', [App\Http\Controllers\ProductCatController::class, 'getData'])->name('productCat.getData');
 });
 Route::get('san-pham/{id}-{slug}.html', [App\Http\Controllers\ProductController::class, 'index'])->name('product.index');
+Route::post('add-cart', [App\Http\Controllers\CartController::class, 'index'])->name('cart.index');
+Route::get('carts', [App\Http\Controllers\CartController::class, 'show'])->name('cart.show');

@@ -28,7 +28,8 @@ class ProductController extends Controller
         $allproducts = $this->product->filters([
             'status'=> 1,
             'relations' => ['product_cat'],
-            'orderBy'=> 'id'
+            'orderBy'=> 'name',
+            'perPage' => 10
         ]);
         $productCat = $product->product_cat;
         $parentCat = $this->productCat->getParentCat($productCat);

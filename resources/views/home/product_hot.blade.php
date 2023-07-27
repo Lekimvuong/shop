@@ -8,10 +8,10 @@
             @endphp
             @foreach ($products as $product)
             <li>
-                <a href="/san-pham/{{$product->id}}-{{\Str::slug($product->name)}}.html" title="" class="thumb">
+                <a href="{{route('product.index', ['id' =>  $product->id, 'slug'=>Str::slug($product->name)])}}" title="" class="thumb">
                     <img src="{{ $product->media[0]->thumb }}">
                 </a>
-                <a href="/san-pham/{{$product->id}}-{{\Str::slug($product->name)}}.html" title="" style ="
+                <a href="{{route('product.index', ['id' =>  $product->id, 'slug'=>Str::slug($product->name)])}}" title="" style ="
                     white-space: nowrap;
                     overflow: hidden;
                     text-overflow: ellipsis;" class="product-name">{{ $product->name }}</a>

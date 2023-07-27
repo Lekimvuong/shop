@@ -63,7 +63,7 @@
                                                 $t++;
                                             @endphp
                                             <li>
-                                                <a href="" title="" class="thumb">
+                                                <a href="{{route('product.index', ['id' =>  $product->id, 'slug'=>Str::slug($product->name)])}}" title="" class="thumb">
                                                     <img src="{{ $product->media[0]->thumb }}">
                                                 </a>
                                                 <a href="" title="" style="
