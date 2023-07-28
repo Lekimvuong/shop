@@ -6,6 +6,7 @@ use App\Http\View\Composers\ProductCatComposer;
 use App\Http\View\Composers\ProductNewComposer;
 use App\Http\View\Composers\ProductHotComposer;
 use App\Http\View\Composers\SliderComposer;
+use App\Http\View\Composers\CartComposer;
 use Illuminate\Support\Facades\View;
 use Illuminate\Support\ServiceProvider;
  
@@ -32,5 +33,6 @@ class ViewServiceProvider extends ServiceProvider
         View::composer('home.slider', SliderComposer::class);
         View::composer('home.product_new', ProductNewComposer::class);
         View::composer('home.product_hot', ProductHotComposer::class);
+        View::composer('home.cart', CartComposer::class);
     }
 }

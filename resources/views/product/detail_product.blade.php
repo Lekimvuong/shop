@@ -56,7 +56,7 @@
                                     <input type="text" name="num-product" value="1" id="num-order">
                                     <a title="" id="plus"><i class="fa fa-plus"></i></a>
                                 </div>
-                                <input type="submit" title="Thêm giỏ hàng" value="Thêm giỏ hàng" class="add-cart" />
+                                <input type="submit" style ="cursor:pointer" title="Thêm giỏ hàng" value="Thêm giỏ hàng" class="add-cart" />
                                 <input type="hidden" name="product_id" value="{{ $product->id }}">
                                 @csrf
                             </form>

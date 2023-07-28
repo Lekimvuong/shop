@@ -30,6 +30,4 @@ class CartService
         Session::put('carts', $carts);
         return true;
     }
-
-
 }

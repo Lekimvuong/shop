@@ -18,13 +18,13 @@ class ProductService
             2 => [1000000, 5000000],
             3 => [5000000, 10000000],
             4 => [10000000, 20000000],
-            5 => [20000000, PHP_INT_MAX]
+            5 => [20000000, PHP_INT_MAX],
         ];
         if (isset($priceRanges[$price_sort])) {
             $range = $priceRanges[$price_sort];
             $products = $this->filters([
                 'status' => 1,
-                'relations' =>'product_cat',
+                'relations' => 'product_cat',
                 'categoryIds' => $categoryIds,
                 'price_sale' => $range,
                 'perPage' => 4,
@@ -42,7 +42,7 @@ class ProductService
             $products = $this->filters([
                 'status' => 1,
                 'categoryIds' => $categoryIds,
-                'relations' =>'product_cat',
+                'relations' => 'product_cat',
                 'orderBy' => $orderBy,
                 'orderByDesc' => $orderByDesc,
                 'perPage' => 4,
@@ -197,5 +197,18 @@ class ProductService
             return true;
         }
         return false;
+    }
+    public function getProduct()
+    {
+        $carts = Session::get('carts');
+        if (is_null($carts)) {
+            return [];
+        }
+
+        $productId = array_keys($carts);
+        return Product::with('Media')
+            ->where('active', 1)
+            ->whereIn('id', $productId)
+            ->get();
     }
 }
