@@ -17,7 +17,7 @@
         </div>@php
             $total = 0;
         @endphp
-        <form method="POST">
+        <form action ="{{route('cart.update')}}" method="POST">
             <div id="wrapper" class="wp-inner clearfix">
                 <div class="section" id="info-cart-wp">
                     <div class="section-detail table-responsive">
@@ -59,8 +59,7 @@
                                             </td>
                                             <td>{{ App\Helpers\Helper::currencyFormat($priceEnd) }}</td>
                                             <td>
-                                                <a href="" title="" class="del-product"><i
-                                                        class="fa fa-trash-o"></i></a>
+                                                <a href="{{route('cart.remove', ['id' =>  $product->id])}}" title="" class="del-product"><i class="fa fa-trash-o"></i></a>
                                             </td>
                                         </tr>
                                     @endforeach
@@ -79,7 +78,8 @@
                                         <td colspan="7">
                                             <div class="clearfix">
                                                 <div class="fl-right">
-                                                    <a href="" title="" id="update-cart">Cập nhật giỏ hàng</a>
+                                                    <input type="submit" style ="cursor:pointer" title="" value="Cập nhật giỏ hàng" id="update-cart" />
+                                                    @csrf
                                                     <a href="?page=checkout" title="" id="checkout-cart">Thanh
                                                         toán</a>
                                                 </div>
@@ -96,8 +96,8 @@
                         <p class="title">Click vào <span>“Cập nhật giỏ hàng”</span> để cập nhật số lượng. Nhập vào số lượng
                             <span>0</span> để xóa sản phẩm khỏi giỏ hàng. Nhấn vào thanh toán để hoàn tất mua hàng.
                         </p>
-                        <a href="?page=home" title="" id="buy-more">Mua tiếp</a><br />
-                        <a href="" title="" id="delete-cart">Xóa giỏ hàng</a>
+                        <a href="/" title="" id="buy-more">Mua tiếp</a><br />
+                        <a href="{{route('cart.removeAll')}}" title="" id="delete-cart">Xóa giỏ hàng</a>
                     </div>
                 </div>
             </div>
@@ -105,7 +105,7 @@
     </div>
 @else
     <div class="text-center">
-        <h2>Giỏ hàng trống</h2>
+        <h1>Giỏ hàng trống</h1>
     </div>
     @endif
 @endsection

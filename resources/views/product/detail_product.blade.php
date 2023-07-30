@@ -96,7 +96,7 @@
                                             class="old">{{ \App\Helpers\Helper::currencyFormat($item->price_sale) }}</span>
                                     </div>
                                     <div class="action clearfix">
-                                        <a href="" title="" class="add-cart fl-left">Thêm giỏ hàng</a>
+                                        <a href="{{ route('cart.addToCart', ['id' => $item->id])}}" title="" class="add-cart fl-left">Thêm giỏ hàng</a>
                                         <a href="" title="" class="buy-now fl-right">Mua ngay</a>
                                     </div>
                                 </li>
@@ -110,7 +110,7 @@
                 <div class="section" id="banner-wp">
                     <div class="section-detail">
                         <a href="" title="" class="thumb">
-                            <img src="/template/public/images/banner.png" alt="">
+                            <img src="/template/public/images/banners.png" alt="">
                         </a>
                     </div>
                 </div>

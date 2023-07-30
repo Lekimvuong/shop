@@ -221,7 +221,7 @@
                 <div class="section" id="banner-wp">
                     <div class="section-detail">
                         <a href="" title="" class="thumb">
-                            <img src="template/public/images/banner.png" alt="">
+                            <img src="template/public/images/banners.png" alt="">
                         </a>
                     </div>
                 </div>

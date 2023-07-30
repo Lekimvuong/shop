@@ -14,8 +14,6 @@ class CartComposer
     {
         $this->product = $product;
     } 
- 
-    
     public function compose(View $view)
     {
         $products = $this->product->getProduct();

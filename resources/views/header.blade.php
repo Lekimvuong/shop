@@ -33,10 +33,13 @@
                             <div id="main-menu-wp" class="fl-right">
                                 <ul id="main-menu" class="clearfix">
                                     <li>
-                                        <a href="?page=home" title="">Trang chủ</a>
+                                        <a href="/" title="">Trang chủ</a>
                                     </li>
                                     <li>
-                                        <a href="?page=category_product" title="">Sản phẩm</a>
+                                        <a href="/danh-muc/11-dien-thoai.html" title="">Điện thoại</a>
+                                    </li>
+                                    <li>
+                                        <a href="/danh-muc/13-laptop.html" title="">Laptop</a>
                                     </li>
                                     <li>
                                         <a href="?page=blog" title="">Blog</a>
@@ -53,7 +56,7 @@
                     </div>
                     <div id="head-body" class="clearfix">
                         <div class="wp-inner">
-                            <a href="{{ route('main') }}" title="" id="logo" class="fl-left"><img src="/template/public/images/logo.png"/></a>
+                            <a href="{{ route('main') }}" title="" id="logo" class="fl-left"><img src="/template/public/images/logos.png"/></a>
                             <div id="search-wp" class="fl-left">
                                 <form method="POST" action="">
                                     <input type="text" name="s" id="s" placeholder="Nhập từ khóa tìm kiếm tại đây!">

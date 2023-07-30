@@ -27,7 +27,7 @@ class ProductService
                 'relations' => 'product_cat',
                 'categoryIds' => $categoryIds,
                 'price_sale' => $range,
-                'perPage' => 4,
+                'perPage' => 16,
             ]);
         } else {
             if ($sortBy == 'a-z') {
@@ -45,7 +45,7 @@ class ProductService
                 'relations' => 'product_cat',
                 'orderBy' => $orderBy,
                 'orderByDesc' => $orderByDesc,
-                'perPage' => 4,
+                'perPage' => 16,
             ]);
         }
 
@@ -204,9 +204,9 @@ class ProductService
         if (is_null($carts)) {
             return [];
         }
-
         $productId = array_keys($carts);
         return Product::with('Media')
+            ->select('id', 'name', 'price', 'price_sale','code')
             ->where('active', 1)
             ->whereIn('id', $productId)
             ->get();

@@ -1,4 +1,4 @@
-<ul class="list-item d-flex clearfix">
+<ul class="list-item clearfix">
     @foreach ($products as $product)
         <li>
             <a href="{{route('product.index', ['id' =>  $product->id, 'slug'=>Str::slug($product->name)])}}" title="" class="thumb">
