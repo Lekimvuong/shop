@@ -14,10 +14,11 @@
                     </ul>
                 </div>
             </div>
-        </div>@php
+        </div>
+        @php
             $total = 0;
         @endphp
-        <form action ="{{route('cart.update')}}" method="POST">
+        <form action="{{ route('cart.update') }}" method="POST">
             <div id="wrapper" class="wp-inner clearfix">
                 <div class="section" id="info-cart-wp">
                     <div class="section-detail table-responsive">
@@ -49,17 +50,20 @@
                                             </td>
                                             <td>
                                                 <a href="" title=""
-                                                class="name-product">{{ $product->name }}</a>
+                                                    class="name-product">{{ $product->name }}</a>
                                             </td>
                                             <td>{{ App\Helpers\Helper::currencyFormat($product->price_sale) }}</td>
                                             <td>
                                                 <div class="form-outline" style="width: 4rem;">
-                                                    <input name ="num-product[{{$product->id}}]" value="{{ $carts[$product->id] }}" type="number" class="form-control" />
+                                                    <input name="num-product[{{ $product->id }}]"
+                                                        value="{{ $carts[$product->id] }}" type="number"
+                                                        class="form-control" />
                                                 </div>
                                             </td>
                                             <td>{{ App\Helpers\Helper::currencyFormat($priceEnd) }}</td>
                                             <td>
-                                                <a href="{{route('cart.remove', ['id' =>  $product->id])}}" title="" class="del-product"><i class="fa fa-trash-o"></i></a>
+                                                <a href="{{ route('cart.remove', ['id' => $product->id]) }}" title=""
+                                                    class="del-product"><i class="fa fa-trash-o"></i></a>
                                             </td>
                                         </tr>
                                     @endforeach
@@ -78,9 +82,11 @@
                                         <td colspan="7">
                                             <div class="clearfix">
                                                 <div class="fl-right">
-                                                    <input type="submit" style ="cursor:pointer" title="" value="Cập nhật giỏ hàng" id="update-cart" />
+                                                    <input type="submit" style="cursor:pointer" title=""
+                                                        value="Cập nhật giỏ hàng" id="update-cart" />
                                                     @csrf
-                                                    <a href="?page=checkout" title="" id="checkout-cart">Thanh
+                                                    <a href="{{ route('checkout') }}" title=""
+                                                        id="checkout-cart">Thanh
                                                         toán</a>
                                                 </div>
                                             </div>
@@ -97,7 +103,7 @@
                             <span>0</span> để xóa sản phẩm khỏi giỏ hàng. Nhấn vào thanh toán để hoàn tất mua hàng.
                         </p>
                         <a href="/" title="" id="buy-more">Mua tiếp</a><br />
-                        <a href="{{route('cart.removeAll')}}" title="" id="delete-cart">Xóa giỏ hàng</a>
+                        <a href="{{ route('cart.removeAll') }}" title="" id="delete-cart">Xóa giỏ hàng</a>
                     </div>
                 </div>
             </div>

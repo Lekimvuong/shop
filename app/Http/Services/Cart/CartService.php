@@ -1,8 +1,11 @@
 <?php
 namespace App\http\Services\Cart;
-
+use App\Models\Cart;
+use App\Models\Customer;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Session;
+use App\Models\Product;
+use Illuminate\Support\Facades\DB;  
 
 class CartService
 {
@@ -69,4 +72,53 @@ class CartService
 
         return $this->add($qty, $product_id);
     }
+    public function addCart($request)
+    {
+
+        try {
+            DB::beginTransaction();
+            $carts = Session::get('carts');
+            if (is_null($carts)) return false;
+
+            $customer = Customer::create([
+                'name' => $request->input('name'),
+                'phone' => $request->input('phone'),
+                'address' => $request->input('address'),
+                'email' => $request->input('email'),
+                'note' => $request->input('note'),
+                'method' => $request->input('method'),
+            ]);
+
+            $this->inforProductCart($carts, $customer->id);
+            DB::commit();
+            Session::flash('success', 'Đặt hàng thành công');
+
+            Session::forget('carts');
+        } catch (\Exception $err) {
+            DB::rollBack();
+            Session::flash('error', 'Đặt hàng lỗi, Vui lòng thử lại');
+            return false;
+        }
+    }
+    protected function inforProductCart($carts, $customerId)
+    {
+        $productId = array_keys($carts);
+        $products = Product::where('active', 1)
+                ->whereIn('id', $productId)
+                ->get();
+
+        $data = [];
+
+        foreach ($products as $product) {
+            $data[] = [
+                'customer_id' => $customerId,
+                'product_id' => $product->id,
+                'qty' => $carts[$product->id],
+                'price' => $product->price_sale,
+            ];
+        }
+
+        return Cart::insert($data);
+    }
+
 }

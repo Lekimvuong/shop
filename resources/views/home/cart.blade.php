@@ -1,4 +1,4 @@
-<a href="/carts" title="giỏ hàng" id="cart-respon-wp" class="fl-right">
+<a href="{{ route('cart.show') }}" title="giỏ hàng" id="cart-respon-wp" class="fl-right">
     <i class="fa fa-shopping-cart" aria-hidden="true"></i>
     <span
         id="num">{{ !is_null($carts)?count($carts):''}}</span>
@@ -27,11 +27,11 @@
                             $sumPrice += $priceEnd;
                         @endphp
                         <li class="clearfix">
-                            <a href="" title="" class="thumb fl-left">
+                            <a href="{{ route('cart.show') }}" title="" class="thumb fl-left">
                                 <img src="{{ $product->media[0]->thumb}}" alt="">
                             </a>
                             <div class="info fl-right">
-                                <a href="" title="" style="
+                                <a href="{{ route('cart.show') }}" title="" style="
                     white-space: nowrap;
                     overflow: hidden;
                     text-overflow: ellipsis;" class="product-name">{{$product->name}}</a>
@@ -53,7 +53,7 @@
         @endif
         <div class="action-cart clearfix">
             <a href="{{ route('cart.show') }}" title="Giỏ hàng" class="view-cart fl-left">Giỏ hàng</a>
-            <a href="/checkout" title="Thanh toán" class="checkout fl-right">Thanh toán</a>
+            <a href="{{ route('checkout') }}" title="Thanh toán" class="checkout fl-right">Thanh toán</a>
         </div>
     </div>
 </div>

@@ -81,3 +81,5 @@ Route::get('carts/delete/{id}', [App\Http\Controllers\CartController::class, 're
 Route::get('carts/delete-all', [App\Http\Controllers\CartController::class, 'removeAll'])->name('cart.removeAll');
 
 Route::get('add-cart/{id}', [App\Http\Controllers\CartController::class, 'addToCart'])->name('cart.addToCart');
+Route::get('checkout', [App\Http\Controllers\CartController::class, 'checkout'])->name('checkout');
+Route::post('checkout', [App\Http\Controllers\CartController::class, 'addCart'])->name('checkout.addCart');

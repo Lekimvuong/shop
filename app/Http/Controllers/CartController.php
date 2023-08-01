@@ -54,4 +54,18 @@ class CartController extends Controller
         $this->cartService->addToCart($id);
         return redirect()->back();
     }
+
+    public function checkout()
+    {
+        $data['products'] = $this->product->getProduct();
+        $data['carts'] = Session::get('carts');
+        $data['title'] = 'checkout';
+        return view('cart.checkout', $data);
+    }
+    public function addCart(Request $request)
+    {
+        $this->cartService->addCart($request);
+        return redirect()->back();
+    }
+    
 }
